@@ -4,7 +4,6 @@ protected/runtime/*
 !protected/runtime/.gitkeep
 .idea
 protected/config/license
-protected/config/version
 themes/*
 !themes/backend
 images/items/*

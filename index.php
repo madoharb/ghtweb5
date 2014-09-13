@@ -3,8 +3,8 @@
 // Проверка установлена ли CMS
 if(is_dir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'install') && strpos($_SERVER['REQUEST_URI'], 'install') === FALSE)
 {
-    //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
-    //exit;
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
+    exit;
 }
 // ---------------
 
@@ -25,7 +25,6 @@ else
 
     define('YII_DEBUG', FALSE);
 
-    //$yii    = dirname(__FILE__) . '/../framework/yiilite.php';
     $config = dirname(__FILE__) . '/protected/config/main.php';
 }
 
