@@ -7,7 +7,7 @@ return array(
     'password' => '',
     'charset' => 'utf8',
     'tablePrefix' => 'ghtweb_',
-    'enableProfiling' => TRUE,
+    'enableProfiling' => YII_DEBUG,
     'enableParamLogging' => TRUE,
     'schemaCachingDuration' => 3600,
 );

@@ -10,12 +10,12 @@ if(is_dir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPA
 
 $yii = dirname(__FILE__) . '/../framework/yii.php'; // Путь к папке с framework
 
-if(in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1')))
+// Чтобы включить режим разработки добавьте свой IP в array() (тот что снизу), к примеру: array('127.0.0.1')
+if(in_array($_SERVER['REMOTE_ADDR'], array()))
 {
     error_reporting(-1);
 
     define('YII_DEBUG', TRUE);
-    define('YII_TRACE_LEVEL', 1); // Запись в лог имени файла и номера строки
 
     $config = dirname(__FILE__) . '/protected/config/main-dev.php';
 }
@@ -27,6 +27,8 @@ else
 
     $config = dirname(__FILE__) . '/protected/config/main.php';
 }
+
+define('YII_TRACE_LEVEL', 1); // Запись в лог имени файла и номера строки
 
 require_once dirname(__FILE__) . '/protected/helpers/global.php';
 

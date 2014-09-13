@@ -29,7 +29,7 @@ class DefaultController extends CController
                 $body .= "    'password' => '" . $model->mysql_pass . "',\n";
                 $body .= "    'charset' => 'utf8',\n";
                 $body .= "    'tablePrefix' => 'ghtweb_',\n";
-                $body .= "    'enableProfiling' => FALSE,\n";
+                $body .= "    'enableProfiling' => YII_DEBUG,\n";
                 $body .= "    'enableParamLogging' => TRUE,\n";
                 $body .= "    'schemaCachingDuration' => 3600,\n";
                 $body .= ");";
