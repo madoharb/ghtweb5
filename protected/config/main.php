@@ -1,8 +1,8 @@
 <?php
 
 return array(
-	'basePath'      => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-	'name'          => 'GHTWEB v5',
+    'basePath'      => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name'          => 'GHTWEB v5',
     'sourceLanguage'=> '00',
     'language'      => 'ru',
 
@@ -15,15 +15,15 @@ return array(
     //'basePath' => 'app',
 
 	// preloading 'log' component
-	'preload' => array('log'),
+    'preload' => array('log'),
 
-	'import' => array(
-		'application.helpers.*',
-		'application.models.*',
+    'import' => array(
+        'application.helpers.*',
+        'application.models.*',
         'application.components.*',
-	),
+    ),
 
-	'modules' => array(
+    'modules' => array(
 
         'register',
         'login',
@@ -38,10 +38,10 @@ return array(
         'gallery',
         'install',
 
-	),
+    ),
 
-	// application components
-	'components' => array(
+    // application components
+    'components' => array(
 
         'clientScript' => array(
             'scriptMap' => array(
@@ -108,12 +108,12 @@ return array(
             'class' => 'system.caching.CFileCache',
         ),
 
-		'user' => array(
+        'user' => array(
             'class'             => 'WebUser',
-			'allowAutoLogin'    => TRUE,
+            'allowAutoLogin'    => TRUE,
             'autoRenewCookie'   => TRUE,
             'loginUrl'          => array('/login/default/index'),
-		),
+        ),
 
         'authManager' => array(
             'class'         => 'CDbAuthManager',
@@ -131,10 +131,10 @@ return array(
         ),
 
         'urlManager' => array(
-			'urlFormat' => 'path',
+            'urlFormat' => 'path',
             'showScriptName' => FALSE,
             'urlSuffix' => '/',
-			'rules' => array(
+            'rules' => array(
 
                 // ------------------- [Frontend] -------------------
                 '' => 'index/default/index',
@@ -322,19 +322,19 @@ return array(
                 'backend/<controller:\w+>/add' => 'backend/<controller>/form',
                 'backend/<controller:\w+>/<id:\d+>/<method:(del|allow)>' => 'backend/<controller>/<method>',
                 //'backend/<controller:\w+>/<method:(del|edit|allow)>' => 'backend/<controller>/<method>',
-			),
-		),
+            ),
+        ),
 
         // DB
         'db' => require 'database.php',
 
-		'errorHandler' => array(
-			'errorAction' => 'index/default/error',
-		),
+        'errorHandler' => array(
+            'errorAction' => 'index/default/error',
+        ),
 
-		'log' => array(
-			'class' => 'CLogRouter',
-			'routes' => array(
+        'log' => array(
+            'class' => 'CLogRouter',
+            'routes' => array(
                 array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'info, error, warning, vardump',
@@ -350,11 +350,11 @@ return array(
                     'levels' => 'profile',
                     'enabled' => FALSE,
                 ),
-			),
-		),
-	),
+            ),
+        ),
+    ),
 
-	'params' => array(
+    'params' => array(
 
         // $_GET параметр отвечающий за реферала
         'cookie_referer_name' => 'ref_id',

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'connectionString' => 'mysql:host=127.0.0.1;port=3306;dbname=ghtweb_yii',
+    'connectionString' => 'mysql:host=127.0.0.1;port=3306;dbname=ghtweb',
     'emulatePrepare' => TRUE,
     'username' => 'root',
     'password' => '',
