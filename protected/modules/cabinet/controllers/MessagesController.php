@@ -47,14 +47,14 @@ class MessagesController extends CabinetBaseController
 
         if(!$model)
         {
-            throw new CHttpException(400);
+            throw new CHttpException(404);
         }
 
         // Меняю статус на прочитаный
         if($model->read == UserMessages::STATUS_NOT_READ)
         {
             $model->read = UserMessages::STATUS_READ;
-            $model->save(FALSE);
+            $model->save(FALSE, array('read'));
         }
 
         $this->render('//cabinet/messages/detail', array(

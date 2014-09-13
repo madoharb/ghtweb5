@@ -35,7 +35,7 @@ $this->breadcrumbs = array($title_);
             <tr>
                 <td><?php echo $form->textField($model, 'id', array('class' => 'form-control input-sm')) ?></td>
                 <td><?php echo $form->textField($model, 'title', array('class' => 'form-control input-sm')) ?></td>
-                <td><?php echo $form->dropDownList($model, 'status', array('' => Yii::t('backend', 'Выбрать')) + $model->getStatusList(), array('class' => 'form-control input-sm')) ?></td>
+                <td><?php echo $form->dropDownList($model, 'status', array('' => Yii::t('backend', '-- select --')) + $model->getStatusList(), array('class' => 'form-control input-sm')) ?></td>
                 <td></td>
                 <td>
                     <button type="submit" class="btn btn-primary glyphicon glyphicon-search" title="<?php echo Yii::t('backend', 'Искать') ?>" rel="tooltip"></button>

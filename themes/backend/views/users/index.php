@@ -21,7 +21,7 @@ $this->breadcrumbs = array($title_);
     'action' => array('/backend/' . $this->getId() . '/index'),
 )) ?>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th width="5%">ID</th>

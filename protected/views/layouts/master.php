@@ -211,6 +211,7 @@ css($assetsUrl . '/css/main.css');
                         </aside>
                     </div>
                     <div class="content">
+
                         <?php if(strpos($_SERVER['REQUEST_URI'], 'cabinet') !== FALSE) { ?>
                             <div class="breadcrumbs">
                                 <?php $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -220,6 +221,12 @@ css($assetsUrl . '/css/main.css');
                                 )) ?>
                             </div>
                         <?php } ?>
+
+                        <!-- Виджет таймера обратного отсчета -->
+                        <?php $this->widget('app.widgets.Timer.Timer', array(
+                            'timeEnd' => strtotime('2017-01-01 00:00:00'), // Дата старта
+                        )) ?>
+
                         <?php echo $content ?>
                     </div>
                 </article>

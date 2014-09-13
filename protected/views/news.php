@@ -11,7 +11,6 @@ $this->pageTitle = Yii::t('main', 'Новости');
 
     <div class="entry">
         <div class="scroll-pane">
-            <div class="timer"></div>
             <?php foreach($data as $row) { ?>
                 <div style="margin-bottom: 30px;">
                     <header>
