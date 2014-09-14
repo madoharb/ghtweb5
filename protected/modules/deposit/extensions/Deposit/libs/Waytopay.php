@@ -193,7 +193,7 @@ class Waytopay
 
         if(!($data = $cache->get($cacheName)))
         {
-            $res      = json_decode(file_get_contents('http://waytopay.org/api/getsmsjson/' . $this->projectId), TRUE);
+            $res      = json_decode(file_get_contents('http://waytopay.org/api/getsmsjson/' . $this->smsProjectId), TRUE);
             $itemCost = app()->controller->gs->deposit_course_payments;
             $data     = array();
 
@@ -239,8 +239,15 @@ class Waytopay
 
     public function getId()
     {
-        list($userId, $gsId) = explode(' ', $this->wText);
-        return (int) $userId;
+        if($this->wText)
+        {
+            list($userId, $gsId) = explode(' ', $this->wText);
+            return (int) $userId;
+        }
+        else
+        {
+            return (int) $this->wInvId;
+        }
     }
 
     public function getGsId()
