@@ -32,7 +32,7 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'password', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control')) ?>
+            <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control')) ?>
             <p class="help-block"><?php echo Yii::t('install', 'Длина пароля от :min до :max символов', array(':min' => Users::PASSWORD_MIN_LENGTH, ':max' => Users::PASSWORD_MAX_LENGTH)) ?></p>
         </div>
     </div>

@@ -52,7 +52,25 @@ class Step2Form extends CFormModel
             array('mysql_port', 'numerical', 'integerOnly' => TRUE),
             array('mysql_pass', 'checkPassChars'),
             array('mysql_pass', 'checkConnect'),
+            array('mysql_pass', 'checkFileIsWritable'),
         );
+    }
+
+    /**
+     * Пороверка файла database.php на запись
+     *
+     * @param string $attribute
+     * @param array $params
+     */
+    public function checkFileIsWritable($attribute, array $params)
+    {
+        if(!$this->hasErrors())
+        {
+            if(!HTML::isWritable(Yii::getPathOfAlias('application.config') . DIRECTORY_SEPARATOR . 'database.php'))
+            {
+                $this->addError($attribute, Yii::t('install', 'Необходимо дать файлу protected/config/database.php права на запись 0777'));
+            }
+        }
     }
 
     public function checkPassChars($attribute)
@@ -76,6 +94,29 @@ class Step2Form extends CFormModel
             try
             {
                 $db = new PDO('mysql:host=' . $this->mysql_host . ';port=' . $this->mysql_port . ';dbname=' . $this->mysql_name, $this->mysql_user, $this->mysql_pass);
+
+                // Проверка таблиц с префиксом ghtweb_
+                $res = $db->prepare('SHOW TABLES FROM ' . $this->mysql_name);
+                $res->execute();
+
+                $tables = array();
+
+                foreach($res->fetchAll(PDO::FETCH_COLUMN) as $table)
+                {
+                    if(strpos($table, 'ghtweb_') !== FALSE)
+                    {
+                        $tables[] = $table;
+                    }
+                }
+
+                if($tables)
+                {
+                    $this->addError($attribute, Yii::t('install', 'Из БД :name надо удалить следующие таблицы: :tables', array(
+                        ':name' => '<b>' . $this->mysql_name . '</b>',
+                        ':tables' => '<b>' . implode(', ', $tables) . '</b>',
+                    )));
+                }
+
                 $db = NULL;
             }
             catch(PDOException $e)

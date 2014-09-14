@@ -6,49 +6,36 @@ $error   = FALSE;
     <h1><?php echo Yii::t('install', 'Шаг 1, проверка системы') ?></h1>
 </div>
 
-<h3><?php echo Yii::t('install', 'Проверка необходимых папок') ?></h3>
+<div class="alert alert-danger">
+    <h4>Внимание!</h4>
+    - Убедитесь что в БД куда будет установлен сайт не содержатся таблицы с префиксом <b>ghtweb_</b><br>
+    - Пользователь от БД должен имень права на <b>SELECT, UPDATE, INSERT ,DELETE, TRUNCATE</b><br>
+    - Если по какой-либо причине Вы хотите переустановить CMS то очистите таблицу куда будет установлен сайт и верните папку <b>install</b>
+</div>
+
+<h3><?php echo Yii::t('install', 'Проверка прав на запись') ?></h3>
 
 <ul>
     <?php
-    foreach(array('assets', 'protected/runtime') as $folder)
-    {
-        $isDir = is_dir($rootDir . DIRECTORY_SEPARATOR . $folder);
+    $folders = array('assets', 'protected/config', 'protected/runtime', 'uploads/images/gallery', 'uploads/images/shop/', 'uploads/images/shop/packs', 'protected/config/database.php');
 
-        if(!$isDir && $error == FALSE)
+    foreach($folders as $folder)
+    {
+        $isWritable = HTML::isWritable($rootDir . DIRECTORY_SEPARATOR . $folder);
+
+        if($isWritable === FALSE)
         {
             $error = TRUE;
         }
 
-        echo '<li>' . $folder . ' <span class="label label-' . ($isDir ? 'success' : 'danger') . '">' . ($isDir ? 'OK' : 'Создайте папку')  . '</span></li>';
+        echo '<li>/' . $folder . ' <span class="label label-' . ($isWritable ? 'success' : 'danger') . '">' . ($isWritable ? 'OK' : 'Установите права на запись 0777')  . '</span></li>';
     }
     ?>
 </ul>
 
-<?php if(!$error) { ?>
-
-    <h3><?php echo Yii::t('install', 'Проверка прав на запись') ?></h3>
-
-    <ul>
-        <?php
-        foreach(array('assets', 'protected/config', 'protected/runtime', 'uploads/images/gallery', 'uploads/images/shop/', 'uploads/images/shop/packs') as $folder)
-        {
-            $isWritable = is_writable($rootDir . DIRECTORY_SEPARATOR . $folder);
-
-            if(!$isWritable && $error == FALSE)
-            {
-                $error = TRUE;
-            }
-
-            echo '<li>' . $folder . ' <span class="label label-' . ($isDir ? 'success' : 'danger') . '">' . ($isDir ? 'OK' : 'Установите права на запись 0777')  . '</span></li>';
-        }
-        ?>
-    </ul>
-
-<?php } ?>
-
 <?php
-if(!$error)
+if($error === FALSE)
 {
-    echo CHtml::link(Yii::t('install', 'Шаг 2'), array('/install/default/step2'), array('class' => 'btn btn-primary'));
+    echo CHtml::link(Yii::t('install', 'Шаг 2'), array('step2'), array('class' => 'btn btn-primary'));
 }
 ?>

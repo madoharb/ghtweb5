@@ -1,8 +1,12 @@
+<?php
+/**
+ * @var ActiveForm $form
+ */
+?>
+
 <div class="page-header">
     <h1><?php echo Yii::t('install', 'Шаг 2, настройка подключения к БД сайта') ?></h1>
 </div>
-
-
 
 <?php $form = $this->beginWidget('ActiveForm', array(
     'id' => $this->getId() . '-form',
@@ -39,7 +43,7 @@
     <div class="form-group">
         <?php echo $form->labelEx($model, 'mysql_pass', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'mysql_pass', array('placeholder' => $model->getAttributeLabel('mysql_pass'), 'class' => 'form-control')) ?>
+            <?php echo $form->passwordField($model, 'mysql_pass', array('placeholder' => $model->getAttributeLabel('mysql_pass'), 'class' => 'form-control')) ?>
             <p class="help-block"><?php echo Yii::t('install', 'Разрешены все символы кроме <b>\' \\</b>') ?></p>
         </div>
     </div>
