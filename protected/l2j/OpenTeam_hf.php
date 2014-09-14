@@ -90,19 +90,16 @@ class OpenTeam_hf
             characters.accesslevel AS access_level,(SELECT IF(value>0,1,0) FROM character_variables WHERE character_variables.obj_id = characters.obj_Id AND character_variables.name = "jailed" LIMIT 1) as jail
             FROM
             characters
-            LEFT JOIN character_subclasses ON characters.obj_Id = character_subclasses.char_obj_id
+            LEFT JOIN character_subclasses ON characters.obj_Id = character_subclasses.char_obj_id AND character_subclasses.isBase = 1
             LEFT JOIN clan_data ON characters.clanid = clan_data.clan_id
-            WHERE
-            character_subclasses.isBase = 1
         */
         return $command
             ->select('characters.account_name,characters.obj_Id AS char_id,characters.char_name,characters.sex,characters.x,characters.y,characters.z,characters.karma,characters.pvpkills,characters.pkkills,characters.clanid AS clan_id,characters.title,
                 characters.online,characters.onlinetime,character_subclasses.class_id AS base_class,character_subclasses.level,character_subclasses.exp,character_subclasses.sp,character_subclasses.maxHp,character_subclasses.maxMp,character_subclasses.maxCp,
                 character_subclasses.curHp,character_subclasses.curMp,character_subclasses.curCp,clan_data.clan_level,clan_data.hasCastle,clan_data.hasFortress AS hasFort,clan_data.crest AS clan_crest,clan_data.reputation_score,clan_data.clan_name,
                 characters.accesslevel AS access_level,(SELECT IF(value>0,1,0) FROM character_variables WHERE character_variables.obj_id = characters.obj_Id AND character_variables.name = "jailed" LIMIT 1) as jail')
-            ->leftJoin('character_subclasses', 'characters.obj_Id = character_subclasses.char_obj_id')
+            ->leftJoin('character_subclasses', 'characters.obj_Id = character_subclasses.char_obj_id AND character_subclasses.isBase = 1')
             ->leftJoin('clan_data', 'characters.clanid = clan_data.clan_id')
-            ->andWhere('character_subclasses.isBase = 1')
             ->from('characters');
     }
 
