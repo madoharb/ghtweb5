@@ -8,7 +8,8 @@ if(is_dir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPA
 }
 // ---------------
 
-$yii = dirname(__FILE__) . '/../framework/yii.php'; // Путь к папке с framework
+// Путь к папке с framework
+$yii = dirname(__FILE__) . '/../framework/yii.php';
 
 // Чтобы включить режим разработки добавьте свой IP в array() (тот что снизу), к примеру: array('127.0.0.1')
 if(in_array($_SERVER['REMOTE_ADDR'], array()))
@@ -27,11 +28,10 @@ else
 
     $config = dirname(__FILE__) . '/protected/config/main.php';
 }
-
-define('YII_TRACE_LEVEL', 1); // Запись в лог имени файла и номера строки
+// Запись в лог имени файла и номера строки
+define('YII_TRACE_LEVEL', 1);
 
 require_once dirname(__FILE__) . '/protected/helpers/global.php';
 
 require_once $yii;
 Yii::createWebApplication($config)->run();
-
