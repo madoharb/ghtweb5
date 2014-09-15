@@ -123,6 +123,12 @@ class WebUser extends CWebUser
         return ($this->_user !== NULL ? $this->_user->getLogin() : '');
     }
 
+    // Deprecated
+    public function getBalance()
+    {
+        return $this->get('balance');
+    }
+
     /**
      * @return Users
      */
