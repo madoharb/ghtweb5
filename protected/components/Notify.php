@@ -42,27 +42,14 @@ class Notify extends CApplicationComponent
         {
             $this->PHPMailer->isSMTP();
 
-            $host   = config('mail.smtp_host');
-            $secure = FALSE;
-
-            if(strpos($host, '://') !== FALSE)
-            {
-                list($secure, $host) = explode('://', config('mail.smtp_host'));
-            }
-
-            $this->PHPMailer->Host = $host;
+            $this->PHPMailer->Host = config('mail.smtp_host');
 
             if(config('mail.smtp_login') != '')
             {
                 $this->PHPMailer->SMTPAuth = TRUE;
                 $this->PHPMailer->Username = config('mail.smtp_login');
-                $this->PHPMailer->Password = config('mail.mail.smtp_password');
+                $this->PHPMailer->Password = config('mail.smtp_password');
                 $this->PHPMailer->Port     = config('mail.smtp_port');
-            }
-
-            if($secure)
-            {
-                $this->PHPMailer->SMTPSecure = $secure;
             }
         }
 
