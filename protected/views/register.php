@@ -50,7 +50,14 @@ $this->pageTitle = $title_;
         <div class="form-group clearfix">
             <?php echo $form->labelEx($model, 'password') ?>
             <div class="field">
-                <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control')) ?>
+                <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control', 'style' => 'position: inherit;')) ?>
+
+                <?php $this->widget('app.widgets.PasswordGenerator.PasswordGenerator', array(
+                    'text'      => Yii::t('main', 'сгенерировать пароль'), // Название кнопки
+                    'minLength' => Users::PASSWORD_MIN_LENGTH, // Мин. длина пароля
+                    'maxLength' => Users::PASSWORD_MAX_LENGTH, // Макс. длина пароля
+                )) ?>
+
             </div>
         </div>
 
