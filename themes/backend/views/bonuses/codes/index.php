@@ -27,7 +27,13 @@ $this->breadcrumbs = array($title_);
                 <tr>
                     <td><?php echo $row->id ?></td>
                     <td><?php echo $row->code ?></td>
-                    <td><?php echo CHtml::link(CHtml::encode($row->bonusInfo->title), array('/backend/bonuses/form', 'id' => $row->bonusInfo->getPrimaryKey()), array('target' => '_blank')) ?></td>
+                    <td>
+                        <?php if($row->bonusInfo !== NULL) { ?>
+                            <?php echo CHtml::link(CHtml::encode($row->bonusInfo->title), array('/backend/bonuses/form', 'id' => $row->bonusInfo->getPrimaryKey()), array('target' => '_blank')) ?>
+                        <?php } else { ?>
+                            <?php echo Yii::t('backend', 'Бонус не найден') ?>
+                        <?php } ?>
+                    </td>
                     <td><?php echo $row->limit ?></td>
                     <td><?php echo count($row->bonusLog) ?></td>
                     <td><?php echo $row->getStatus() ?></td>
