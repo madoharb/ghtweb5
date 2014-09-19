@@ -15,3 +15,5 @@ protected/components/BackendBaseController.php
 protected/components/CabinetBaseController.php
 protected/components/Controller.php
 protected/components/FrontendBaseController.php
+protected/messages/*
+!protected/messages/config.php
