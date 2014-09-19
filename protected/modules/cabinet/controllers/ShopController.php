@@ -49,7 +49,7 @@ class ShopController extends CabinetBaseController
 
         if(!$categoryModel)
         {
-            throw new CHttpException(404, Yii::t('main', 'Нет данных'));
+            throw new CHttpException(404, Yii::t('main', 'Нет данных.'));
         }
 
 

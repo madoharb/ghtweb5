@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
             <?php } ?>
         <?php } else { ?>
             <tr>
-                <td colspan="6"><?php echo Yii::t('backend', 'Нет данных') ?></td>
+                <td colspan="6"><?php echo Yii::t('backend', 'Нет данных.') ?></td>
             </tr>
         <?php } ?>
     </tbody>

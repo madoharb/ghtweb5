@@ -37,7 +37,7 @@ $total = 0;
 
     <?php } else { ?>
         <div class="alert alert-info">
-            <?php echo Yii::t('main', 'Нет данных') ?>
+            <?php echo Yii::t('main', 'Нет данных.') ?>
         </div>
     <?php } ?>
 

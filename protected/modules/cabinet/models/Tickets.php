@@ -56,7 +56,7 @@ class Tickets extends ActiveRecord
     public function getPriority()
     {
         $data = $this->getPrioritiesList();
-        return isset($data[$this->priority]) ? $data[$this->priority] : Yii::t('main', '*unknown*');
+        return isset($data[$this->priority]) ? $data[$this->priority] : Yii::t('main', '*Unknown*');
     }
 
     public function getStatusList()

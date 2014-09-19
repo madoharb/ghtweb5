@@ -265,7 +265,7 @@ class Users extends ActiveRecord
     public function getActivatedStatus()
     {
         $data = $this->getActivatedStatusList();
-        return isset($data[$this->activated]) ? $data[$this->activated] : Yii::t('backend', '*unknown*');
+        return isset($data[$this->activated]) ? $data[$this->activated] : Yii::t('backend', '*Unknown*');
     }
 
     /**

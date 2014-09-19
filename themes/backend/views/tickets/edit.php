@@ -74,7 +74,7 @@ $this->breadcrumbs = array(
     )) ?>
 
 <?php } else { ?>
-    <?php echo Yii::t('backend', 'Нет данных') ?>
+    <?php echo Yii::t('backend', 'Нет данных.') ?>
 <?php } ?>
 
 <h3><?php echo Yii::t('backend', 'Добавить ответ') ?></h3>

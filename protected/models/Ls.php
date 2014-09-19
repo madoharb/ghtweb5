@@ -138,7 +138,7 @@ class Ls extends ActiveRecord
     public function getPasswordType()
     {
         $data = $this->getPasswordTypeList();
-        return isset($data[$this->password_type]) ? $data[$this->password_type] : Yii::t('backend', '*unknown*');
+        return isset($data[$this->password_type]) ? $data[$this->password_type] : Yii::t('backend', '*Unknown*');
     }
 
     public function getStatusList()

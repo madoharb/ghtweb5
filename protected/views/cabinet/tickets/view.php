@@ -50,7 +50,7 @@ $this->breadcrumbs = array(
             )) ?>
 
         <?php } else { ?>
-            <?php echo Yii::t('main', 'Нет данных') ?>
+            <?php echo Yii::t('main', 'Нет данных.') ?>
         <?php } ?>
     </div>
 </div>

@@ -190,7 +190,7 @@ class Notify extends CApplicationComponent
      */
     public function userNoticeTicketAnswer($to, array $params = NULL)
     {
-        $this->send($to, Yii::t('main', 'Был дан ответ в Вашем тикете'), $this->render(__FUNCTION__, $params));
+        $this->send($to, Yii::t('main', 'Был дан ответ на Ваш тикет'), $this->render(__FUNCTION__, $params));
     }
 
     /**

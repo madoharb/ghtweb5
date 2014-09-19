@@ -171,7 +171,7 @@ class ShopItems extends ActiveRecord
     public function getCurrencyType()
     {
         $data = $this->getCurrencyTypeList();
-        return isset($data[$this->currency_type]) ? $data[$this->currency_type] : Yii::t('backend', '*unknown*');
+        return isset($data[$this->currency_type]) ? $data[$this->currency_type] : Yii::t('backend', '*Unknown*');
     }
 
     /**

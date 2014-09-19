@@ -17,7 +17,7 @@ class ChangePasswordForm extends CFormModel
             array('old_password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH),
             array('new_password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH),
             array('old_password', 'isValidPassword'),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || !config('cabinet.change_password.captcha.allow'), 'message' => Yii::t('main', 'Код с картинки введен не верно')),
+            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || !config('cabinet.change_password.captcha.allow'), 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
         );
     }
 

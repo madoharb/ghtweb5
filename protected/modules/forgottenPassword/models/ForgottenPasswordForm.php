@@ -25,8 +25,8 @@ class ForgottenPasswordForm extends CFormModel
             array('gs_id,login,email,verifyCode', 'filter', 'filter' => 'trim'),
             array('gs_id,login,email', 'required'),
             array('login', 'length', 'min' => Users::LOGIN_MIN_LENGTH, 'max' => Users::LOGIN_MAX_LENGTH),
-            array('email', 'email', 'message' => Yii::t('main', 'Введите корректный Email адрес')),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('forgotten_password.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно')),
+            array('email', 'email', 'message' => Yii::t('main', 'Введите корректный Email адрес.')),
+            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('forgotten_password.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
             array('login', 'loginIsExists'),
             array('gs_id', 'gsIsExists'),
         );
@@ -86,15 +86,15 @@ class ForgottenPasswordForm extends CFormModel
 
             if($user === NULL)
             {
-                $this->addError(__FUNCTION__, Yii::t('register', 'Аккаунт не найден'));
+                $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт не найден'));
             }
             elseif($user->role == Users::ROLE_BANNED)
             {
-                $this->addError(__FUNCTION__, Yii::t('register', 'Аккаунт заблокирован, восстановление пароля невозможно'));
+                $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт заблокирован, восстановление пароля невозможно'));
             }
             elseif($user->activated == Users::STATUS_INACTIVATED)
             {
-                $this->addError(__FUNCTION__, Yii::t('register', 'Аккаунт не активирован, восстановление пароля невозможно'));
+                $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт не активирован, восстановление пароля невозможно'));
             }
             else
             {
@@ -109,7 +109,7 @@ class ForgottenPasswordForm extends CFormModel
 
                     if(!$res)
                     {
-                        $this->addError(__FUNCTION__, Yii::t('register', 'Аккаунт не найден'));
+                        $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт не найден'));
                     }
                 }
                 catch(Exception $e)

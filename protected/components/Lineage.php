@@ -246,8 +246,8 @@ class Lineage
         $time    = $time - ($hours * 3600);
         $minutes = floor($time / 60);
 
-        return Yii::t('app', '{n} час|{n} часа|{n} часов|{n} часа', $hours) . ' ' .
-            Yii::t('app', '{n} минута|{n} минуты|{n} минут|{n} минуты', $minutes);
+        return Yii::t('main', '{n} час|{n} часа|{n} часов|{n} часа', $hours) . ' ' .
+            Yii::t('main', '{n} минута|{n} минуты|{n} минут|{n} минуты', $minutes);
     }
 
     /**

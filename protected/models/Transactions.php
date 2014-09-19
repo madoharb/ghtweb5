@@ -101,7 +101,7 @@ class Transactions extends ActiveRecord
     public function getStatus()
     {
         $data = $this->getStatusList();
-        return isset($data[$this->status]) ? $data[$this->status] : Yii::t('backend', '*unknown*');
+        return isset($data[$this->status]) ? $data[$this->status] : Yii::t('backend', '*Unknown*');
     }
 
     public function getType()

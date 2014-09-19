@@ -155,456 +155,456 @@ return array(
 
     'classList' => array(
         0 => array(
-            'name' => Yii::t('classList', 'Human Fighter'),
+            'name' => Yii::t('main', 'Human Fighter'),
             'race' => 0,
         ),
         1 => array(
-            'name' => Yii::t('classList', 'Warrior'),
+            'name' => Yii::t('main', 'Warrior'),
             'race' => 0,
         ),
         2 => array(
-            'name' => Yii::t('classList', 'Gladiator'),
+            'name' => Yii::t('main', 'Gladiator'),
             'race' => 0,
         ),
         3 => array(
-            'name' => Yii::t('classList', 'Warlord'),
+            'name' => Yii::t('main', 'Warlord'),
             'race' => 0,
         ),
         4 => array(
-            'name' => Yii::t('classList', 'Human Knight'),
+            'name' => Yii::t('main', 'Human Knight'),
             'race' => 0,
         ),
         5 => array(
-            'name' => Yii::t('classList', 'Paladin'),
+            'name' => Yii::t('main', 'Paladin'),
             'race' => 0,
         ),
         6 => array(
-            'name' => Yii::t('classList', 'Dark Avenger'),
+            'name' => Yii::t('main', 'Dark Avenger'),
             'race' => 0,
         ),
         7 => array(
-            'name' => Yii::t('classList', 'Rogue'),
+            'name' => Yii::t('main', 'Rogue'),
             'race' => 0,
         ),
         8 => array(
-            'name' => Yii::t('classList', 'Treasure Hunter'),
+            'name' => Yii::t('main', 'Treasure Hunter'),
             'race' => 0,
         ),
         9 => array(
-            'name' => Yii::t('classList', 'Hawkeye'),
+            'name' => Yii::t('main', 'Hawkeye'),
             'race' => 0,
         ),
         10 => array(
-            'name' => Yii::t('classList', 'Human Mage'),
+            'name' => Yii::t('main', 'Human Mage'),
             'race' => 0,
         ),
         11 => array(
-            'name' => Yii::t('classList', 'Human Wizard'),
+            'name' => Yii::t('main', 'Human Wizard'),
             'race' => 0,
         ),
         12 => array(
-            'name' => Yii::t('classList', 'Sorcerer'),
+            'name' => Yii::t('main', 'Sorcerer'),
             'race' => 0,
         ),
         13 => array(
-            'name' => Yii::t('classList', 'Necromancer'),
+            'name' => Yii::t('main', 'Necromancer'),
             'race' => 0,
         ),
         14 => array(
-            'name' => Yii::t('classList', 'Warlock'),
+            'name' => Yii::t('main', 'Warlock'),
             'race' => 0,
         ),
         15 => array(
-            'name' => Yii::t('classList', 'Cleric'),
+            'name' => Yii::t('main', 'Cleric'),
             'race' => 0,
         ),
         16 => array(
-            'name' => Yii::t('classList', 'Bishop'),
+            'name' => Yii::t('main', 'Bishop'),
             'race' => 0,
         ),
         17 => array(
-            'name' => Yii::t('classList', 'Human Prophet'),
+            'name' => Yii::t('main', 'Human Prophet'),
             'race' => 0,
         ),
         88 => array(
-            'name' => Yii::t('classList', 'Duelist'),
+            'name' => Yii::t('main', 'Duelist'),
             'race' => 0,
         ),
         89 => array(
-            'name' => Yii::t('classList', 'DreadNought'),
+            'name' => Yii::t('main', 'DreadNought'),
             'race' => 0,
         ),
         90 => array(
-            'name' => Yii::t('classList', 'Phoenix Knight'),
+            'name' => Yii::t('main', 'Phoenix Knight'),
             'race' => 0,
         ),
         91 => array(
-            'name' => Yii::t('classList', 'Hell Knight'),
+            'name' => Yii::t('main', 'Hell Knight'),
             'race' => 0,
         ),
         92 => array(
-            'name' => Yii::t('classList', 'Sagittarius'),
+            'name' => Yii::t('main', 'Sagittarius'),
             'race' => 0,
         ),
         93 => array(
-            'name' => Yii::t('classList', 'Adventurer'),
+            'name' => Yii::t('main', 'Adventurer'),
             'race' => 0,
         ),
         94 => array(
-            'name' => Yii::t('classList', 'Archmage'),
+            'name' => Yii::t('main', 'Archmage'),
             'race' => 0,
         ),
         95 => array(
-            'name' => Yii::t('classList', 'Soultaker'),
+            'name' => Yii::t('main', 'Soultaker'),
             'race' => 0,
         ),
         96 => array(
-            'name' => Yii::t('classList', 'Arcana Lord'),
+            'name' => Yii::t('main', 'Arcana Lord'),
             'race' => 0,
         ),
         97 => array(
-            'name' => Yii::t('classList', 'Cardinal'),
+            'name' => Yii::t('main', 'Cardinal'),
             'race' => 0,
         ),
         98 => array(
-            'name' => Yii::t('classList', 'Hierophant'),
+            'name' => Yii::t('main', 'Hierophant'),
             'race' => 0,
         ),
         18 => array(
-            'name' => Yii::t('classList', 'Elf Fighter'),
+            'name' => Yii::t('main', 'Elf Fighter'),
             'race' => 1,
         ),
         19 => array(
-            'name' => Yii::t('classList', 'Elf Knight'),
+            'name' => Yii::t('main', 'Elf Knight'),
             'race' => 1,
         ),
         20 => array(
-            'name' => Yii::t('classList', 'Temple Knight'),
+            'name' => Yii::t('main', 'Temple Knight'),
             'race' => 1,
         ),
         21 => array(
-            'name' => Yii::t('classList', 'Swordsinger'),
+            'name' => Yii::t('main', 'Swordsinger'),
             'race' => 1,
         ),
         22 => array(
-            'name' => Yii::t('classList', 'Scout'),
+            'name' => Yii::t('main', 'Scout'),
             'race' => 1,
         ),
         23 => array(
-            'name' => Yii::t('classList', 'Plains Walker'),
+            'name' => Yii::t('main', 'Plains Walker'),
             'race' => 1,
         ),
         24 => array(
-            'name' => Yii::t('classList', 'Silver Ranger'),
+            'name' => Yii::t('main', 'Silver Ranger'),
             'race' => 1,
         ),
         25 => array(
-            'name' => Yii::t('classList', 'Elf Mage'),
+            'name' => Yii::t('main', 'Elf Mage'),
             'race' => 1,
         ),
         26 => array(
-            'name' => Yii::t('classList', 'Elf Wizard'),
+            'name' => Yii::t('main', 'Elf Wizard'),
             'race' => 1,
         ),
         27 => array(
-            'name' => Yii::t('classList', 'Spellsinger'),
+            'name' => Yii::t('main', 'Spellsinger'),
             'race' => 1,
         ),
         28 => array(
-            'name' => Yii::t('classList', 'Elemental Summoner'),
+            'name' => Yii::t('main', 'Elemental Summoner'),
             'race' => 1,
         ),
         29 => array(
-            'name' => Yii::t('classList', 'Oracle'),
+            'name' => Yii::t('main', 'Oracle'),
             'race' => 1,
         ),
         30 => array(
-            'name' => Yii::t('classList', 'Elder'),
+            'name' => Yii::t('main', 'Elder'),
             'race' => 1,
         ),
         99 => array(
-            'name' => Yii::t('classList', 'Eva Templar'),
+            'name' => Yii::t('main', 'Eva Templar'),
             'race' => 1,
         ),
         100 => array(
-            'name' => Yii::t('classList', 'Sword Muse'),
+            'name' => Yii::t('main', 'Sword Muse'),
             'race' => 1,
         ),
         101 => array(
-            'name' => Yii::t('classList', 'Wind Rider'),
+            'name' => Yii::t('main', 'Wind Rider'),
             'race' => 1,
         ),
         102 => array(
-            'name' => Yii::t('classList', 'Moonlight Sentinel'),
+            'name' => Yii::t('main', 'Moonlight Sentinel'),
             'race' => 1,
         ),
         103 => array(
-            'name' => Yii::t('classList', 'Mystic Muse'),
+            'name' => Yii::t('main', 'Mystic Muse'),
             'race' => 1,
         ),
         104 => array(
-            'name' => Yii::t('classList', 'Elemental Master'),
+            'name' => Yii::t('main', 'Elemental Master'),
             'race' => 1,
         ),
         105 => array(
-            'name' => Yii::t('classList', 'Eva Saint'),
+            'name' => Yii::t('main', 'Eva Saint'),
             'race' => 1,
         ),
         31 => array(
-            'name' => Yii::t('classList', 'DE Fighter'),
+            'name' => Yii::t('main', 'DE Fighter'),
             'race' => 2,
         ),
         32 => array(
-            'name' => Yii::t('classList', 'Palus Knight'),
+            'name' => Yii::t('main', 'Palus Knight'),
             'race' => 2,
         ),
         33 => array(
-            'name' => Yii::t('classList', 'Shillien Knight'),
+            'name' => Yii::t('main', 'Shillien Knight'),
             'race' => 2,
         ),
         34 => array(
-            'name' => Yii::t('classList', 'Bladedancer'),
+            'name' => Yii::t('main', 'Bladedancer'),
             'race' => 2,
         ),
         35 => array(
-            'name' => Yii::t('classList', 'Assassin'),
+            'name' => Yii::t('main', 'Assassin'),
             'race' => 2,
         ),
         36 => array(
-            'name' => Yii::t('classList', 'Abyss Walker'),
+            'name' => Yii::t('main', 'Abyss Walker'),
             'race' => 2,
         ),
         37 => array(
-            'name' => Yii::t('classList', 'Phantom Ranger'),
+            'name' => Yii::t('main', 'Phantom Ranger'),
             'race' => 2,
         ),
         38 => array(
-            'name' => Yii::t('classList', 'DE Mage'),
+            'name' => Yii::t('main', 'DE Mage'),
             'race' => 2,
         ),
         39 => array(
-            'name' => Yii::t('classList', 'DE Wizard'),
+            'name' => Yii::t('main', 'DE Wizard'),
             'race' => 2,
         ),
         40 => array(
-            'name' => Yii::t('classList', 'Spell Howler'),
+            'name' => Yii::t('main', 'Spell Howler'),
             'race' => 2,
         ),
         41 => array(
-            'name' => Yii::t('classList', 'Phantom Summoner'),
+            'name' => Yii::t('main', 'Phantom Summoner'),
             'race' => 2,
         ),
         42 => array(
-            'name' => Yii::t('classList', 'Shillien Oracle'),
+            'name' => Yii::t('main', 'Shillien Oracle'),
             'race' => 2,
         ),
         43 => array(
-            'name' => Yii::t('classList', 'Shillien Elder'),
+            'name' => Yii::t('main', 'Shillien Elder'),
             'race' => 2,
         ),
         106 => array(
-            'name' => Yii::t('classList', 'Shillien Templar'),
+            'name' => Yii::t('main', 'Shillien Templar'),
             'race' => 2,
         ),
         107 => array(
-            'name' => Yii::t('classList', 'Spectral Dancer'),
+            'name' => Yii::t('main', 'Spectral Dancer'),
             'race' => 2,
         ),
         108 => array(
-            'name' => Yii::t('classList', 'Ghost Hunter'),
+            'name' => Yii::t('main', 'Ghost Hunter'),
             'race' => 2,
         ),
         109 => array(
-            'name' => Yii::t('classList', 'Ghost Sentinel'),
+            'name' => Yii::t('main', 'Ghost Sentinel'),
             'race' => 2,
         ),
         110 => array(
-            'name' => Yii::t('classList', 'Storm Screamer'),
+            'name' => Yii::t('main', 'Storm Screamer'),
             'race' => 2,
         ),
         111 => array(
-            'name' => Yii::t('classList', 'Spectral Master'),
+            'name' => Yii::t('main', 'Spectral Master'),
             'race' => 2,
         ),
         112 => array(
-            'name' => Yii::t('classList', 'Shillen Saint'),
+            'name' => Yii::t('main', 'Shillen Saint'),
             'race' => 2,
         ),
         44 => array(
-            'name' => Yii::t('classList', 'Orc Fighter'),
+            'name' => Yii::t('main', 'Orc Fighter'),
             'race' => 3,
         ),
         45 => array(
-            'name' => Yii::t('classList', 'Raider'),
+            'name' => Yii::t('main', 'Raider'),
             'race' => 3,
         ),
         46 => array(
-            'name' => Yii::t('classList', 'Destroyer'),
+            'name' => Yii::t('main', 'Destroyer'),
             'race' => 3,
         ),
         47 => array(
-            'name' => Yii::t('classList', 'Monk'),
+            'name' => Yii::t('main', 'Monk'),
             'race' => 3,
         ),
         48 => array(
-            'name' => Yii::t('classList', 'Tyrant'),
+            'name' => Yii::t('main', 'Tyrant'),
             'race' => 3,
         ),
         49 => array(
-            'name' => Yii::t('classList', 'Orc Mage'),
+            'name' => Yii::t('main', 'Orc Mage'),
             'race' => 3,
         ),
         50 => array(
-            'name' => Yii::t('classList', 'Shaman'),
+            'name' => Yii::t('main', 'Shaman'),
             'race' => 3,
         ),
         51 => array(
-            'name' => Yii::t('classList', 'Overlord'),
+            'name' => Yii::t('main', 'Overlord'),
             'race' => 3,
         ),
         52 => array(
-            'name' => Yii::t('classList', 'Warcryer'),
+            'name' => Yii::t('main', 'Warcryer'),
             'race' => 3,
         ),
         113 => array(
-            'name' => Yii::t('classList', 'Titan'),
+            'name' => Yii::t('main', 'Titan'),
             'race' => 3,
         ),
         114 => array(
-            'name' => Yii::t('classList', 'Grand Khauatari'),
+            'name' => Yii::t('main', 'Grand Khauatari'),
             'race' => 3,
         ),
         115 => array(
-            'name' => Yii::t('classList', 'Dominator'),
+            'name' => Yii::t('main', 'Dominator'),
             'race' => 3,
         ),
         116 => array(
-            'name' => Yii::t('classList', 'Doomcryer'),
+            'name' => Yii::t('main', 'Doomcryer'),
             'race' => 3,
         ),
         53 => array(
-            'name' => Yii::t('classList', 'Dwarf Fighter'),
+            'name' => Yii::t('main', 'Dwarf Fighter'),
             'race' => 4,
         ),
         54 => array(
-            'name' => Yii::t('classList', 'Scavenger'),
+            'name' => Yii::t('main', 'Scavenger'),
             'race' => 4,
         ),
         55 => array(
-            'name' => Yii::t('classList', 'Bounty Hunter'),
+            'name' => Yii::t('main', 'Bounty Hunter'),
             'race' => 4,
         ),
         56 => array(
-            'name' => Yii::t('classList', 'Artisan'),
+            'name' => Yii::t('main', 'Artisan'),
             'race' => 4,
         ),
         57 => array(
-            'name' => Yii::t('classList', 'Warsmith'),
+            'name' => Yii::t('main', 'Warsmith'),
             'race' => 4,
         ),
         117 => array(
-            'name' => Yii::t('classList', 'Fortune Seeker'),
+            'name' => Yii::t('main', 'Fortune Seeker'),
             'race' => 4,
         ),
         118 => array(
-            'name' => Yii::t('classList', 'Maestro'),
+            'name' => Yii::t('main', 'Maestro'),
             'race' => 4,
         ),
         123 => array(
-            'name' => Yii::t('classList', 'Male Soldier'),
+            'name' => Yii::t('main', 'Male Soldier'),
             'race' => 5,
         ),
         124 => array(
-            'name' => Yii::t('classList', 'Female Soldier'),
+            'name' => Yii::t('main', 'Female Soldier'),
             'race' => 5,
         ),
         125 => array(
-            'name' => Yii::t('classList', 'Trooper'),
+            'name' => Yii::t('main', 'Trooper'),
             'race' => 5,
         ),
         126 => array(
-            'name' => Yii::t('classList', 'Warder'),
+            'name' => Yii::t('main', 'Warder'),
             'race' => 5,
         ),
         127 => array(
-            'name' => Yii::t('classList', 'Berserker'),
+            'name' => Yii::t('main', 'Berserker'),
             'race' => 5,
         ),
         128 => array(
-            'name' => Yii::t('classList', 'Male Soulbreaker'),
+            'name' => Yii::t('main', 'Male Soulbreaker'),
             'race' => 5,
         ),
         129 => array(
-            'name' => Yii::t('classList', 'Female Soulbreaker'),
+            'name' => Yii::t('main', 'Female Soulbreaker'),
             'race' => 5,
         ),
         130 => array(
-            'name' => Yii::t('classList', 'Arbalester'),
+            'name' => Yii::t('main', 'Arbalester'),
             'race' => 5,
         ),
         131 => array(
-            'name' => Yii::t('classList', 'Doombringer'),
+            'name' => Yii::t('main', 'Doombringer'),
             'race' => 5,
         ),
         132 => array(
-            'name' => Yii::t('classList', 'Male Soulhound'),
+            'name' => Yii::t('main', 'Male Soulhound'),
             'race' => 5,
         ),
         133 => array(
-            'name' => Yii::t('classList', 'Female Soulhound'),
+            'name' => Yii::t('main', 'Female Soulhound'),
             'race' => 5,
         ),
         134 => array(
-            'name' => Yii::t('classList', 'Trickster'),
+            'name' => Yii::t('main', 'Trickster'),
             'race' => 5,
         ),
         135 => array(
-            'name' => Yii::t('classList', 'Inspector'),
+            'name' => Yii::t('main', 'Inspector'),
             'race' => 5,
         ),
         136 => array(
-            'name' => Yii::t('classList', 'Judicator'),
+            'name' => Yii::t('main', 'Judicator'),
             'race' => 5,
         ),
         139 => array(
-            'name' => Yii::t('classList', 'Sigel Knight'),
+            'name' => Yii::t('main', 'Sigel Knight'),
             'race' => 5,
         ),
         140 => array(
-            'name' => Yii::t('classList', 'Tyrr Warrior'),
+            'name' => Yii::t('main', 'Tyrr Warrior'),
             'race' => 5,
         ),
         141 => array(
-            'name' => Yii::t('classList', 'Othell Rogue'),
+            'name' => Yii::t('main', 'Othell Rogue'),
             'race' => 5,
         ),
         142 => array(
-            'name' => Yii::t('classList', 'Yul Archer'),
+            'name' => Yii::t('main', 'Yul Archer'),
             'race' => 5,
         ),
         143 => array(
-            'name' => Yii::t('classList', 'Feoh Wizard'),
+            'name' => Yii::t('main', 'Feoh Wizard'),
             'race' => 5,
         ),
         144 => array(
-            'name' => Yii::t('classList', 'Iss Enchanter'),
+            'name' => Yii::t('main', 'Iss Enchanter'),
             'race' => 5,
         ),
         145 => array(
-            'name' => Yii::t('classList', 'Wynn Summoner'),
+            'name' => Yii::t('main', 'Wynn Summoner'),
             'race' => 5,
         ),
         146 => array(
-            'name' => Yii::t('classList', 'Aeore Healer'),
+            'name' => Yii::t('main', 'Aeore Healer'),
             'race' => 5,
         ),
     ),
     'raceList' => array(
-        0 => Yii::t('raceList', 'Human'),
-        1 => Yii::t('raceList', 'Elf'),
-        2 => Yii::t('raceList', 'Dark elf'),
-        3 => Yii::t('raceList', 'Orc'),
-        4 => Yii::t('raceList', 'Dwarf'),
-        5 => Yii::t('raceList', 'Kamael'),
+        0 => Yii::t('main', 'Human'),
+        1 => Yii::t('main', 'Elf'),
+        2 => Yii::t('main', 'Dark elf'),
+        3 => Yii::t('main', 'Orc'),
+        4 => Yii::t('main', 'Dwarf'),
+        5 => Yii::t('main', 'Kamael'),
     ),
 );

@@ -219,7 +219,7 @@ class CharactersController extends CabinetBaseController
             }
             else
             {
-                user()->setFlash(FlashConst::MESSAGE_ERROR, Yii::t('main', 'Ошибка, попробуйте повторить позже.'));
+                user()->setFlash(FlashConst::MESSAGE_ERROR, Yii::t('main', 'Произошла ошибка! Попробуйте повторить позже.'));
                 $this->redirect(array('index'));
             }
         }

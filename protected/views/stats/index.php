@@ -28,7 +28,7 @@
 <?php if($gs_list) { ?>
 
     <ul class="list-unstyled server-list">
-        <li><?php echo Yii::t('main', 'Выберите сервер') ?>:</li>
+        <li><?php echo Yii::t('main', 'Выберите сервер.') ?>:</li>
         <?php foreach($gs_list as $gs) { ?>
             <li<?php echo ($gs_id == $gs->id ? ' class="active"' : '') ?>>
                 <?php echo HTML::link($gs->name, array('/stats/default/index', 'gs_id' => $gs->id)) ?>

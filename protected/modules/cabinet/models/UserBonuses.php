@@ -101,6 +101,6 @@ class UserBonuses extends ActiveRecord
     public function getState()
     {
         $data = $this->getStateList();
-        return isset($data[$this->status]) ? $data[$this->status] :t('backend', '*unknown*');
+        return isset($data[$this->status]) ? $data[$this->status] :t('backend', '*Unknown*');
     }
 }

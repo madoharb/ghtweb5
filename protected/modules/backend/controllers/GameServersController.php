@@ -67,7 +67,7 @@ class GameServersController extends BackendBaseController
 
         if($model->save(FALSE, array('status')))
         {
-            user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('backend', 'Статус изменен на <b>:status</b>', array(':status' => $model->getStatus())));
+            user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('backend', 'Статус изменен на <b>:status</b>.', array(':status' => $model->getStatus())));
         }
 
         $this->redirectBack();
