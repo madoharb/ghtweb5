@@ -17,15 +17,6 @@ $(function(){
             }
         });
     });
-    $(".js-update-tables").on("click", function(e){
-        e.preventDefault();
-        var $self = $(this);
-        APP.globalAjaxLoading("start");
-        $.get($self[0].href, function(res){
-            APP.globalAjaxLoading("stop");
-            $(".update-info-block").empty().html("<pre>" + res + "</pre>");
-        });
-    });
 });
 ', CClientScript::POS_END);
 ?>
@@ -56,4 +47,3 @@ if($mv < $nv)
 
 <br/>
 <?php echo CHtml::link(Yii::t('main', 'Удалить кэш'), array('/backend/default/clearCache'), array('class' => 'btn btn-warning btn-sm js-clear-cache')) ?> &nbsp;
-<?php echo CHtml::link(Yii::t('main', 'Установить миграции'), array('/backend/default/updateTables'), array('class' => 'btn btn-warning btn-sm js-update-tables')) ?>

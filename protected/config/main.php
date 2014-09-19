@@ -240,9 +240,6 @@ return array(
                 // Обновление CMS
                 'backend/update' => 'backend/default/update',
 
-                // Обновление миграций
-                'backend/update-tables' => 'backend/default/updateTables',
-
                 // Инфа о item
                 'backend/get-item-info' => 'backend/default/getItemInfo',
 

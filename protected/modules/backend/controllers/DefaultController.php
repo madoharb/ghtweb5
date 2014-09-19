@@ -74,17 +74,6 @@ class DefaultController extends BackendBaseController
     }
 
     /**
-     * Обновление миграций
-     */
-    public function actionUpdateTables()
-    {
-        if(request()->isAjaxRequest)
-        {
-            echo $this->migrationInstall();
-        }
-    }
-
-    /**
      * Очистка кэша
      */
     public function actionClearCache()
