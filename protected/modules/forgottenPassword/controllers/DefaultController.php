@@ -22,6 +22,9 @@ class DefaultController extends FrontendBaseController
 
             if($model->validate())
             {
+                $cache = new CFileCache();
+                $cache->init();
+
                 $cacheData = array(
                     'hash'  => md5(randomString(rand(10,30)) . userIp() . time()),
                     'login' => $model->login,
@@ -29,7 +32,7 @@ class DefaultController extends FrontendBaseController
                     'email' => $model->email,
                 );
 
-                cache()->set($this->_cacheName . $cacheData['hash'], $cacheData, config('forgotten_password.cache_time') * 60);
+                $cache->set($this->_cacheName . $cacheData['hash'], $cacheData, (int) config('forgotten_password.cache_time') * 60);
 
                 app()->notify->forgottenPasswordStep1($model->email, array(
                     'hash' => $cacheData['hash'],
@@ -47,9 +50,12 @@ class DefaultController extends FrontendBaseController
 
     public function actionStep2($hash)
     {
-        if(($hashInfo = cache()->get($this->_cacheName . $hash)) !== FALSE)
+        $cache = new CFileCache();
+        $cache->init();
+
+        if(($hashInfo = $cache->get($this->_cacheName . $hash)) !== FALSE)
         {
-            cache()->delete($this->_cacheName . $hash);
+            $cache->delete($this->_cacheName . $hash);
 
             $user = db()->createCommand("SELECT COUNT(0) FROM `{{users}}` WHERE `email` = :email AND `login` = :login LIMIT 1")
                 ->bindParam('email', $hashInfo['email'], PDO::PARAM_STR)
