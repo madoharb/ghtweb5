@@ -92,7 +92,16 @@ class Config extends ActiveRecord
                 {
                     $params = array(Yii::t('main', 'Нет'), Yii::t('main', 'Да'));
                 }
-                $field = HTML::dropDownList('Config[' . $this->param . ']', ($this->value == '' ? $this->default : $this->value), $params, array('class' => 'form-control'));
+
+                $htmlOptions = array('class' => 'form-control');
+
+                if($this->param == 'theme')
+                {
+                    $htmlOptions = array_merge($htmlOptions, array('empty' => Yii::t('backend', 'Дефолтная тема (GHTWEB)')));
+                }
+
+                $field = HTML::dropDownList('Config[' . $this->param . ']', ($this->value == '' ? $this->default : $this->value), $params, $htmlOptions);
+
                 break;
             default:
                 $field = HTML::textField('Config[' . $this->param . ']', ($this->value == '' ? $this->default : $this->value), array('class' => 'form-control'));

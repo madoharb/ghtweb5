@@ -53,4 +53,26 @@ class ConfigController extends BackendBaseController
             'model' => $model,
         ));
 	}
+
+    public function actionSort()
+    {
+        $groupId = (int) request()->getParam('groupId', 0);
+        $data    = request()->getParam('data');
+
+        if($groupId < 1 || !$data)
+        {
+            die;
+        }
+
+        foreach(explode(',', $data) as $v)
+        {
+            list($id, $order) = explode('-', $v);
+
+            db()->createCommand()->update('{{config}}', array('order' => $order), 'id = :id', array('id' => $id));
+        }
+
+        $this->ajax['status'] = 'success';
+        echo json_encode($this->ajax);
+        app()->end();
+    }
 }
