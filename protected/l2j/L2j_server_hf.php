@@ -182,6 +182,7 @@ class L2j_server_hf
                 'item_id'       => $itemId,
                 'count'         => $count,
                 'enchant_level' => $enchantLevel,
+                'log'           => 'INVENTORY',
             ));
     }
 
