@@ -1,10 +1,10 @@
 <table class="table">
     <tbody>
-        <?php foreach($content as $i => $row) { ?>
+        <?php $i = 0; foreach($content as $row) { ?>
             <tr>
                 <th colspan="2"><?php echo Lineage::getCastleName($row['castle_id']) ?></th>
             </tr>
-            <tr class="<?php echo $i % 2 == 0 ? 'odd' : 'even' ?>">
+            <tr class="<?php echo ++$i % 2 == 0 ? 'odd' : 'even' ?>">
                 <td width="150"><?php echo Lineage::getCastleIcon($row['castle_id']) ?></td>
                 <td>
                 <?php echo Yii::t('main', 'Налог') ?>: <i><?php echo $row['tax_percent'] ?>%</i><br />
