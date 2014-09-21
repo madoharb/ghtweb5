@@ -33,7 +33,7 @@ $this->breadcrumbs = array(
     <div class="form-group">
         <?php echo $form->labelEx($model, 'date_end', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'date_end', array('placeholder' => $model->getAttributeLabel('date_end'), 'class' => 'form-control', 'data-date-format' => 'YYYY-MM-DD hh:mm:ss')) ?>
+            <?php echo $form->textField($model, 'date_end', array('placeholder' => $model->getAttributeLabel('date_end'), 'class' => 'form-control', 'data-date-format' => 'YYYY-MM-DD HH:mm:ss')) ?>
             <p class="help-block"><?php echo Yii::t('backend', 'Пример: :date', array(':date' => date('Y-m-d H:i:s'))) ?></p>
         </div>
     </div>
@@ -53,4 +53,7 @@ $this->breadcrumbs = array(
 
 <?php $this->widget('application.widgets.DatetimePicker.DatetimePicker', array(
     'fields' => array('#Bonuses_date_end'),
+    'params' => array(
+        'useSeconds' => TRUE,
+    ),
 )) ?>
