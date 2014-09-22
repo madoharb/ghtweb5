@@ -206,7 +206,7 @@ class RegisterForm extends CFormModel
     {
         if(!$this->hasErrors())
         {
-            $login = $this->prefix . $this->login;
+            $login = $this->getLogin();
             $lsId  = $this->gs_list[$this->gs_id]['login_id'];
 
             $res = db()->createCommand("SELECT COUNT(0) FROM `{{users}}` WHERE `login` = :login AND ls_id = :ls_id LIMIT 1")
@@ -275,7 +275,7 @@ class RegisterForm extends CFormModel
      */
     public function getLogin()
     {
-        return $this->prefix . $this->login;
+        return strtolower($this->prefix . $this->login);
     }
 
     /**
