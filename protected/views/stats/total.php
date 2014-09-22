@@ -20,41 +20,85 @@
     </tr>
     <tr>
         <td><?php echo Yii::t('main', 'Мужчин') ?></td>
-        <td><?php echo $countMen ?></td>
+        <td><?php $percent = ceil(($countMen / ($countFemale + $countMen)) * 100) ?>
+            <div class="progress-bar">
+                <span class="text"><?php echo $percent ?>% (<?php echo $countMen ?>)</span>
+                <span class="line-bg" style="width: <?php echo $percent ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <tr class="even">
         <td><?php echo Yii::t('main', 'Женщин') ?></td>
-        <td><?php echo $countFemale ?></td>
+        <td><?php $percent = ceil(($countFemale / ($countFemale + $countMen)) * 100) ?>
+            <div class="progress-bar">
+                <span class="text"><?php echo $percent ?>% (<?php echo $countFemale ?>)</span>
+                <span class="line-bg" style="width: <?php echo $percent ?>%;"></span>
+            </div>
+        </td>
     </tr>
+</table>
+<table class="table stats-table">
     <tr class="divider">
         <td colspan="2"><?php echo Yii::t('main', 'Расы') ?></td>
     </tr>
     <tr>
-        <td><?php echo Yii::t('main', 'Люди') ?></td>
-        <td><?php echo $races_percentage['human'] ?>% (<?php echo $races['human'] ?>)</td>
+        <td width="30%"><?php echo Yii::t('main', 'Люди') ?></td>
+        <td width="70%">
+            <div class="progress-bar">
+                <span class="text"><?php echo $races_percentage['human'] ?>% (<?php echo $races['human'] ?>)</span>
+                <span class="line-bg" style="width: <?php echo $races_percentage['human'] ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <tr class="even">
         <td><?php echo Yii::t('main', 'Эльфы') ?></td>
-        <td><?php echo $races_percentage['elf'] ?>% (<?php echo $races['elf'] ?>)</td>
+        <td>
+            <div class="progress-bar">
+                <span class="text"><?php echo $races_percentage['elf'] ?>% (<?php echo $races['elf'] ?>)</span>
+                <span class="line-bg" style="width: <?php echo $races_percentage['elf'] ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <tr>
         <td><?php echo Yii::t('main', 'Темные Эльфы') ?></td>
-        <td><?php echo $races_percentage['dark_elf'] ?>% (<?php echo $races['dark_elf'] ?>)</td>
+        <td>
+            <div class="progress-bar">
+                <span class="text"><?php echo $races_percentage['dark_elf'] ?>% (<?php echo $races['dark_elf'] ?>)</span>
+                <span class="line-bg" style="width: <?php echo $races_percentage['dark_elf'] ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <tr class="even">
         <td><?php echo Yii::t('main', 'Орки') ?></td>
-        <td><?php echo $races_percentage['ork'] ?>% (<?php echo $races['ork'] ?>)</td>
+        <td>
+            <div class="progress-bar">
+                <span class="text"><?php echo $races_percentage['ork'] ?>% (<?php echo $races['ork'] ?>)</span>
+                <span class="line-bg" style="width: <?php echo $races_percentage['ork'] ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <tr>
         <td><?php echo Yii::t('main', 'Гномы') ?></td>
-        <td><?php echo $races_percentage['dwarf'] ?>% (<?php echo $races['dwarf'] ?>)</td>
+        <td>
+            <div class="progress-bar">
+                <span class="text"><?php echo $races_percentage['dwarf'] ?>% (<?php echo $races['dwarf'] ?>)</span>
+                <span class="line-bg" style="width: <?php echo $races_percentage['dwarf'] ?>%;"></span>
+            </div>
+        </td>
     </tr>
     <?php if(isset($races_percentage['kamael'])) { ?>
         <tr class="even">
             <td><?php echo Yii::t('main', 'Камаэли') ?></td>
-            <td><?php echo $races_percentage['kamael'] ?>% (<?php echo $races['kamael'] ?>)</td>
+            <td>
+                <div class="progress-bar">
+                    <span class="text"><?php echo $races_percentage['kamael'] ?>% (<?php echo $races['kamael'] ?>)</span>
+                    <span class="line-bg" style="width: <?php echo $races_percentage['kamael'] ?>%;"></span>
+                </div>
+            </td>
         </tr>
     <?php } ?>
+</table>
+<table class="table">
     <tr class="divider">
         <td colspan="2"><?php echo Yii::t('main', 'Рейты') ?></td>
     </tr>
