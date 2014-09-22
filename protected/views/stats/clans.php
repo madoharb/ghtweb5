@@ -15,7 +15,10 @@
             <?php foreach($content as $i => $row) { ?>
                 <tr class="<?php echo $i % 2 == 0 ? 'odd' : 'even' ?>">
                     <td><?php echo ++$i ?></td>
-                    <td><?php
+                    <td>
+                        <?php echo clanAllyCrest('ally', $row['ally_id'], $this->_gs_id, $row['ally_crest']) .
+                            clanAllyCrest('clan', $row['clan_id'], $this->_gs_id, $row['clan_crest']) ?>
+                        <?php
                         if($this->_gs->stats_clan_info)
                         {
                             echo HTML::link($row['clan_name'], array('/stats/default/index', 'gs_id' => $this->_gs_id, 'type' => 'clan-info', 'clan_id' => $row['clan_id']));
@@ -25,7 +28,6 @@
                             echo '<font color="#9D6A1E">' . e($row['clan_name']) . '</font>';
                         }
                         ?>
-                        <?php echo Lineage::getCrestIcon('clan', $this->_gs_id, $row['clan_id'], $row['clan_crest']) ?>
                         <p class="help-block"><?php echo Yii::t('main', 'Лидер') ?>: <?php echo $row['char_name'] ?> [<?php echo Lineage::getClassName($row['base_class']) ?>][<?php echo $row['level'] ?>]</p>
                     </td>
                     <td><?php echo $row['clan_level'] ?></td>
@@ -34,7 +36,6 @@
                     <td><?php echo number_format($row['reputation_score'], 0, '', '.') ?></td>
                     <td>
                         <?php echo ($row['ally_name'] != '' ? $row['ally_name'] : Yii::t('main', 'Не в Альянсе')) ?>
-                        <?php echo Lineage::getCrestIcon('ally', $this->_gs_id, $row['ally_id'], $row['ally_crest']) ?>
                     </td>
                 </tr>
             <?php } ?>

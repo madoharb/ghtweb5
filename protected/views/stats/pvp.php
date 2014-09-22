@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var FrontendBaseController $this
+ */
+?>
 <table class="table">
     <thead>
         <tr>
@@ -17,13 +22,13 @@
                     <td><?php echo e($row['char_name']) ?>
                         <p class="help-block" style="font-size: 13px;"><?php echo Lineage::getClassName($row['base_class']) ?> [<?php echo $row['level'] ?>]</p></td>
                     <td><?php echo $row['pvpkills'] ?></td>
-                    <td><?php
+                    <td><?php echo clanAllyCrest('clan', $row['clan_id'], $this->_gs->id, $row['clan_crest']) ?> <?php
                     $clan_link = e($row['clan_name']);
                     if($this->_gs->stats_clan_info)
                     {
                         $clan_link = HTML::link($row['clan_name'], array('/stats/default/index', 'gs_id' => $this->_gs_id, 'type' => 'clan-info', 'clan_id' => $row['clan_id']));
                     }
-                    echo ($row['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link . ' ' . Lineage::getCrestIcon('clan', $this->_gs_id, $row['clan_id'], $row['clan_crest']));
+                    echo ($row['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link);
                     ?></td>
                     <td><?php echo Lineage::getOnlineTime($row['onlinetime']) ?></td>
                     <td><?php echo ($row['online'] ? '<span style="color: green;">' . Yii::t('main', 'В игре') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не в игре') . '</span>') ?></td>

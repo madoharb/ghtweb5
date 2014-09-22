@@ -45,6 +45,8 @@ class DefaultController extends FrontendBaseController
         {
             $this->_gs_list[$row->getPrimaryKey()] = $row;
         }
+
+        require_once Yii::getPathOfAlias('application.helpers') . DIRECTORY_SEPARATOR . 'lineage.php';
     }
 
 	public function actionIndex($gs_id = NULL, $type = '', $clan_id = NULL)

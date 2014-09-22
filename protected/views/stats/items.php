@@ -37,7 +37,7 @@
                             {
                                 $clan_link = HTML::link($character['clan_name'], array('/stats/default/index', 'gs_id' => $this->_gs_id, 'type' => 'clan-info', 'clan_id' => $character['clan_id']));
                             }
-                            echo ($character['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link . ' ' . Lineage::getCrestIcon('clan', $this->_gs_id, $character['clan_id'], $character['clan_crest']));
+                            echo ($character['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link);
                             ?></td>
                         <td><?php echo Lineage::getOnlineTime($character['onlinetime']) ?></td>
                         <td><?php echo ($character['online'] ? '<span style="color: green;">' . Yii::t('main', 'В игре') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не в игре') . '</span>') ?></td>
