@@ -37,7 +37,12 @@ class DefaultController extends FrontendBaseController
 
                         if($refererProfile)
                         {
-                            $profit = $transaction->sum / 100 * $percents;
+                            $gsModel = Gs::model()->findByPk($transaction->gs_id);
+
+                            // Кол-во предметов которые были куплены, от них будет считаться % рефералу
+                            $countItems = $transaction->sum / $gsModel->deposit_course_payments;
+
+                            $profit = $countItems / 100 * $percents;
 
                             $refererProfile->balance += $profit;
 
