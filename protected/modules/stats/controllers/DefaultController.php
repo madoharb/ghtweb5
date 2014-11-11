@@ -316,7 +316,7 @@ class DefaultController extends FrontendBaseController
     private function top()
     {
         return $this->renderPartial('//stats/' . __FUNCTION__, array(
-            'content' => l2('gs', $this->_gs_id)->connect()->getTop(),
+            'content' => l2('gs', $this->_gs_id)->connect()->getTop($this->_gs->stats_count_results),
         ), TRUE);
     }
 
