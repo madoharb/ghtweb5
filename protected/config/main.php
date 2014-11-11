@@ -365,6 +365,7 @@ return array(
             'R2_core_ep'    => 'R2Core Epilogue', // http://r2core.ru/
             'L2j_server_hf' => 'L2J Server HF', // http://www.l2jserver.com/
             'PainTeamIt'    => 'Pain Team Interlude', // http://pain-team.ru/
+            'Pwsoft_it'     => 'Pwsoft Interlude', // http://pwsoft.ru/server/
         ),
 
         // Папка куда кидаются картинки
