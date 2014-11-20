@@ -17,3 +17,6 @@ protected/components/Controller.php
 protected/components/FrontendBaseController.php
 protected/messages/*
 !protected/messages/config.php
+protected/codecept.phar
+protected/tests/*
+protected/codeception.yml

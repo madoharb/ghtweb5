@@ -366,6 +366,7 @@ return array(
             'L2j_server_hf' => 'L2J Server HF', // http://www.l2jserver.com/
             'PainTeamIt'    => 'Pain Team Interlude', // http://pain-team.ru/
             'Pwsoft_it'     => 'Pwsoft Interlude', // http://pwsoft.ru/server/
+            'L2Scripts_hf'  => 'L2 Scripts HF', // http://l2-scripts.ru/
         ),
 
         // Папка куда кидаются картинки
