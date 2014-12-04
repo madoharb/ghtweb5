@@ -367,6 +367,7 @@ return array(
             'PainTeamIt'    => 'Pain Team Interlude', // http://pain-team.ru/
             'Pwsoft_it'     => 'Pwsoft Interlude', // http://pwsoft.ru/server/
             'L2Scripts_hf'  => 'L2 Scripts HF', // http://l2-scripts.ru/
+            'Rebellion_hf'  => 'Rebellion-team HF', // http://rebellion-team.ru/
         ),
 
         // Папка куда кидаются картинки
