@@ -234,7 +234,9 @@ class Deposit
             {
                 $transaction->save(FALSE, array('status', 'updated_at'));
 
-                $user = UserProfiles::model()->findByPk($transaction->user_id);
+                $user = UserProfiles::model()->find('user_id = :user_id', array(
+                    'user_id' => $transaction->user_id,
+                ));
 
                 $user->balance += $transaction->count;
 
