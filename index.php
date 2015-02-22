@@ -3,8 +3,8 @@
 // Проверка установлена ли CMS
 if(is_dir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'install') && strpos($_SERVER['REQUEST_URI'], 'install') === FALSE)
 {
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
-    exit;
+   // header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
+    //exit;
 }
 // ---------------
 
@@ -18,7 +18,7 @@ if(!file_exists($yii))
 }
 
 // Чтобы включить режим разработки добавьте свой IP в array() (тот что снизу), к примеру: array('127.0.0.1')
-if(in_array($_SERVER['REMOTE_ADDR'], array()))
+if(in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1')))
 {
     error_reporting(-1);
 

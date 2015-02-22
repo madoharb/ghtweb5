@@ -18,7 +18,7 @@ class DefaultController extends FrontendBaseController
             try
             {
                 /**
-                 * @var Transaction $transaction
+                 * @var Transactions $transaction
                  */
                 $transaction = $deposit->processed();
                 $percents    = (float) config('referral_program.percent');
@@ -37,10 +37,10 @@ class DefaultController extends FrontendBaseController
 
                         if($refererProfile)
                         {
-                            $gsModel = Gs::model()->findByPk($transaction->gs_id);
+                            $gsModel = Gs::model()->findByPk($transaction->getGsId());
 
                             // Кол-во предметов которые были куплены, от них будет считаться % рефералу
-                            $countItems = $transaction->sum / $gsModel->deposit_course_payments;
+                            $countItems = $transaction->getSum() / $gsModel->deposit_course_payments;
 
                             $profit = $countItems / 100 * $percents;
 
@@ -51,11 +51,11 @@ class DefaultController extends FrontendBaseController
                             // Логирую
                             $dataDb = array(
                                 'referer_id'     => $refererProfile->user_id,
-                                'referal_id'     => $transaction->user_id,
+                                'referal_id'     => $transaction->getUserId(),
                                 'profit'         => $profit,
-                                'sum'            => $transaction->sum,
+                                'sum'            => $transaction->getSum(),
                                 'percent'        => $percents,
-                                'transaction_id' => $transaction->id,
+                                'transaction_id' => $transaction->getPrimaryKey(),
                                 'created_at'     => date('Y-m-d H:i:s'),
                             );
 
@@ -71,7 +71,7 @@ class DefaultController extends FrontendBaseController
                             {
                                 $log = new UserActionsLog();
 
-                                $log->user_id = $transaction->user_id;
+                                $log->user_id = $transaction->getUserId();
                                 $log->action_id = UserActionsLog::ACTION_DEPOSIT_SUCCESS;
                                 $log->params = json_encode($dataDb);
 
