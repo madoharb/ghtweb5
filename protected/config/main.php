@@ -369,6 +369,7 @@ return array(
             'L2Scripts_hf'  => 'L2 Scripts HF', // http://l2-scripts.ru/
             'Rebellion_hf'  => 'Rebellion-team HF', // http://rebellion-team.ru/
             'l2j_dev_hf'    => 'l2j-dev HF', // http://l2j-dev.ru/
+            'AsgardDev_hf'  => 'Asgard-Dev HF', // http://asgard-dev.ru/index.php
         ),
 
         // Папка куда кидаются картинки
