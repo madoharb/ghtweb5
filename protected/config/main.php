@@ -371,6 +371,7 @@ return array(
             'l2j_dev_hf'    => 'l2j-dev HF', // http://l2j-dev.ru/
             'AsgardDev_hf'  => 'Asgard-Dev HF', // http://asgard-dev.ru/index.php
             'Acis_it'       => 'Acis Iterlude', // http://acis.i-live.eu/
+            'L2j_lovely_it' => 'L2j lovely interlude', // http://l2jlovely.net/
         ),
 
         // Папка куда кидаются картинки
