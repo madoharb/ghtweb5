@@ -370,6 +370,7 @@ return array(
             'Rebellion_hf'  => 'Rebellion-team HF', // http://rebellion-team.ru/
             'l2j_dev_hf'    => 'l2j-dev HF', // http://l2j-dev.ru/
             'AsgardDev_hf'  => 'Asgard-Dev HF', // http://asgard-dev.ru/index.php
+            'Acis_it'       => 'Acis Iterlude', // http://acis.i-live.eu/
         ),
 
         // Папка куда кидаются картинки
