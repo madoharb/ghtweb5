@@ -46,11 +46,28 @@ class RegisterForm extends CFormModel
             array('referer', 'length', 'allowEmpty' => TRUE, 'min' => Users::REFERER_MIN_LENGTH, 'max' => Users::REFERER_MAX_LENGTH),
             array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('register.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
             array('email', 'checkBadEmail'),
+            array('login', 'checkLoginChars'),
             array('gs_id', 'gsIsExists'),
             array('email', 'emailUnique'),
             array('login', 'loginUnique'),
             array('referer', 'refererIsExists'),
         );
+    }
+
+    /**
+     * Проверка символов в логине
+     *
+     * @param string $attr
+     */
+    public function checkLoginChars($attr)
+    {
+        if(!$this->hasErrors($attr))
+        {
+            if(!preg_match('/^([' . Users::LOGIN_REGEXP . ']{' . Users::LOGIN_MIN_LENGTH . ', ' . Users::LOGIN_MAX_LENGTH . '})$/', $this->$attr))
+            {
+                $this->addError($attr, Yii::t('main', 'В логине разрешены следующие символы: :chars', array(':chars' => Users::LOGIN_REGEXP)));
+            }
+        }
     }
 
     protected function afterConstruct()

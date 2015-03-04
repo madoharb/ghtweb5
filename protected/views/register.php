@@ -44,6 +44,7 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 'login') ?>
             <div class="field">
                 <?php echo $form->textField($model, 'login', array('placeholder' => $model->getAttributeLabel('login'), 'class' => 'form-control')) ?>
+                <p class="help-block"><?php echo Yii::t('main', 'Разрешенные символы: :chars', array(':chars' => Users::LOGIN_REGEXP)) ?></p>
             </div>
         </div>
 

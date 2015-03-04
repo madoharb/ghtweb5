@@ -34,6 +34,7 @@ class Users extends ActiveRecord
     // Login
     const LOGIN_MIN_LENGTH = 6;
     const LOGIN_MAX_LENGTH = 14;
+    const LOGIN_REGEXP     = 'A-Za-z0-9-';
 
     // Password
     const PASSWORD_MIN_LENGTH = 6;
