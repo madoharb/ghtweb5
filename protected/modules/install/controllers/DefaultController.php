@@ -3,6 +3,7 @@
 class DefaultController extends CController
 {
     public $layout = '/layouts/master';
+    public $pageHeader;
 
 
     public function actionIndex()

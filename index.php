@@ -3,15 +3,15 @@
 // Проверка установлена ли CMS
 if(is_dir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'protected' . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . 'install') && strpos($_SERVER['REQUEST_URI'], 'install') === FALSE)
 {
-   // header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
-    //exit;
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/install/');
+    exit;
 }
 // ---------------
 
 // Путь к папке с framework
 $yii = dirname(__FILE__) . '/../framework/yii.php';
 
-if(!file_exists($yii))
+if(!is_file($yii))
 {
     echo 'Неправильно указан путь до папки <b>framework</b>';
     exit;
