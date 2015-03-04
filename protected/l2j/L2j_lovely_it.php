@@ -24,7 +24,7 @@ class L2j_lovely_it
      */
     private $_fields = array(
         'accounts.access_level'   => 'accounts.accessLevel',
-        'characters.access_level' => 'characters.',
+        //'characters.access_level' => FALSE,
         'characters.char_id'      => 'characters.charId',
         'clan_data.clan_id'       => 'clan_data.clan_id',
     );
@@ -102,7 +102,7 @@ FROM characters
 LEFT JOIN clan_data ON clan_data.clan_id = characters.clanid
         */
         return $command
-			->select(array('characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.clanid AS clan_id', 'characters.title', '"0" AS access_level', 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp', 'clan_data.clan_name', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score'))
+			->select(array('characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.clanid AS clan_id', 'characters.title', new AA, 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp', 'clan_data.clan_name', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score'))
 			->leftJoin('clan_data', 'clan_data.clan_id = characters.clanid')
 			->from('characters');
     }
@@ -128,7 +128,7 @@ FROM clan_data
 LEFT JOIN characters ON characters.charId = clan_data.leader_id
         */
         return $command
-			->select(array('clan_data.clan_id', 'clan_data.clan_name', 'clan_data.leader_id', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score', '(SELECT COUNT(0) FROM characters WHERE characters.clanid = clan_data.clan_id) as ccount', 'ally_name', 'ally_crest_id AS ally_crest', 'ally_id', 'characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.title', '"0" AS access_level', 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp'))
+			->select(array('clan_data.clan_id', 'clan_data.clan_name', 'clan_data.leader_id', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score', '(SELECT COUNT(0) FROM characters WHERE characters.clanid = clan_data.clan_id) as ccount', 'ally_name', 'ally_crest_id AS ally_crest', 'ally_id', 'characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.title', new AA, 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp'))
 			->leftJoin('characters', 'characters.charId = clan_data.leader_id')
 			->from('clan_data');
     }
@@ -633,7 +633,7 @@ LEFT JOIN clan_data ON clan_data.clan_id = characters.clanid
 GROUP BY items.owner_id, items.item_id
         */
         $res = $this->_db->createCommand()
-            ->select(array('MAX(items.count) AS maxCountItems', 'COUNT(items.count) AS countItems', 'items.owner_id', 'items.object_id', 'items.item_id', 'items.count', 'items.enchant_level', 'items.loc', 'items.loc_data', 'characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.clanid AS clan_id', 'characters.title', '"0" AS access_level', 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp', 'clan_data.clan_name', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score'))
+            ->select(array('MAX(items.count) AS maxCountItems', 'COUNT(items.count) AS countItems', 'items.owner_id', 'items.object_id', 'items.item_id', 'items.count', 'items.enchant_level', 'items.loc', 'items.loc_data', 'characters.account_name', 'characters.charId AS char_id', 'characters.char_name', 'characters.sex', 'characters.x', 'characters.y', 'characters.z', 'characters.karma', 'characters.pvpkills', 'characters.pkkills', 'characters.clanid AS clan_id', 'characters.title', new AA, 'characters.online', 'characters.onlinetime', 'characters.race AS base_class', 'characters.level', 'characters.exp', 'characters.sp', 'characters.maxHp', 'characters.curHp', 'characters.maxCp', 'characters.curCp', 'characters.maxMp', 'characters.curMp', 'clan_data.clan_name', 'clan_data.clan_level', 'clan_data.hasCastle', 'clan_data.crest_id AS clan_crest', 'clan_data.reputation_score'))
 			->leftJoin('characters', 'items.owner_id = characters.charId')
 			->leftJoin('clan_data', 'clan_data.clan_id = characters.clanid')
 			->andWhere(array('in', 'item_id', $itemList))
@@ -665,5 +665,15 @@ GROUP BY items.owner_id, items.item_id
         }
 
         return $characters;
+    }
+}
+
+class AA
+{
+    private $f = '"0" AS access_level';
+
+    function __toString()
+    {
+        return $this->f;
     }
 }
