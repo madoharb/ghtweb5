@@ -63,7 +63,9 @@ class RegisterForm extends CFormModel
     {
         if(!$this->hasErrors($attr))
         {
-            if(!preg_match('/^([' . Users::LOGIN_REGEXP . ']{' . Users::LOGIN_MIN_LENGTH . ', ' . Users::LOGIN_MAX_LENGTH . '})$/', $this->$attr))
+            $pattern = '/^[' . Users::LOGIN_REGEXP . ']{' . Users::LOGIN_MIN_LENGTH . ',' . Users::LOGIN_MAX_LENGTH . '}$/';
+
+            if(!preg_match($pattern, $this->$attr))
             {
                 $this->addError($attr, Yii::t('main', 'В логине разрешены следующие символы: :chars', array(':chars' => Users::LOGIN_REGEXP)));
             }
