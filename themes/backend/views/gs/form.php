@@ -127,7 +127,7 @@ $this->breadcrumbs = array(
     <div class="form-group">
         <?php echo $form->labelEx($model, 'db_pass', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'db_pass', array('placeholder' => $model->getAttributeLabel('db_pass'), 'class' => 'form-control')) ?>
+            <?php echo $form->passwordField($model, 'db_pass', array('placeholder' => $model->getAttributeLabel('db_pass'), 'class' => 'form-control')) ?>
             <p class="help-block"><?php echo Yii::t('backend', 'Пароль от БД сервера.') ?></p>
         </div>
     </div>
