@@ -261,6 +261,11 @@ class Waytopay
         return $this->wProfit;
     }
 
+    public function getSum()
+    {
+        return $this->wOutSum;
+    }
+
     public function error($str)
     {
         return 'ERROR_' . $str;

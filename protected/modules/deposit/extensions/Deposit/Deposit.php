@@ -102,6 +102,14 @@ class Deposit
         // Проверка подписи
         $aggregator->checkSignature();
 
+        $gsId    = $aggregator->getGsId();
+        $gsModel = Gs::model()->findByPk($gsId);
+
+        if(!$gsModel)
+        {
+            throw new Exception('Сервер не найден.');
+        }
+
         if($aggregator->isSms())
         {
             $paymentSystem = ($this->_aggregator_id == self::PAYMENT_SYSTEM_UNITPAY ? self::PAYMENT_SYSTEM_UNITPAY_SMS : self::PAYMENT_SYSTEM_WAYTOPAY_SMS);
@@ -109,15 +117,8 @@ class Deposit
             if($paymentSystem == self::PAYMENT_SYSTEM_UNITPAY_SMS)
             {
                 $transactionId = $aggregator->getId();
-                $gsId          = $aggregator->getGsId();
 
-                $gsModel = Gs::model()->findByPk($gsId);
-
-                if(!$gsModel)
-                {
-                    throw new Exception('Сервер не найден.');
-                }
-
+                /** @var Transactions $transaction */
                 $transaction = Transactions::model()->findByPk($transactionId);
 
                 if(!$transaction)
@@ -128,6 +129,10 @@ class Deposit
                 {
                     throw new Exception('Транзакция уже обработана.');
                 }
+                elseif($transaction->getSum() != $aggregator->getSum())
+                {
+                    throw new Exception('Сумма не совпадает.');
+                }
 
                 $tr = db()->beginTransaction();
 
@@ -137,13 +142,7 @@ class Deposit
 
                     $transaction->save(FALSE, array('status', 'updated_at'));
 
-                    $userProfileModel = UserProfiles::model()->find('user_id = :user_id', array(
-                        'user_id' => $transaction->user_id,
-                    ));
-
-                    $userProfileModel->balance += $transaction->count;
-
-                    $userProfileModel->save(FALSE, array('balance', 'updated_at'));
+                    $this->recharge($transaction->user_id, $aggregator->getSum(), $gsModel->deposit_course_payments);
 
                     $tr->commit();
                 }
@@ -156,21 +155,12 @@ class Deposit
             }
             elseif($paymentSystem == self::PAYMENT_SYSTEM_WAYTOPAY_SMS)
             {
-                $userId = $aggregator->getId();
-                $gsId   = $aggregator->getGsId();
-
+                $userId    = $aggregator->getId();
                 $userModel = Users::model()->findByPk($userId);
 
                 if(!$userModel)
                 {
                     throw new Exception('Аккаунт не найден.');
-                }
-
-                $gsModel = Gs::model()->findByPk($gsId);
-
-                if(!$gsModel)
-                {
-                    throw new Exception('Сервер не найден.');
                 }
 
                 $count = floor($aggregator->getProfit() / $gsModel->deposit_course_payments);
@@ -191,13 +181,7 @@ class Deposit
 
                     $transaction->save(FALSE);
 
-                    $userProfileModel = UserProfiles::model()->find('user_id = :user_id', array(
-                        'user_id' => $userId,
-                    ));
-
-                    $userProfileModel->balance += $count;
-
-                    $userProfileModel->save(FALSE, array('balance', 'updated_at'));
+                    $this->recharge($userId, $aggregator->getSum(), $gsModel->deposit_course_payments);
 
                     $tr->commit();
                 }
@@ -224,6 +208,10 @@ class Deposit
             {
                 throw new Exception('Транзакция уже обработана.');
             }
+            elseif($transaction->getSum() != $aggregator->getSum())
+            {
+                throw new Exception('Сумма не совпадает.');
+            }
 
             $transaction->status = Transactions::STATUS_SUCCESS;
 
@@ -234,13 +222,7 @@ class Deposit
             {
                 $transaction->save(FALSE, array('status', 'updated_at'));
 
-                $user = UserProfiles::model()->find('user_id = :user_id', array(
-                    'user_id' => $transaction->user_id,
-                ));
-
-                $user->balance += $transaction->count;
-
-                $user->save(FALSE, array('balance', 'updated_at'));
+                $this->recharge($transaction->user_id, $aggregator->getSum(), $gsModel->deposit_course_payments);
 
                 $tr->commit();
             }
@@ -253,6 +235,28 @@ class Deposit
         }
 
         return $transaction;
+    }
+
+    /**
+     * Поплнение баланса юзеру
+     *
+     * @param int $userId
+     * @param float $sum
+     * @param int $curs
+     *
+     * @return void
+     */
+    private function recharge($userId, $sum, $curs)
+    {
+        $userProfilesModel = UserProfiles::model()->find('user_id = :user_id', array(
+            'user_id' => $userId,
+        ));
+
+        $balance = floor($sum / $curs);
+
+        $userProfilesModel->balance += $balance;
+
+        $userProfilesModel->save(FALSE, array('balance', 'updated_at'));
     }
 
     /**
@@ -327,4 +331,3 @@ class Deposit
         return $this->_aggregator->success($str);
     }
 }
- 

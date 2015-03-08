@@ -259,6 +259,11 @@ class Unitpay
         return $this->profit;
     }
 
+    public function getSum()
+    {
+        return $this->sum;
+    }
+
     public function error($message)
     {
         return json_encode(array(

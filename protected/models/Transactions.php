@@ -139,7 +139,7 @@ class Transactions extends ActiveRecord
      */
     public function getSum()
     {
-        return $this->sum;
+        return (float) $this->sum;
     }
 
     /**

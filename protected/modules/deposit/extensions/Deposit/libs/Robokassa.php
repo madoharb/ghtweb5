@@ -138,6 +138,11 @@ class Robokassa
         return $this->InvId;
     }
 
+    public function getSum()
+    {
+        return $this->OutSum;
+    }
+
     public function getSmsNumbers()
     {
         return FALSE;
