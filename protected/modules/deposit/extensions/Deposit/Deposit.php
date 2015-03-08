@@ -102,14 +102,6 @@ class Deposit
         // Проверка подписи
         $aggregator->checkSignature();
 
-        $gsId    = $aggregator->getGsId();
-        $gsModel = Gs::model()->findByPk($gsId);
-
-        if(!$gsModel)
-        {
-            throw new Exception('Сервер не найден.');
-        }
-
         if($aggregator->isSms())
         {
             $paymentSystem = ($this->_aggregator_id == self::PAYMENT_SYSTEM_UNITPAY ? self::PAYMENT_SYSTEM_UNITPAY_SMS : self::PAYMENT_SYSTEM_WAYTOPAY_SMS);
@@ -132,6 +124,13 @@ class Deposit
                 elseif($transaction->getSum() != $aggregator->getSum())
                 {
                     throw new Exception('Сумма не совпадает.');
+                }
+
+                $gsModel = Gs::model()->findByPk($transaction->gs_id);
+
+                if(!$gsModel)
+                {
+                    throw new Exception('Сервер не найден.');
                 }
 
                 $tr = db()->beginTransaction();
@@ -181,6 +180,13 @@ class Deposit
 
                     $transaction->save(FALSE);
 
+                    $gsModel = Gs::model()->findByPk($gsId);
+
+                    if(!$gsModel)
+                    {
+                        throw new Exception('Сервер не найден.');
+                    }
+
                     $this->recharge($userId, $aggregator->getSum(), $gsModel->deposit_course_payments);
 
                     $tr->commit();
@@ -215,6 +221,12 @@ class Deposit
 
             $transaction->status = Transactions::STATUS_SUCCESS;
 
+            $gsModel = Gs::model()->findByPk($transaction->gs_id);
+
+            if(!$gsModel)
+            {
+                throw new Exception('Сервер не найден.');
+            }
 
             $tr = db()->beginTransaction();
 
