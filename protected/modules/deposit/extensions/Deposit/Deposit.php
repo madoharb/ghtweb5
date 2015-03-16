@@ -155,11 +155,19 @@ class Deposit
             elseif($paymentSystem == self::PAYMENT_SYSTEM_WAYTOPAY_SMS)
             {
                 $userId    = $aggregator->getId();
+                $gsId      = $aggregator->getGsId();
                 $userModel = Users::model()->findByPk($userId);
 
                 if(!$userModel)
                 {
                     throw new Exception('Аккаунт не найден.');
+                }
+
+                $gsModel = Gs::model()->findByPk($gsId);
+
+                if(!$gsModel)
+                {
+                    throw new Exception('Сервер не найден.');
                 }
 
                 $count = floor($aggregator->getProfit() / $gsModel->deposit_course_payments);
