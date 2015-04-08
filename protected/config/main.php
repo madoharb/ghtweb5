@@ -255,9 +255,6 @@ return array(
                 // Очистка кэша
                 $backendUrl . '/clear-cache' => 'backend/default/clearCache',
 
-                // Обновление CMS
-                $backendUrl . '/update' => 'backend/default/update',
-
                 // Инфа о item
                 $backendUrl . '/get-item-info' => 'backend/default/getItemInfo',
 
