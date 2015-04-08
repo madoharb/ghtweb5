@@ -1,5 +1,10 @@
 <?php
 
+
+$backendUrl = 'backend'; // Ссылка на админку (не менять!!!)
+
+
+
 return array(
     'basePath'      => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name'          => 'GHTWEB v5',
@@ -115,6 +120,13 @@ return array(
             'loginUrl'          => array('/login/default/index'),
         ),
 
+        'admin' => array(
+            'class'             => 'WebAdmin',
+            'allowAutoLogin'    => TRUE,
+            'autoRenewCookie'   => TRUE,
+            'loginUrl'          => array('/' . $backendUrl . '/login/index'),
+        ),
+
         'authManager' => array(
             'class'         => 'CDbAuthManager',
             'connectionId'  => 'db',
@@ -122,7 +134,7 @@ return array(
 
         'securityManager' => array(
             'cryptAlgorithm'    => array('rijndael-256', '', 'ofb', ''),
-            'encryptionKey'     => 'kcwUC@CHuc1y78nC17yg',
+            'encryptionKey'     => 'kkc123103x-1813c1io31hxi1',
         ),
 
         'request' => array(
@@ -232,93 +244,99 @@ return array(
 
 
                 // ------------------- [Backend] -------------------
-                'backend' => 'backend/default/index',
+                $backendUrl => 'backend/default/index',
+
+                // Авторизация
+                $backendUrl . '/login' => 'backend/login/index',
+
+                // Выход из админки
+                $backendUrl . '/logout' => 'backend/login/logout',
 
                 // Очистка кэша
-                'backend/clear-cache' => 'backend/default/clearCache',
+                $backendUrl . '/clear-cache' => 'backend/default/clearCache',
 
                 // Обновление CMS
-                'backend/update' => 'backend/default/update',
+                $backendUrl . '/update' => 'backend/default/update',
 
                 // Инфа о item
-                'backend/get-item-info' => 'backend/default/getItemInfo',
+                $backendUrl . '/get-item-info' => 'backend/default/getItemInfo',
 
                 // Игровые сервера
-                'backend/game-servers' => 'backend/gameServers/index',
-                'backend/game-servers/<gs_id:\d+>/edit' => 'backend/gameServers/form',
-                'backend/game-servers/add' => 'backend/gameServers/form',
-                'backend/game-servers/<gs_id:\d+>/<action:(del|allow)>' => 'backend/gameServers/<action>',
+                $backendUrl . '/game-servers' => 'backend/gameServers/index',
+                $backendUrl . '/game-servers/<gs_id:\d+>/edit' => 'backend/gameServers/form',
+                $backendUrl . '/game-servers/add' => 'backend/gameServers/form',
+                $backendUrl . '/game-servers/<gs_id:\d+>/<action:(del|allow)>' => 'backend/gameServers/<action>',
 
                 // Магазин
-                'backend/game-servers/<gs_id:\d+>/shop' => 'backend/gameServers/shop',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/edit' => 'backend/gameServers/shopCategoryForm',
-                'backend/game-servers/<gs_id:\d+>/shop/category/add' => 'backend/gameServers/shopCategoryForm',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/allow' => 'backend/gameServers/shopCategoryAllow',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/del' => 'backend/gameServers/shopCategoryDel',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/packs' => 'backend/gameServers/shopCategoryPacks',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/add' => 'backend/gameServers/shopCategoryPacksForm',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/items' => 'backend/gameServers/shopCategoryPackItems',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/create-item' => 'backend/gameServers/shopCategoryPackCreateItem',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/item/<item_id:\d+>/edit' => 'backend/gameServers/shopCategoryPackEditItem',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/item/<item_id:\d+>/del' => 'backend/gameServers/shopCategoryPackDelItem',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/edit' => 'backend/gameServers/shopCategoryPacksForm',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop' => 'backend/gameServers/shop',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/edit' => 'backend/gameServers/shopCategoryForm',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/add' => 'backend/gameServers/shopCategoryForm',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/allow' => 'backend/gameServers/shopCategoryAllow',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/del' => 'backend/gameServers/shopCategoryDel',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/packs' => 'backend/gameServers/shopCategoryPacks',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/add' => 'backend/gameServers/shopCategoryPacksForm',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/items' => 'backend/gameServers/shopCategoryPackItems',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/create-item' => 'backend/gameServers/shopCategoryPackCreateItem',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/item/<item_id:\d+>/edit' => 'backend/gameServers/shopCategoryPackEditItem',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/item/<item_id:\d+>/del' => 'backend/gameServers/shopCategoryPackDelItem',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/edit' => 'backend/gameServers/shopCategoryPacksForm',
 
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/allow' => 'backend/gameServers/shopCategoryPackAllow',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/del-img' => 'backend/gameServers/shopCategoryPackDelImage',
-                'backend/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/del' => 'backend/gameServers/shopCategoryPackDel',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/allow' => 'backend/gameServers/shopCategoryPackAllow',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/del-img' => 'backend/gameServers/shopCategoryPackDelImage',
+                $backendUrl . '/game-servers/<gs_id:\d+>/shop/category/<category_id:\d+>/pack/<pack_id:\d+>/del' => 'backend/gameServers/shopCategoryPackDel',
 
 
                 // Логин сервера
-                'backend/login-servers' => 'backend/loginServers/index',
-                'backend/login-servers/<ls_id:\d+>/edit' => 'backend/loginServers/form',
-                'backend/login-servers/add' => 'backend/loginServers/form',
-                'backend/login-servers/<ls_id:\d+>/<action:(del|allow|accounts)>' => 'backend/loginServers/<action>',
+                $backendUrl . '/login-servers' => 'backend/loginServers/index',
+                $backendUrl . '/login-servers/<ls_id:\d+>/edit' => 'backend/loginServers/form',
+                $backendUrl . '/login-servers/add' => 'backend/loginServers/form',
+                $backendUrl . '/login-servers/<ls_id:\d+>/<action:(del|allow|accounts)>' => 'backend/loginServers/<action>',
 
                 // Игровые аккаунты на логине
-                //'backend/login-servers/<ls_id:\d+>/<action:(edit|del|shop)>' => 'backend/loginServers/<action>',
+                // $backendUrl . '/login-servers/<ls_id:\d+>/<action:(edit|del|shop)>' => 'backend/loginServers/<action>',
 
                 // Юзеры
-                'backend/users' => 'backend/users/index',
-                'backend/users/add' => 'backend/users/add',
-                'backend/users/<user_id:\d+>/<action:(view|referals)>' => 'backend/users/<action>',
-                'backend/users/<user_id:\d+>/auth-history' => 'backend/users/authHistory',
-                'backend/users/<user_id:\d+>/delete-bonus/<bonus_id:\d+>' => 'backend/users/delBonus',
-                'backend/users/<user_id:\d+>/add-bonus/' => 'backend/users/addBonus',
-                'backend/users/<user_id:\d+>/add-message/' => 'backend/users/addMessage',
-                'backend/users/<user_id:\d+>/item-purchase/' => 'backend/users/itemPurchaseLog',
-                'backend/users/<user_id:\d+>/transaction-history/' => 'backend/users/transactionHistory',
-                'backend/users/<user_id:\d+>/edit-data/' => 'backend/users/editData',
+                $backendUrl . '/users' => 'backend/users/index',
+                $backendUrl . '/users/add' => 'backend/users/add',
+                $backendUrl . '/users/<user_id:\d+>/<action:(view|referals)>' => 'backend/users/<action>',
+                $backendUrl . '/users/<user_id:\d+>/auth-history' => 'backend/users/authHistory',
+                $backendUrl . '/users/<user_id:\d+>/delete-bonus/<bonus_id:\d+>' => 'backend/users/delBonus',
+                $backendUrl . '/users/<user_id:\d+>/add-bonus/' => 'backend/users/addBonus',
+                $backendUrl . '/users/<user_id:\d+>/add-message/' => 'backend/users/addMessage',
+                $backendUrl . '/users/<user_id:\d+>/item-purchase/' => 'backend/users/itemPurchaseLog',
+                $backendUrl . '/users/<user_id:\d+>/transaction-history/' => 'backend/users/transactionHistory',
+                $backendUrl . '/users/<user_id:\d+>/edit-data/' => 'backend/users/editData',
 
                 // Transactions
-                //'backend/transactions/user/<user_id:\d+>' => 'backend/transactions/index',
+                //$backendUrl . '/transactions/user/<user_id:\d+>' => 'backend/transactions/index',
 
                 // Бонусы
-                'backend/bonuses/<bonus_id:\d+>/items' => 'backend/bonuses/items',
-                'backend/bonuses/<bonus_id:\d+>/create-item' => 'backend/bonuses/itemAdd',
-                'backend/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/edit' => 'backend/bonuses/itemEdit',
-                'backend/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/del' => 'backend/bonuses/itemDel',
-                'backend/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/allow' => 'backend/bonuses/itemAllow',
-                'backend/bonuses/generate-code' => 'backend/bonuses/generateCode',
+                $backendUrl . '/bonuses/<bonus_id:\d+>/items' => 'backend/bonuses/items',
+                $backendUrl . '/bonuses/<bonus_id:\d+>/create-item' => 'backend/bonuses/itemAdd',
+                $backendUrl . '/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/edit' => 'backend/bonuses/itemEdit',
+                $backendUrl . '/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/del' => 'backend/bonuses/itemDel',
+                $backendUrl . '/bonuses/<bonus_id:\d+>/item/<item_id:\d+>/allow' => 'backend/bonuses/itemAllow',
+                $backendUrl . '/bonuses/generate-code' => 'backend/bonuses/generateCode',
 
-                'backend/bonuses/codes/add' => 'backend/bonuses/codeAdd',
-                'backend/bonuses/codes/<code_id:\d+>/allow' => 'backend/bonuses/codeAllow',
-                'backend/bonuses/codes/<code_id:\d+>/edit' => 'backend/bonuses/codeEdit',
-                'backend/bonuses/codes/<code_id:\d+>/add' => 'backend/bonuses/codeAdd',
-                'backend/bonuses/codes/<code_id:\d+>/del' => 'backend/bonuses/codeDel',
+                $backendUrl . '/bonuses/codes/add' => 'backend/bonuses/codeAdd',
+                $backendUrl . '/bonuses/codes/<code_id:\d+>/allow' => 'backend/bonuses/codeAllow',
+                $backendUrl . '/bonuses/codes/<code_id:\d+>/edit' => 'backend/bonuses/codeEdit',
+                $backendUrl . '/bonuses/codes/<code_id:\d+>/add' => 'backend/bonuses/codeAdd',
+                $backendUrl . '/bonuses/codes/<code_id:\d+>/del' => 'backend/bonuses/codeDel',
 
                 // Тикеты
-                'backend/tickets/<id:\d+>/edit' => 'backend/tickets/edit',
-                'backend/tickets/categories/<category_id:\d+>/edit' => 'backend/tickets/categoryForm',
-                'backend/tickets/categories/<category_id:\d+>/del' => 'backend/tickets/categoryDel',
-                'backend/tickets/categories/<category_id:\d+>/allow' => 'backend/tickets/categoryAllow',
-                'backend/tickets/categories/add' => 'backend/tickets/categoryForm',
+                $backendUrl . '/tickets/<id:\d+>/edit' => 'backend/tickets/edit',
+                $backendUrl . '/tickets/categories/<category_id:\d+>/edit' => 'backend/tickets/categoryForm',
+                $backendUrl . '/tickets/categories/<category_id:\d+>/del' => 'backend/tickets/categoryDel',
+                $backendUrl . '/tickets/categories/<category_id:\d+>/allow' => 'backend/tickets/categoryAllow',
+                $backendUrl . '/tickets/categories/add' => 'backend/tickets/categoryForm',
 
                 // Общие правила
-                'backend/<controller:\w+>' => 'backend/<controller>/index',
-                'backend/<controller:\w+>/<id:\d+>/edit' => 'backend/<controller>/form',
-                'backend/<controller:\w+>/add' => 'backend/<controller>/form',
-                'backend/<controller:\w+>/<id:\d+>/<method:(del|allow)>' => 'backend/<controller>/<method>',
-                //'backend/<controller:\w+>/<method:(del|edit|allow)>' => 'backend/<controller>/<method>',
+                $backendUrl . '/<controller:\w+>' => 'backend/<controller>/index',
+                $backendUrl . '/<controller:\w+>/<id:\d+>/edit' => 'backend/<controller>/form',
+                $backendUrl . '/<controller:\w+>/add' => 'backend/<controller>/form',
+                $backendUrl . '/<controller:\w+>/<id:\d+>/<method:(del|allow)>' => 'backend/<controller>/<method>',
+                //$backendUrl . '/<controller:\w+>/<method:(del|edit|allow)>' => 'backend/<controller>/<method>',
             ),
         ),
 

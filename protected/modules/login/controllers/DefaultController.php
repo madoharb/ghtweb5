@@ -69,7 +69,7 @@ class DefaultController extends FrontendBaseController
                             $userModel = new Users();
 
                             $userModel->login       = $login;
-                            $userModel->email       = NULL;
+                            $userModel->email       = !empty($account['l2email']) ? $account['l2email'] : NULL;
                             $userModel->password    = $model->password;
                             $userModel->activated   = Users::STATUS_ACTIVATED;
                             $userModel->role        = Users::ROLE_DEFAULT;

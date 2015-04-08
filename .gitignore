@@ -20,3 +20,4 @@ protected/messages/*
 protected/codecept.phar
 protected/tests/*
 protected/codeception.yml
+!protected/extensions/PaymentSystems

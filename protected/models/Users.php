@@ -331,4 +331,20 @@ class Users extends ActiveRecord
     {
         return $this->ls_id;
     }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role == self::ROLE_ADMIN;
+    }
 }

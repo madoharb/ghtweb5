@@ -35,7 +35,7 @@ $this->breadcrumbs = array(
         </tr>
         <tr>
             <td><b><?php echo $model->getAttributeLabel('role') ?></b></td>
-            <td><?php echo $model->role ?></td>
+            <td><?php echo $model->getRole() ?></td>
             <td><b><?php echo $model->profile->getAttributeLabel('balance') ?></b></td>
             <td><?php echo formatCurrency($model->profile->balance) ?></td>
         </tr>
@@ -57,6 +57,16 @@ $this->breadcrumbs = array(
 <?php echo CHtml::link(Yii::t('backend', 'Добавить бонус'), array('addBonus', 'user_id' => $model->getPrimaryKey()), array('class' => 'btn btn-xs btn-primary js-add-bonus')) ?>&nbsp;
 <?php echo CHtml::link(Yii::t('backend', 'Отправить сообщение'), array('addMessage', 'user_id' => $model->getPrimaryKey()), array('class' => 'btn btn-xs btn-primary js-send-message')) ?>&nbsp;
 <?php echo CHtml::link(Yii::t('backend', 'Редактировать данные юзера'), array('editData', 'user_id' => $model->getPrimaryKey()), array('class' => 'btn btn-xs btn-primary js-edit-data')) ?>
+
+<?php if(!$model->isAdmin()) { ?>
+    <?php echo CHtml::link(Yii::t('backend', 'Сделать админом'), array('changeRole', 'user_id' => $model->getPrimaryKey()), array('class' => 'btn btn-xs btn-primary')) ?>
+<?php } else { ?>
+    <?php echo CHtml::link(Yii::t('backend', 'Удалить статус админа'), array('changeRole', 'user_id' => $model->getPrimaryKey()), array('class' => 'btn btn-xs btn-primary')) ?>
+<?php } ?>
+
+<br/>
+<br/>
+<div class="alert alert-info"><?php echo Yii::t('backend', 'Админ имеет доступ только к админке сайта и его функционалу.') ?></div>
 
 <h3><?php echo Yii::t('backend', 'Бонусы') ?></h3>
 <hr>

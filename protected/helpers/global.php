@@ -59,6 +59,14 @@ function user()
     return Yii::app()->user;
 }
 
+/**
+ * @return WebAdmin
+ */
+function admin()
+{
+    return Yii::app()->admin;
+}
+
 /*function t($category, $message, $params = array(), $source = null, $language = null)
 {
     return Yii::t($category, $message, $params, $source, $language);

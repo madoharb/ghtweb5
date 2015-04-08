@@ -29,6 +29,7 @@ $this->breadcrumbs = array($title_);
                 <th width="20%"><?php echo $model->getAttributeLabel('email') ?></th>
                 <th width="10%"><?php echo Yii::t('backend', 'Баланс') ?></th>
                 <th width="10%"><?php echo Yii::t('backend', 'Рефералов') ?></th>
+                <th width="10%"><?php echo $model->getAttributeLabel('role') ?></th>
                 <th width="10%"><?php echo $model->getAttributeLabel('ls_id') ?></th>
                 <th width="15%"><?php echo $model->getAttributeLabel('created_at') ?></th>
                 <th width="12%"></th>
@@ -39,6 +40,7 @@ $this->breadcrumbs = array($title_);
                 <td><?php echo $form->textField($model, 'user_id', array('class' => 'form-control input-sm')) ?></td>
                 <td><?php echo $form->textField($model, 'login', array('class' => 'form-control input-sm')) ?></td>
                 <td><?php echo $form->textField($model, 'email', array('class' => 'form-control input-sm')) ?></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td><?php echo $form->dropDownList($model, 'ls_id', Chtml::listData(Ls::model()->not_deleted()->findAll(), 'id', 'name'), array('class' => 'form-control input-sm', 'empty' => Yii::t('backend', 'Выбрать'))) ?></td>
@@ -56,6 +58,7 @@ $this->breadcrumbs = array($title_);
                         <td><?php echo $row->email ?></td>
                         <td><?php echo CHtml::link(formatCurrency($row->profile->balance, FALSE), array('/backend/users/transactionHistory', 'user_id' => $row->user_id), array('title' => Yii::t('main', 'История пополнений'), 'rel' => 'tooltip')) ?></td>
                         <td><?php echo CHtml::link(count($row->referals), array('/backend/users/referals', 'user_id' => $row->user_id), array('title' => Yii::t('main', 'Список рефералов'), 'rel' => 'tooltip')) ?></td>
+                        <td><?php echo $row->getRole() ?></td>
                         <td><?php echo CHtml::link(e($row->ls->name), array('/backend/loginServers/form', 'ls_id' => $row->ls->getPrimaryKey()), array('title' => Yii::t('main', 'Просмотр сервера'), 'rel' => 'tooltip')) ?></td>
                         <td><?php echo $row->getCreatedAt() ?></td>
                         <td>
@@ -74,7 +77,7 @@ $this->breadcrumbs = array($title_);
                 <?php } ?>
             <?php } else { ?>
                 <tr>
-                    <td colspan="8"><?php echo Yii::t('backend', 'Нет данных.') ?></td>
+                    <td colspan="9"><?php echo Yii::t('backend', 'Нет данных.') ?></td>
                 </tr>
             <?php } ?>
         </tbody>

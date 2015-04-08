@@ -250,6 +250,27 @@ class UsersController extends BackendBaseController
     }
 
     /**
+     * Делает юзера админом
+     *
+     * @param $user_id
+     */
+    public function actionChangeRole($user_id)
+    {
+        $model = $this->loadModel($user_id);
+
+        $model->role = $model->role == Users::ROLE_ADMIN ? Users::ROLE_DEFAULT : Users::ROLE_ADMIN;
+        $model->auth_hash = NULL;
+
+        $model->save(FALSE);
+
+        user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('backend', 'Роль изменена на - :role', array(
+            ':role' => $model->getRole(),
+        )));
+
+        $this->redirectBack();
+    }
+
+    /**
      * Редактирование данных
      *
      * @param $user_id
