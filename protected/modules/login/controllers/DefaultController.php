@@ -45,19 +45,19 @@ class DefaultController extends FrontendBaseController
 
                     $command = $l2->getDb()->createCommand();
 
-                    $command->where('login = :login AND password = :password', array(':login' => $login, ':password' => $l2->passwordEncrypt($model->password)));
+                    $command->where('login = :login AND password = :password', array(
+                        ':login' => $login,
+                        ':password' => $l2->passwordEncrypt($model->password)
+                    ));
 
-                    $account = $l2->accounts($command)->queryRow();
+                    $command->from('accounts');
+
+                    $account = $command->queryRow();
 
                     // Ищю на сайте
-                    $statusActivated = Users::STATUS_ACTIVATED;
-                    $roleBanned      = Users::ROLE_BANNED;
-
-                    $siteAccount = db()->createCommand("SELECT password FROM {{users}} WHERE login = :login AND ls_id = :ls_id AND activated = :activated AND role != :role LIMIT 1")
+                    $siteAccount = db()->createCommand("SELECT password FROM {{users}} WHERE login = :login AND ls_id = :ls_id LIMIT 1")
                         ->bindParam('login', $login, PDO::PARAM_STR)
                         ->bindParam('ls_id', $lsId, PDO::PARAM_INT)
-                        ->bindParam('activated', $statusActivated, PDO::PARAM_INT)
-                        ->bindParam('role', $roleBanned, PDO::PARAM_INT)
                         ->queryRow();
 
                     // Найден
@@ -66,10 +66,20 @@ class DefaultController extends FrontendBaseController
                         // Если не найден на сайте то создаю
                         if(!$siteAccount)
                         {
+                            $email = NULL;
+
+                            foreach($account as $fieldVal)
+                            {
+                                if(filter_var($fieldVal, FILTER_VALIDATE_EMAIL))
+                                {
+                                    $email = $fieldVal;
+                                }
+                            }
+
                             $userModel = new Users();
 
                             $userModel->login       = $login;
-                            $userModel->email       = !empty($account['l2email']) ? $account['l2email'] : NULL;
+                            $userModel->email       = $email;
                             $userModel->password    = $model->password;
                             $userModel->activated   = Users::STATUS_ACTIVATED;
                             $userModel->role        = Users::ROLE_DEFAULT;
@@ -105,7 +115,14 @@ class DefaultController extends FrontendBaseController
                 }
                 catch(Exception $e)
                 {
-                    $model->addError('login', Yii::t('main', 'Произошла ошибка! Попробуйте повторить позже.'));
+                    $msg = Yii::t('main', 'Произошла ошибка! Попробуйте повторить позже.');
+
+                    if(YII_DEBUG)
+                    {
+                        $msg .= '<br>' . $e->getMessage();
+                    }
+
+                    $model->addError('login', $msg);
                     Yii::log("Ошибка авторизации\nMessage: " . $e->getMessage() . "\n", CLogger::LEVEL_ERROR, 'login');
                 }
             }

@@ -62,5 +62,5 @@ $this->breadcrumbs=array($title_);
         <?php } ?>
     </ul>
 <?php } else { ?>
-    <?php echo Yii::t('main', 'У Вас нет бонусов.') ?>
+    <div class="alert alert-info"><?php echo Yii::t('main', 'У Вас нет бонусов.') ?></div>
 <?php } ?>

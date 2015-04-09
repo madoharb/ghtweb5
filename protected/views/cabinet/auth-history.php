@@ -25,10 +25,14 @@ $this->breadcrumbs=array($title_);
             <tbody>
                 <?php if($data = $dataProvider->getData()) { ?>
                     <?php foreach($data as $i => $row) { ?>
+                        <?php
+                        $userAgent = explode(' ', $row->user_agent);
+                        $userAgent = !empty($userAgent[0]) ? trim($userAgent[0]) : 'n/a';
+                        ?>
                         <tr>
                             <td><?php echo ++$i ?></td>
                             <td><?php echo CHtml::link($row->ip, getLocationLinkByIp($row->ip), array('target' => '_blank')) ?></td>
-                            <td><?php echo e($row->user_agent) ?></td>
+                            <td><?php echo e($userAgent) ?></td>
                             <td><span style="color: <?php echo ($row->status == UsersAuthLogs::STATUS_AUTH_SUCCESS ? 'green' : 'red') ?>;"><?php echo $row->getStatus() ?></span></td>
                             <td><?php echo date('Y-m-d H:i', strtotime($row->created_at)) ?></td>
                         </tr>

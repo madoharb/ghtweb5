@@ -4,11 +4,6 @@ class ReferalsController extends CabinetBaseController
 {
     public function actionIndex()
     {
-        if(!config('referral_program.allow'))
-        {
-            throw new CHttpException(404, Yii::t('main', 'Реферальная программа отключена.'));
-        }
-
         $dependency = new CDbCacheDependency('SELECT COUNT(0) FROM {{referals_profit}} WHERE referer_id = :referer_id');
         $dependency->params = array('referer_id' => user()->getId());
         $model      = ReferalsProfit::model()->cache(3600 * 24, $dependency, 2);

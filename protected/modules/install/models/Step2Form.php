@@ -113,7 +113,7 @@ class Step2Form extends CFormModel
                 {
                     $this->addError($attribute, Yii::t('install', 'Из БД :name надо удалить следующие таблицы: :tables', array(
                         ':name' => '<b>' . $this->mysql_name . '</b>',
-                        ':tables' => '<b>' . implode(', ', $tables) . '</b>',
+                        ':tables' => '<br>- ' . implode('<br>- ', $tables),
                     )));
                 }
 

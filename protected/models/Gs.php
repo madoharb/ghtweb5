@@ -13,9 +13,6 @@
  * @property string $db_user
  * @property string $db_pass
  * @property string $db_name
- * @property string $telnet_host
- * @property int $telnet_port
- * @property string $telnet_pass
  * @property integer $login_id
  * @property string $version
  * @property string $fake_online
@@ -82,7 +79,7 @@ class Gs extends ActiveRecord
 	public function rules()
 	{
 		return array(
-            array('name, ip, port, db_host, db_port, db_user, db_name, telnet_host, telnet_port, telnet_pass, login_id,
+            array('name, ip, port, db_host, db_port, db_user, db_name, login_id,
                 version, status, fake_online, allow_teleport, teleport_time, stats_allow, stats_cache_time, stats_total,
                 stats_pvp, stats_pk, stats_clans, stats_castles, stats_online, stats_clan_info, stats_top, stats_rich,
                 stats_count_results, exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb, services_premium_allow,
@@ -95,7 +92,7 @@ class Gs extends ActiveRecord
                 stats_clans, stats_castles, stats_online, stats_clan_info, stats_top, stats_rich, stats_count_results,
                 exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb, services_premium_allow,
                 services_remove_hwid_allow, currency_name, deposit_allow, deposit_payment_system, deposit_desc, deposit_course_payments,
-                currency_symbol, stats_items', 'required'),
+                stats_items', 'required'),
 
             array('services_premium_allow', 'checkPremiumCost'),
             array('deposit_payment_system', 'checkDepositPaymentSystem'),
@@ -105,18 +102,17 @@ class Gs extends ActiveRecord
                 services_remove_hwid_allow, deposit_allow, stats_items', 'in', 'range' => array_keys($this->getStatusList())),
 
             array('status', 'in', 'range' => array_keys(parent::getStatusList())),
-            array('currency_symbol', 'in', 'range' => array_keys($this->getCurrencySymbols()), 'message' => Yii::t('main', 'Валюта')),
 
-			array('port, db_port, telnet_port, login_id, fake_online, teleport_time, stats_cache_time, stats_count_results,
+			array('port, db_port, login_id, fake_online, teleport_time, stats_cache_time, stats_count_results,
                 exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb', 'numerical', 'integerOnly' => TRUE),
 
 			array('currency_name', 'length', 'max' => 128),
-			array('name, ip, db_host, db_user, db_pass, db_name, telnet_host, telnet_pass', 'length', 'max' => 54),
-			array('port, db_port, telnet_port, fake_online, teleport_time, stats_cache_time, stats_count_results', 'length', 'max' => 11),
+			array('name, ip, db_host, db_user, db_pass, db_name', 'length', 'max' => 54),
+			array('port, db_port, fake_online, teleport_time, stats_cache_time, stats_count_results', 'length', 'max' => 11),
 			array('exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb', 'length', 'max' => 6),
 			array('version', 'length', 'max' => 20),
 
-            array('telnet_host, telnet_port, telnet_pass', 'default', 'value' => NULL),
+            array('db_pass', 'default', 'value' => NULL),
 
             array('stats_items', 'checkStatsItemsList'),
             array('stats_items_list', 'default', 'value' => NULL),
@@ -167,7 +163,7 @@ class Gs extends ActiveRecord
         {
             $lsId = $this->login_id;
 
-            $login = db()->createCommand("SELECT COUNT(0) FROM `{{ls}}` WHERE `id` = :id LIMIT 1")
+            $login = db()->createCommand("SELECT COUNT(0) FROM {{ls}} WHERE id = :id LIMIT 1")
                 ->bindParam('id', $lsId, PDO::PARAM_INT)
                 ->queryScalar();
 
@@ -261,9 +257,6 @@ class Gs extends ActiveRecord
 			'db_user'                           => Yii::t('backend', 'MYSQL user'),
 			'db_pass'                           => Yii::t('backend', 'MYSQL pass'),
 			'db_name'                           => Yii::t('backend', 'MYSQL bd name'),
-			'telnet_host'                       => Yii::t('backend', 'TELNET host'),
-			'telnet_port'                       => Yii::t('backend', 'TELNET port'),
-			'telnet_pass'                       => Yii::t('backend', 'TELNET pass'),
 			'login_id'                          => Yii::t('backend', 'Логин'),
 			'version'                           => Yii::t('backend', 'Версия сервера'),
 			'status'                            => Yii::t('backend', 'Статус'),
@@ -398,5 +391,405 @@ class Gs extends ActiveRecord
     {
         $data = app()->params['currency_symbols'];
         return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbHost()
+    {
+        return $this->db_host;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbPort()
+    {
+        return $this->db_port;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbUser()
+    {
+        return $this->db_user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbPass()
+    {
+        return $this->db_pass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbName()
+    {
+        return $this->db_name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLoginId()
+    {
+        return $this->login_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFakeOnline()
+    {
+        return $this->fake_online;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllowTeleport()
+    {
+        return $this->allow_teleport;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTeleportTime()
+    {
+        return $this->teleport_time;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsAllow()
+    {
+        return $this->stats_allow;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatsCacheTime()
+    {
+        return $this->stats_cache_time;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsTotal()
+    {
+        return $this->stats_total;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsPvp()
+    {
+        return $this->stats_pvp;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsPk()
+    {
+        return $this->stats_pk;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsClans()
+    {
+        return $this->stats_clans;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsCastles()
+    {
+        return $this->stats_castles;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsOnline()
+    {
+        return $this->stats_online;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsClanInfo()
+    {
+        return $this->stats_clan_info;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsTop()
+    {
+        return $this->stats_top;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsRich()
+    {
+        return $this->stats_rich;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatsCountResults()
+    {
+        return $this->stats_count_results;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExp()
+    {
+        return $this->exp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSp()
+    {
+        return $this->sp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdena()
+    {
+        return $this->adena;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDrop()
+    {
+        return $this->drop;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSpoil()
+    {
+        return $this->spoil;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQDrop()
+    {
+        return $this->q_drop;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQReward()
+    {
+        return $this->q_reward;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRb()
+    {
+        return $this->rb;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErb()
+    {
+        return $this->erb;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesPremiumAllow()
+    {
+        return $this->services_premium_allow;
+    }
+
+    /**
+     * @return string
+     */
+    public function getServicesPremiumCost()
+    {
+        return $this->services_premium_cost;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesRemoveHwidAllow()
+    {
+        return $this->services_remove_hwid_allow;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesChangeCharNameAllow()
+    {
+        return $this->services_change_char_name_allow;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesChangeCharNameCost()
+    {
+        return $this->services_change_char_name_cost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getServicesChangeCharNameChars()
+    {
+        return $this->services_change_char_name_chars;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesChangeGenderAllow()
+    {
+        return $this->services_change_gender_allow;
+    }
+
+    /**
+     * @return int
+     */
+    public function getServicesChangeGenderCost()
+    {
+        return $this->services_change_gender_cost;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepositAllow()
+    {
+        return $this->deposit_allow;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepositPaymentSystem()
+    {
+        return $this->deposit_payment_system;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepositDesc()
+    {
+        return $this->deposit_desc;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDepositCoursePayments()
+    {
+        return $this->deposit_course_payments;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrencySymbol()
+    {
+        return $this->currency_symbol;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatsItems()
+    {
+        return $this->stats_items;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatsItemsList()
+    {
+        return $this->stats_items_list;
     }
 }

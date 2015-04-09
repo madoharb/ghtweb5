@@ -4,4 +4,4 @@
 
 <pre><?php echo $res ?></pre>
 
-<?php echo CHtml::link(Yii::t('install', 'Шаг 4'), array('/install/default/step4'), array('class' => 'btn btn-primary')) ?>
+<?php echo CHtml::link(Yii::t('install', 'Далее'), array('/install/default/step4'), array('class' => 'btn btn-primary')) ?>

@@ -59,7 +59,13 @@ $this->breadcrumbs = array($title_);
                         <td><?php echo CHtml::link(formatCurrency($row->profile->balance, FALSE), array('/backend/users/transactionHistory', 'user_id' => $row->user_id), array('title' => Yii::t('main', 'История пополнений'), 'rel' => 'tooltip')) ?></td>
                         <td><?php echo CHtml::link(count($row->referals), array('/backend/users/referals', 'user_id' => $row->user_id), array('title' => Yii::t('main', 'Список рефералов'), 'rel' => 'tooltip')) ?></td>
                         <td><?php echo $row->getRole() ?></td>
-                        <td><?php echo CHtml::link(e($row->ls->name), array('/backend/loginServers/form', 'ls_id' => $row->ls->getPrimaryKey()), array('title' => Yii::t('main', 'Просмотр сервера'), 'rel' => 'tooltip')) ?></td>
+                        <td>
+                            <?php if($row->ls) { ?>
+                                <?php echo CHtml::link(e($row->ls->name), array('/backend/loginServers/form', 'ls_id' => $row->ls->getPrimaryKey()), array('title' => Yii::t('main', 'Просмотр сервера'), 'rel' => 'tooltip')) ?>
+                            <?php } else { ?>
+                                n/a
+                            <?php } ?>
+                        </td>
                         <td><?php echo $row->getCreatedAt() ?></td>
                         <td>
                             <div class="dropdown">

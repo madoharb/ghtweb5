@@ -6,16 +6,9 @@ class DepositController extends CabinetBaseController
 {
 	public function actionIndex()
 	{
-        $aggregatorList = Deposit::getAggregatorsList();
-
-        if(!$this->gs->deposit_allow || !isset($aggregatorList[$this->gs->deposit_payment_system]))
-        {
-            throw new CHttpException(503, Yii::t('main', 'Пополнение баланса отключено.'));
-        }
-
         $model = new DepositForm();
 
-        if(isset($_POST['DepositForm']))
+        if(isset($_POST['DepositForm']) && $this->gs->deposit_allow)
         {
             $model->setAttributes($_POST['DepositForm']);
 

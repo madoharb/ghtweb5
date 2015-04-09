@@ -11,6 +11,9 @@ class UserIdentity extends CUserIdentity
     const ERROR_STATUS_IP_NO_ACCESS = 5;
 
 
+    /**
+     * @var Users
+     */
     private $_user;
     private $_ls_id;
     private $_gs_id;
@@ -29,7 +32,7 @@ class UserIdentity extends CUserIdentity
         $userIp      = userIp();
         $this->_user = Users::model()->with('profile')->find('login = :login AND ls_id = :ls_id', array(
             ':login' => $this->username,
-            'ls_id' => $this->_ls_id,
+            'ls_id'  => $this->_ls_id,
         ));
 
         if($this->_user === NULL)
@@ -49,11 +52,11 @@ class UserIdentity extends CUserIdentity
                 'created_at' => date('Y-m-d H:i:s'),
             ));
         }
-        elseif($this->_user->activated == Users::STATUS_INACTIVATED)
+        elseif(!$this->_user->isActivated())
         {
             $this->errorCode = self::ERROR_STATUS_INACTIVE;
         }
-        elseif($this->_user->role == Users::ROLE_BANNED)
+        elseif($this->_user->isBanned())
         {
             $this->errorCode = self::ERROR_STATUS_BANNED;
         }

@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
             <td><?php echo formatCurrency($model->profile->balance) ?></td>
         </tr>
         <tr>
-            <td><b><?php echo $model->profile->getAttributeLabel('vote_balance') ?></b></td>
+            <td><b><?php echo $model->profile->getAttributeLabel('vote_balance') ?></b> (Не используется)</td>
             <td><?php echo $model->profile->vote_balance ?></td>
             <td><b><?php echo $model->profile->getAttributeLabel('preferred_language') ?></b></td>
             <td><?php echo $model->profile->preferred_language ?></td>
@@ -48,7 +48,7 @@ $this->breadcrumbs = array(
         <tr>
             <td><b><?php echo $model->profile->getAttributeLabel('protected_ip') ?></b></td>
             <td><?php echo ($model->profile->protected_ip && is_array($model->profile->protected_ip) ? implode(', ', $model->profile->protected_ip) : 'Привязки к IP нет') ?></td>
-            <td><b><?php echo $model->profile->getAttributeLabel('phone') ?></b></td>
+            <td><b><?php echo $model->profile->getAttributeLabel('phone') ?></b> (Не используется)</td>
             <td><?php echo $model->profile->phone ?></td>
         </tr>
     </tbody>

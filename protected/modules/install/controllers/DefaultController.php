@@ -51,6 +51,8 @@ class DefaultController extends CController
      */
     public function actionStep3()
     {
+        $res = '';
+
         try
         {
             $res = $this->runMigrationTool();
@@ -77,7 +79,7 @@ class DefaultController extends CController
     }
 
     /**
-     * Настройка логин сервера
+     * Создание админа
      */
     public function actionStep4()
     {
@@ -89,88 +91,10 @@ class DefaultController extends CController
 
             if($model->validate())
             {
-                db()->createCommand()->insert('{{ls}}', array(
-                    'name'          => $model->name,
-                    'ip'            => $model->ip,
-                    'port'          => $model->port,
-                    'db_host'       => $model->db_host,
-                    'db_port'       => $model->db_port,
-                    'db_user'       => $model->db_user,
-                    'db_pass'       => $model->db_pass,
-                    'db_name'       => $model->db_name,
-                    'version'       => $model->version,
-                    'password_type' => $model->password_type,
-                    'status'        => ActiveRecord::STATUS_ON,
-                    'created_at'    => date('Y-m-d H:i:s'),
-                ));
-
-                $this->redirect(array('step5'));
-            }
-        }
-
-        $this->render('step4', array(
-            'model' => $model,
-        ));
-    }
-
-    /**
-     * Настройка гейм сервера
-     */
-    public function actionStep5()
-    {
-        $model = new Step5Form();
-
-        if(isset($_POST['Step5Form']))
-        {
-            $model->setAttributes($_POST['Step5Form']);
-
-            if($model->validate())
-            {
-                $loginId = db()->createCommand("SELECT id FROM {{ls}} LIMIT 1")->queryScalar();
-
-                db()->createCommand()->insert('{{gs}}', array(
-                    'name'          => $model->name,
-                    'ip'            => $model->ip,
-                    'port'          => $model->port,
-                    'db_host'       => $model->db_host,
-                    'db_port'       => $model->db_port,
-                    'db_user'       => $model->db_user,
-                    'db_pass'       => $model->db_pass,
-                    'db_name'       => $model->db_name,
-                    'login_id'      => $loginId,
-                    'version'       => $model->version,
-                    'status'        => ActiveRecord::STATUS_ON,
-                    'created_at'    => date('Y-m-d H:i:s'),
-                ));
-
-                $this->redirect(array('step6'));
-            }
-        }
-
-        $this->render('step5', array(
-            'model' => $model,
-        ));
-    }
-
-    /**
-     * Создание админа
-     */
-    public function actionStep6()
-    {
-        $model = new Step6Form();
-
-        if(isset($_POST['Step6Form']))
-        {
-            $model->setAttributes($_POST['Step6Form']);
-
-            if($model->validate())
-            {
                 $transaction = db()->beginTransaction();
 
                 try
                 {
-                    $loginId = db()->createCommand("SELECT id FROM {{ls}} LIMIT 1")->queryScalar();
-
                     db()->createCommand()->insert('{{users}}', array(
                         'login'             => $model->login,
                         'password'          => Users::hashPassword($model->password),
@@ -179,7 +103,7 @@ class DefaultController extends CController
                         'referer'           => Users::generateRefererCode(),
                         'role'              => Users::ROLE_ADMIN,
                         'registration_ip'   => userIp(),
-                        'ls_id'             => $loginId,
+                        'ls_id'             => 1,
                         'created_at'        => date('Y-m-d H:i:s'),
                     ));
 
@@ -190,7 +114,7 @@ class DefaultController extends CController
 
                     $transaction->commit();
 
-                    $this->redirect(array('step7'));
+                    $this->redirect(array('step5'));
                 }
                 catch(Exception $e)
                 {
@@ -200,7 +124,7 @@ class DefaultController extends CController
             }
         }
 
-        $this->render('step6', array(
+        $this->render('step4', array(
             'model' => $model,
         ));
     }
@@ -208,9 +132,9 @@ class DefaultController extends CController
     /**
      * Finish
      */
-    public function actionStep7()
+    public function actionStep5()
     {
-        $this->render('step7');
+        $this->render('step5');
     }
 
     public function actionError()

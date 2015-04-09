@@ -38,7 +38,7 @@ $this->breadcrumbs = array(
                     <tr>
                         <td><?php echo getNumberForPagination(++$i, $perPage) ?></td>
                         <td><?php echo $row['login'] ?></td>
-                        <td><?php echo date('Y-m-d H:i', $row['last_active']) ?></td>
+                        <td><?php echo ($row['last_active'] ? date('Y-m-d H:i', $row['last_active']) : '-') ?></td>
                         <td><?php echo $row['access_level'] ?></td>
                         <td>
                             <!-- <ul class="actions list-unstyled">

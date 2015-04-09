@@ -5,22 +5,21 @@
  */
 
 $maxLimitOnline = 500; // Верхний предел онлайна (чем он ниже тем больше будет закрашена полоска)
-
-// Подключаю библиотеки для работы с графиком онлайна (See: https://github.com/pguso/jquery-plugin-circliful)
-css(assetsUrl() . '/js/libs/circliful/css/jquery.circliful.css');
-js(assetsUrl() . '/js/libs/circliful/js/jquery.circliful.min.js', CClientScript::POS_END);
-
-clientScript()->registerScript('circliful', '
-
-    $(function(){
-        $(".circuit").circliful();
-    });
-
-', CClientScript::POS_END);
 ?>
 
 <?php if(config('server_status.allow')) { ?>
     <?php if($content) { ?>
+        <?php
+        // Подключаю библиотеки для работы с графиком онлайна (See: https://github.com/pguso/jquery-plugin-circliful)
+        css(assetsUrl() . '/js/libs/circliful/css/jquery.circliful.css');
+        js(assetsUrl() . '/js/libs/circliful/js/jquery.circliful.min.js', CClientScript::POS_END);
+
+        clientScript()->registerScript('circliful', '
+            $(function(){
+                $(".circuit").circliful();
+            });
+        ', CClientScript::POS_END);
+        ?>
         <table>
             <tr>
                 <?php foreach($content as $gsId => $row) { ?>

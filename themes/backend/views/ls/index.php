@@ -54,7 +54,7 @@ $this->breadcrumbs = array($title_);
                         <td><?php echo e($row->name) ?></td>
                         <td><?php echo $row->ip ?></td>
                         <td><?php echo $row->port ?></td>
-                        <td><?php echo $row->version ?></td>
+                        <td><?php echo app()->params['server_versions'][$row->version] ?></td>
                         <td><span class="label <?php echo ($row->isStatusOn() ? 'label-success' : 'label-default') ?>"><?php echo $row->getStatus() ?></span></td>
                         <td>
                             <ul class="actions list-unstyled">

@@ -20,7 +20,7 @@ if(!is_file($yii))
 }
 
 // Чтобы включить режим разработки добавьте свой IP в array() (тот что снизу), к примеру: array('127.0.0.1')
-if(in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1')))
+if(in_array($_SERVER['REMOTE_ADDR'], array()))
 {
     define('YII_DEBUG', TRUE);
 

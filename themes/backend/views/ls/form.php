@@ -112,29 +112,6 @@ $this->breadcrumbs = array(
         </div>
     </div>
 
-    <legend><?php echo Yii::t('backend', 'Telnet') ?></legend>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_host', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_host', array('placeholder' => $model->getAttributeLabel('telnet_host'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_pass', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_pass', array('placeholder' => $model->getAttributeLabel('telnet_pass'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_port', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_port', array('placeholder' => $model->getAttributeLabel('telnet_port'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
             <button type="submit" class="btn btn-primary"><?php echo ($this->getAction()->id == 'add' ? Yii::t('backend', 'Создать') : Yii::t('backend', 'Сохранить')) ?></button>

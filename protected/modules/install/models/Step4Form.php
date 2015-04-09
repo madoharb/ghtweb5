@@ -3,16 +3,9 @@
 /**
  * Class Step4Form
  *
- * @property string $name
- * @property string $ip
- * @property int $port
- * @property string $db_host
- * @property int $db_port
- * @property string $db_user
- * @property string $db_pass
- * @property string $db_name
- * @property string $version
- * @property string $password_type
+ * @property string $login
+ * @property string $password
+ * @property string $email
  */
 class Step4Form extends CFormModel
 {
@@ -20,108 +13,46 @@ class Step4Form extends CFormModel
      * Название сервера
      * @var string
      */
-    public $name;
+    public $login;
 
     /**
-     * IP сервера
+     * Пароль
      * @var string
      */
-    public $ip;
+    public $password;
 
     /**
-     * Порт сервера
-     * @var int
-     */
-    public $port;
-
-    /**
-     * Mysql host
+     * Email
      * @var string
      */
-    public $db_host;
-
-    /**
-     * Mysql port
-     * @var int
-     */
-    public $db_port;
-
-    /**
-     * Mysql user
-     * @var string
-     */
-    public $db_user;
-
-    /**
-     * Mysql pass
-     * @var string
-     */
-    public $db_pass;
-
-    /**
-     * Mysql name
-     * @var string
-     */
-    public $db_name;
-
-    /**
-     * Версия сервера
-     * @var string
-     */
-    public $version;
-
-    /**
-     * Тип шифрования пароля
-     * @var string
-     */
-    public $password_type;
-
-    /**
-     * Зарпещенные символы в пароле
-     * @var array
-     */
-    private $_db_pass_denied_chars = array("'", "\\");
+    public $email;
 
 
 
     public function rules()
     {
         return array(
-            array('name, ip, port, db_host, db_port, db_user, db_pass, db_name, version, password_type', 'filter', 'filter' => 'trim'),
-            array('name, ip, port, db_host, db_port, db_user, db_name, version, password_type', 'required'),
-            array('version', 'in', 'range' => array_keys(app()->params['server_versions'])),
-            array('password_type', 'in', 'range' => array_keys($this->getPasswordTypeList())),
-            array('db_pass', 'checkPassChars'),
-            array('db_pass', 'checkConnect'),
+            array('login, password, email', 'filter', 'filter' => 'trim'),
+            array('login, password, email', 'required'),
+            array('login', 'length', 'min' => Users::LOGIN_MIN_LENGTH, 'max' => Users::LOGIN_MAX_LENGTH),
+            array('password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH, 'max' => Users::PASSWORD_MAX_LENGTH),
+            array('login', 'loginUnique'),
+            array('email', 'email'),
         );
     }
 
-    public function checkPassChars($attribute)
+    public function loginUnique($attr)
     {
-        if($this->db_pass != '')
+        if(!$this->hasErrors($attr))
         {
-            foreach($this->_db_pass_denied_chars as $char)
-            {
-                if(strpos($this->db_pass, $char) !== FALSE)
-                {
-                    $this->addError($attribute, Yii::t('install', 'В пароле не должно быть <b>:char</b> символа', array(':char' => $char)));
-                }
-            }
-        }
-    }
+            $res = db()->createCommand("SELECT COUNT(0) FROM {{users}} WHERE login = :login")
+                ->queryScalar(array(
+                    'login' => $this->login
+                ));
 
-    public function checkConnect($attribute)
-    {
-        if(!$this->hasErrors())
-        {
-            try
+            if($res)
             {
-                $db = new PDO('mysql:host=' . $this->db_host . ';port=' . $this->db_port . ';dbname=' . $this->db_name, $this->db_user, $this->db_pass);
-                $db = NULL;
-            }
-            catch(PDOException $e)
-            {
-                $this->addError($attribute, $e->getMessage());
+                $this->addError($attr, Yii::t('install', 'Логин уже занят.'));
             }
         }
     }
@@ -129,23 +60,10 @@ class Step4Form extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'name'          => Yii::t('install', 'Название логин сервера'),
-            'ip'            => Yii::t('install', 'IP сервера'),
-            'port'          => Yii::t('install', 'Порт сервера'),
-            'db_host'       => Yii::t('install', 'Mysql host'),
-            'db_port'       => Yii::t('install', 'Mysql port'),
-            'db_user'       => Yii::t('install', 'Mysql user'),
-            'db_pass'       => Yii::t('install', 'Mysql pass'),
-            'db_name'       => Yii::t('install', 'Mysql name'),
-            'version'       => Yii::t('install', 'Версия сервера'),
-            'password_type' => Yii::t('install', 'Тип шифрования пароля'),
+            'login'     => Yii::t('install', 'Логин'),
+            'password'  => Yii::t('install', 'Пароль'),
+            'email'     => Yii::t('install', 'Email'),
         );
-    }
-
-    public function getPasswordTypeList()
-    {
-        $model = new Ls();
-        return $model->getPasswordTypeList();
     }
 }
  

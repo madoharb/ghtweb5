@@ -13,9 +13,6 @@
  * @property string $db_user
  * @property string $db_pass
  * @property string $db_name
- * @property string $telnet_host
- * @property int $telnet_port
- * @property string $telnet_pass
  * @property string $version
  * @property integer $status
  * @property string $password_type
@@ -23,7 +20,7 @@
  * @property string $updated_at
  *
  * The followings are the available model relations:
- * @property Gs $servers
+ * @property Gs[] $servers
  */
 class Ls extends ActiveRecord
 {
@@ -47,20 +44,20 @@ class Ls extends ActiveRecord
 	public function rules()
 	{
 		return array(
-			array('name, ip, port, db_host, db_port, db_user, db_pass, db_name, telnet_host, telnet_port, telnet_pass,
-			      version, status, password_type, created_at', 'filter', 'filter' => 'trim'),
+			array('name, ip, port, db_host, db_port, db_user, db_pass, db_name, version, status, password_type,
+			    created_at', 'filter', 'filter' => 'trim'),
 
 			array('name, ip, port, db_host, db_port, db_user, db_name, version, status, password_type', 'required'),
 
 			array('status', 'in', 'range' => array(ActiveRecord::STATUS_OFF, ActiveRecord::STATUS_ON)),
 
-			array('name, ip, db_host, db_user, db_pass, db_name, telnet_host, telnet_pass', 'length', 'max' => 54),
+			array('name, ip, db_host, db_user, db_pass, db_name', 'length', 'max' => 54),
 			array('port', 'length', 'max' => 5),
 
             array('version', 'in', 'range' => array_keys(app()->params['server_versions']), 'message' => Yii::t('main', 'Выберите версию сервера')),
 			array('password_type', 'in', 'range' => array_keys($this->getPasswordTypeList())),
 
-			array('telnet_host, telnet_port, telnet_pass', 'default', 'value' => NULL),
+			array('db_pass', 'default', 'value' => NULL),
 
 			array('id, name, ip, port, version, status', 'safe', 'on' => 'search'),
 		);
@@ -91,9 +88,6 @@ class Ls extends ActiveRecord
             'db_user'       => Yii::t('backend', 'MYSQL user'),
             'db_pass'       => Yii::t('backend', 'MYSQL pass'),
             'db_name'       => Yii::t('backend', 'MYSQL bd name'),
-            'telnet_host'   => Yii::t('backend', 'TELNET host'),
-            'telnet_port'   => Yii::t('backend', 'TELNET port'),
-            'telnet_pass'   => Yii::t('backend', 'TELNET pass'),
 			'version'       => Yii::t('backend', 'Версия логина'),
 			'status'        => Yii::t('backend', 'Статус'),
 			'password_type' => Yii::t('backend', 'Тип пароля'),
@@ -147,5 +141,77 @@ class Ls extends ActiveRecord
         unset($data[ActiveRecord::STATUS_DELETED]);
 
         return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbHost()
+    {
+        return $this->db_host;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbPort()
+    {
+        return $this->db_port;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbUser()
+    {
+        return $this->db_user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbPass()
+    {
+        return $this->db_pass;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDbName()
+    {
+        return $this->db_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
     }
 }

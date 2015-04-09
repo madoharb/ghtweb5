@@ -243,29 +243,6 @@ $this->breadcrumbs = array(
         </div>
     </div>
 
-    <legend><?php echo Yii::t('backend', 'Telnet') ?></legend>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_host', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_host', array('placeholder' => $model->getAttributeLabel('telnet_host'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_pass', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_pass', array('placeholder' => $model->getAttributeLabel('telnet_pass'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'telnet_port', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'telnet_port', array('placeholder' => $model->getAttributeLabel('telnet_port'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-
     <legend><?php echo Yii::t('backend', 'Рейты') ?></legend>
 
     <div class="form-group">
@@ -351,14 +328,14 @@ $this->breadcrumbs = array(
                     <?php foreach($model->services_premium_cost as $i => $cost) { ?>
                         <li class="list-group-item" data-id="<?php echo $i ?>">
                             <?php echo Yii::t('backend', 'Кол-во дней') ?>: <input type="text" name="Gs[services_premium_cost][<?php echo $i ?>][days]" value="<?php echo $cost['days'] ?>" class="form-control">
-                            <?php echo Yii::t('backend', 'Кол-во') ?> <?php echo config('server.curryncy_name') ?>: <input type="text" name="Gs[services_premium_cost][<?php echo $i ?>][cost]" value="<?php echo $cost['cost'] ?>" class="form-control">
+                            <?php echo Yii::t('backend', 'Кол-во монет') ?>: <input type="text" name="Gs[services_premium_cost][<?php echo $i ?>][cost]" value="<?php echo $cost['cost'] ?>" class="form-control">
                             <a class="glyphicon glyphicon-minus" title="<?php echo Yii::t('backend', 'Удалить') ?>" rel="tooltip"></a>
                         </li>
                     <?php } ?>
                 <?php } else { ?>
                     <li class="list-group-item" data-id="0">
                         <?php echo Yii::t('backend', 'Кол-во дней') ?>: <input type="text" name="Gs[services_premium_cost][0][days]" class="form-control">
-                        <?php echo Yii::t('backend', 'Кол-во') ?> <?php echo config('server.curryncy_name') ?>: <input type="text" name="Gs[services_premium_cost][0][cost]" class="form-control">
+                        <?php echo Yii::t('backend', 'Кол-во монет') ?>: <input type="text" name="Gs[services_premium_cost][0][cost]" class="form-control">
                         <a class="glyphicon glyphicon-minus" title="<?php echo Yii::t('backend', 'Удалить') ?>" rel="tooltip"></a>
                     </li>
                 <?php } ?>
@@ -401,13 +378,6 @@ $this->breadcrumbs = array(
         <?php echo $form->labelEx($model, 'deposit_desc', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
             <?php echo $form->textField($model, 'deposit_desc', array('class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'currency_symbol', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->dropDownList($model, 'currency_symbol', $model->getCurrencySymbols(), array('class' => 'form-control')) ?>
-            <p class="help-block"><?php echo Yii::t('backend', 'Какую валюту используете.') ?></p>
         </div>
     </div>
     <div class="form-group">

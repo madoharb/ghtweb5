@@ -56,7 +56,7 @@ $this->breadcrumbs = array($title_);
                         <td><?php echo e($row->name) ?></td>
                         <td><?php echo $row->ip ?></td>
                         <td><?php echo $row->port ?></td>
-                        <td><?php echo $row->version ?></td>
+                        <td><?php echo app()->params['server_versions'][$row->version] ?></td>
                         <td><?php echo CHtml::link(e($row->ls->name), array('/backend/loginServers/edit', 'ls_id' => $row->ls->getPrimaryKey())) ?></td>
                         <td><span class="label <?php echo ($row->isStatusOn() ? 'label-success' : 'label-default') ?>"><?php echo $row->getStatus() ?></span></td>
                         <td>

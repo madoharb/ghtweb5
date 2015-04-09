@@ -6,7 +6,7 @@
 ?>
 
 <div class="page-header">
-    <h1><?php echo Yii::t('install', 'Шаг 4, настройка подключения к БД логин сервера') ?></h1>
+    <h1><?php echo Yii::t('install', 'Шаг 4, создание админа') ?></h1>
 </div>
 
 
@@ -23,70 +23,31 @@
     <?php $this->widget('app.widgets.FlashMessages.FlashMessages') ?>
 
     <div class="form-group">
-        <?php echo $form->labelEx($model, 'name', array('class' => 'col-lg-3 control-label')) ?>
+        <?php echo $form->labelEx($model, 'login', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'name', array('placeholder' => $model->getAttributeLabel('name'), 'class' => 'form-control')) ?>
+            <?php echo $form->textField($model, 'login', array('placeholder' => $model->getAttributeLabel('login'), 'class' => 'form-control')) ?>
+            <p class="help-block">
+                <?php echo Yii::t('main', 'Разрешенные символы: :chars', array(':chars' => Users::LOGIN_REGEXP)) ?><br>
+                <?php echo Yii::t('install', 'Длина логина от :min до :max символов', array(':min' => Users::LOGIN_MIN_LENGTH, ':max' => Users::LOGIN_MAX_LENGTH)) ?>
+            </p>
         </div>
     </div>
     <div class="form-group">
-        <?php echo $form->labelEx($model, 'ip', array('class' => 'col-lg-3 control-label')) ?>
+        <?php echo $form->labelEx($model, 'password', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'ip', array('placeholder' => $model->getAttributeLabel('ip'), 'class' => 'form-control')) ?>
+            <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control')) ?>
+            <p class="help-block"><?php echo Yii::t('install', 'Длина пароля от :min до :max символов', array(':min' => Users::PASSWORD_MIN_LENGTH, ':max' => Users::PASSWORD_MAX_LENGTH)) ?></p>
         </div>
     </div>
     <div class="form-group">
-        <?php echo $form->labelEx($model, 'port', array('class' => 'col-lg-3 control-label')) ?>
+        <?php echo $form->labelEx($model, 'email', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
-            <?php echo $form->textField($model, 'port', array('placeholder' => $model->getAttributeLabel('port'), 'class' => 'form-control')) ?>
-            <p class="help-block"><?php echo Yii::t('install', 'Default: 2106') ?></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'db_host', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'db_host', array('placeholder' => $model->getAttributeLabel('db_host'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'db_port', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'db_port', array('placeholder' => $model->getAttributeLabel('db_port'), 'class' => 'form-control')) ?>
-            <p class="help-block"><?php echo Yii::t('install', 'Default: 3306') ?></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'db_user', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'db_user', array('placeholder' => $model->getAttributeLabel('db_user'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'db_pass', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->passwordField($model, 'db_pass', array('placeholder' => $model->getAttributeLabel('db_pass'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'db_name', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->textField($model, 'db_name', array('placeholder' => $model->getAttributeLabel('db_name'), 'class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'version', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->dropDownList($model, 'version', app()->params['server_versions'], array('class' => 'form-control')) ?>
-        </div>
-    </div>
-    <div class="form-group">
-        <?php echo $form->labelEx($model, 'password_type', array('class' => 'col-lg-3 control-label')) ?>
-        <div class="col-lg-9">
-            <?php echo $form->dropDownList($model, 'password_type', $model->getPasswordTypeList(), array('class' => 'form-control')) ?>
+            <?php echo $form->textField($model, 'email', array('placeholder' => $model->getAttributeLabel('email'), 'class' => 'form-control')) ?>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-primary"><?php echo Yii::t('backend', 'Далее') ?></button>
+            <button type="submit" class="btn btn-primary"><?php echo Yii::t('backend', 'Завершить установку') ?></button>
         </div>
     </div>
 

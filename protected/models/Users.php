@@ -219,7 +219,22 @@ class Users extends ActiveRecord
      */
     public static function generateRefererCode()
     {
-        return strtolower(randomString(rand(self::REFERER_MIN_LENGTH, self::REFERER_MAX_LENGTH)));
+        while(TRUE)
+        {
+            $code = strtolower(randomString(rand(self::REFERER_MIN_LENGTH, self::REFERER_MAX_LENGTH)));
+
+            $res = db()->createCommand("SELECT COUNT(0) FROM {{users}} WHERE referer = :referer LIMIT 1")
+                ->queryScalar(array(
+                    'referer' => $code,
+                ));
+
+            if(!$res)
+            {
+                break;
+            }
+        }
+
+        return $code;
     }
 
     /**

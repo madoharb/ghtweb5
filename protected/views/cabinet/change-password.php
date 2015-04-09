@@ -36,20 +36,6 @@ $this->breadcrumbs=array($title__);
         </div>
     </div>
 
-    <?php if(CCaptcha::checkRequirements() && config('cabinet.change_password.captcha.allow')) { ?>
-    <div class="form-group clearfix">
-        <?php echo $form->labelEx($model, 'verifyCode') ?>
-        <div class="field captcha">
-            <?php echo $form->textField($model, 'verifyCode', array('placeholder' => $model->getAttributeLabel('verifyCode'), 'class' => 'form-control')) ?>
-            <div class="captcha-image">
-                <?php $this->widget('CCaptcha', array(
-                    'id' => 'change-password-form-captcha'
-                )) ?>
-            </div>
-        </div>
-    </div>
-    <?php } ?>
-
     <div class="button-group center">
         <button type="submit" class="button">
             <span><?php echo Yii::t('main', 'Изменить') ?></span>
