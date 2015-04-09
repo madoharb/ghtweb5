@@ -55,7 +55,7 @@ class DefaultController extends FrontendBaseController
         {
             user()->setFlash(FlashConst::MESSAGE_ERROR, Yii::t('main', 'Аккаунт не найден.'));
         }
-        elseif($user->activated == Users::STATUS_ACTIVATED)
+        elseif($user->isActivated())
         {
             user()->setFlash(FlashConst::MESSAGE_ERROR, Yii::t('main', 'Аккаунт уже активирован.'));
         }

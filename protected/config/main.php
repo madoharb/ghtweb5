@@ -133,7 +133,8 @@ return array(
         ),
 
         'securityManager' => array(
-            'encryptionKey'     => 'kkc123103x-1813c1io31hxi1',
+            'cryptAlgorithm' => array('rijndael-256', '', 'ofb', ''),
+            'encryptionKey'  => '7fzyTAybk70bzuLf', // Длина ключа должна быть ровно 16, 24 или 32 символа
         ),
 
         'request' => array(
