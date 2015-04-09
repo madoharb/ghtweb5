@@ -105,7 +105,6 @@ class RegisterForm extends CFormModel
         {
             $rules[] = array('prefix', 'filter', 'filter' => 'trim');
             $rules[] = array('prefix', 'required');
-            $rules[] = array('prefix', 'length', 'is' => config('prefixes.length'));
             $rules[] = array('prefix', 'checkPrefix');
         }
 
@@ -135,7 +134,7 @@ class RegisterForm extends CFormModel
     {
         if(!$this->hasErrors($attr))
         {
-            $prefix   = $this->prefix;
+            $prefix   = $this->$attr;
             $prefixes = user()->getState('prefixes');
 
             if(is_array($prefixes) && !in_array($prefix, $prefixes))
