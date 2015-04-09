@@ -77,7 +77,7 @@ class TicketsController extends BackendBaseController
 
                 $ticket->save(FALSE, array('new_message_for_user', 'updated_at'));
 
-                app()->notify->userNoticeTicketAnswer($ticket->user->email, array(
+                notify()->userNoticeTicketAnswer($ticket->user->email, array(
                     'ticket' => $ticket,
                     'user'   => $ticket->user,
                 ));

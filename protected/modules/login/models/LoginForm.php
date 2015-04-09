@@ -42,12 +42,25 @@ class LoginForm extends CFormModel
 
     public function rules()
     {
-        return array(
-            array('gs_id,login,password,verifyCode', 'filter', 'filter' => 'trim'),
+        $rules = array(
+            array('gs_id,login,password', 'filter', 'filter' => 'trim'),
             array('gs_id,login,password', 'required'),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('login.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
+            array('login', 'length', 'min' => Users::LOGIN_MIN_LENGTH, 'max' => Users::LOGIN_MAX_LENGTH),
+            array('password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH, 'max' => Users::PASSWORD_MAX_LENGTH),
             array('gs_id', 'gsIsExists'),
         );
+
+        // Captcha
+        $captcha = config('login.captcha.allow') && CCaptcha::checkRequirements();
+
+        if($captcha)
+        {
+            $rules[] = array('verifyCode', 'filter', 'filter' => 'trim');
+            $rules[] = array('verifyCode', 'required');
+            $rules[] = array('verifyCode', 'captcha', 'message' => Yii::t('main', 'Код с картинки введен не верно.'));
+        }
+
+        return $rules;
     }
 
     protected function afterConstruct()

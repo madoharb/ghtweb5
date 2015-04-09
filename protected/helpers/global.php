@@ -341,3 +341,41 @@ function characterLimiter($str, $n = 500, $end_char = '&#8230;')
         }
     }
 }
+
+/**
+ * @return Notify
+ */
+function notify()
+{
+    return app()->notify;
+}
+
+/**
+ * @param string $path
+ *
+ * @return string
+ */
+function assetsUrl($path = NULL)
+{
+    static $paths = array();
+
+    if($path === NULL)
+    {
+        $path = 'application.views.assets';
+
+        if(app()->getTheme()->getName() != '')
+        {
+            $path = 'webroot.themes.' . app()->getTheme()->getName();
+        }
+    }
+
+    if(isset($paths[$path]))
+    {
+        return $paths[$path];
+    }
+
+    $path_ = app()->getAssetManager()->publish(Yii::getPathOfAlias($path), FALSE, -1, YII_DEBUG);
+    $paths[$path] = $path_;
+
+    return $path_;
+}

@@ -39,7 +39,7 @@ class ChangePasswordController extends CabinetBaseController
 
                         if(user()->get('email'))
                         {
-                            app()->notify->changePassword(user()->get('email'), array(
+                            notify()->changePassword(user()->get('email'), array(
                                 'password' => $model->new_password,
                             ));
                         }

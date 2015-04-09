@@ -347,4 +347,20 @@ class Users extends ActiveRecord
     {
         return $this->role == self::ROLE_ADMIN;
     }
+
+    /**
+     * @return bool
+     */
+    public function isBanned()
+    {
+        return $this->role == self::ROLE_BANNED;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActivated()
+    {
+        return $this->activated == self::STATUS_ACTIVATED;
+    }
 }

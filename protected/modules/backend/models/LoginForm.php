@@ -43,7 +43,8 @@ class LoginForm extends Users
                 $this->addError('login', Yii::t('backend', 'Доступ к аккаунту для вашего IP запрещён.'));
                 break;
             default:
-                admin()->login($identity);
+                $duration = 3600 * 24 * 7; // 7 days
+                admin()->login($identity, $duration);
                 return TRUE;
         }
 

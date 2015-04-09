@@ -81,7 +81,7 @@ class TicketsController extends CabinetBaseController
                         $log->save(FALSE);
                     }
 
-                    app()->notify->adminNoticeTicketAdd(array(
+                    notify()->adminNoticeTicketAdd(array(
                         'user'   => user()->getUser(),
                         'ticket' => $ticket,
                     ));

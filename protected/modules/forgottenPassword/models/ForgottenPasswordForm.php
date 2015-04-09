@@ -11,25 +11,55 @@
  */
 class ForgottenPasswordForm extends CFormModel
 {
+    /**
+     * @var Gs[]
+     */
     public $gs_list;
+
+    /**
+     * @var int
+     */
     public $gs_id;
+
+    /**
+     * @var string
+     */
     public $login;
+
+    /**
+     * @var string
+     */
     public $email;
+
+    /**
+     * @var string
+     */
     public $verifyCode;
 
 
 
     public function rules()
     {
-        return array(
+        $rules = array(
             array('gs_id,login,email,verifyCode', 'filter', 'filter' => 'trim'),
             array('gs_id,login,email', 'required'),
             array('login', 'length', 'min' => Users::LOGIN_MIN_LENGTH, 'max' => Users::LOGIN_MAX_LENGTH),
             array('email', 'email', 'message' => Yii::t('main', 'Введите корректный Email адрес.')),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('forgotten_password.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
             array('login', 'loginIsExists'),
             array('gs_id', 'gsIsExists'),
         );
+
+        // Captcha
+        $captcha = config('forgotten_password.captcha.allow') && CCaptcha::checkRequirements();
+
+        if($captcha)
+        {
+            $rules[] = array('verifyCode', 'filter', 'filter' => 'trim');
+            $rules[] = array('verifyCode', 'required');
+            $rules[] = array('verifyCode', 'captcha', 'message' => Yii::t('main', 'Код с картинки введен не верно.'));
+        }
+
+        return $rules;
     }
 
     public function afterConstruct()
@@ -61,10 +91,10 @@ class ForgottenPasswordForm extends CFormModel
     /**
      * Проверка сервера
      *
-     * @param $attributs
+     * @param $attr
      * @param $params
      */
-    public function gsIsExists($attributs, $params)
+    public function gsIsExists($attr, $params)
     {
         if(!isset($this->gs_list[$this->gs_id]))
         {
@@ -75,24 +105,25 @@ class ForgottenPasswordForm extends CFormModel
     /**
      * Проверка Логина и Email
      *
-     * @param $attribute
+     * @param $attr
      * @param $params
      */
-    public function loginIsExists($attribute, $params)
+    public function loginIsExists($attr, $params)
     {
         if(!$this->hasErrors())
         {
+            /** @var Users $user */
             $user = Users::model()->find('login = :login AND email = :email', array(':login' => $this->login, ':email' => $this->email));
 
             if($user === NULL)
             {
                 $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт не найден'));
             }
-            elseif($user->role == Users::ROLE_BANNED)
+            elseif($user->isBanned())
             {
                 $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт заблокирован, восстановление пароля невозможно'));
             }
-            elseif($user->activated == Users::STATUS_INACTIVATED)
+            elseif(!$user->isActivated())
             {
                 $this->addError(__FUNCTION__, Yii::t('main', 'Аккаунт не активирован, восстановление пароля невозможно'));
             }
@@ -103,7 +134,7 @@ class ForgottenPasswordForm extends CFormModel
                 {
                     $l2 = l2('ls', $this->gs_list[$this->gs_id]['login_id'])->connect();
 
-                    $res = $l2->getDb()->createCommand("SELECT * FROM `{{accounts}}` WHERE `login` = :login LIMIT 1")
+                    $res = $l2->getDb()->createCommand("SELECT * FROM {{accounts}} WHERE login = :login LIMIT 1")
                         ->bindParam('login', $this->login, PDO::PARAM_STR)
                         ->queryScalar();
 

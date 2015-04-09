@@ -73,7 +73,7 @@ class DefaultController extends FrontendBaseController
 
                 user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('main', 'Активация аккаунта прошла успешно. Приятной игры!'));
 
-                app()->notify->registerStep2($hash['email'], array(
+                notify()->registerStep2($hash['email'], array(
                     'login'    => $user->login,
                     'password' => $hash['password'],
                 ));

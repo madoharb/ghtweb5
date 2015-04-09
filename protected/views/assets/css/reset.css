@@ -202,7 +202,6 @@ label.control
 			color: #fff;
 			height: 32px;
 			padding: 0 20px;
-			position: absolute;
 			width: 100%;
 
 			-webkit-border-radius: 5px;
@@ -271,7 +270,8 @@ label.control
 		    padding: 40px 0 10px 25px;
 		}
 
-		.form-group .field textarea + .help-block
+		.form-group .field textarea + .help-block,
+		.form-group .field input + .help-block
 		{
 			padding: 5px 0 5px 25px;
 		}

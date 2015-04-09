@@ -2,6 +2,7 @@
 /**
  * @var Controller $this
  * @var RegisterForm $model
+ * @var ActiveForm $form
  */
 
 $title_ = Yii::t('main', 'Регистрация');
@@ -44,7 +45,10 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 'login') ?>
             <div class="field">
                 <?php echo $form->textField($model, 'login', array('placeholder' => $model->getAttributeLabel('login'), 'class' => 'form-control')) ?>
-                <p class="help-block"><?php echo Yii::t('main', 'Разрешенные символы: :chars', array(':chars' => Users::LOGIN_REGEXP)) ?></p>
+                <p class="help-block">
+                    <?php echo Yii::t('main', 'Разрешенные символы: :chars', array(':chars' => Users::LOGIN_REGEXP)) ?><br>
+                    <?php echo Yii::t('main', 'Длина должна быть от :min до :max символов', array(':min' => Users::LOGIN_MIN_LENGTH, ':max' => Users::LOGIN_MAX_LENGTH)) ?><br>
+                </p>
             </div>
         </div>
 
@@ -52,7 +56,9 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 'password') ?>
             <div class="field">
                 <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control', 'style' => 'position: inherit;')) ?>
-
+                <p class="help-block">
+                    <?php echo Yii::t('main', 'Длина должна быть от :min до :max символов', array(':min' => Users::PASSWORD_MIN_LENGTH, ':max' => Users::PASSWORD_MAX_LENGTH)) ?><br>
+                </p>
                 <?php $this->widget('app.widgets.PasswordGenerator.PasswordGenerator', array(
                     'text'      => Yii::t('main', 'сгенерировать пароль'), // Название кнопки
                     'minLength' => Users::PASSWORD_MIN_LENGTH, // Мин. длина пароля
@@ -66,6 +72,9 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 're_password') ?>
             <div class="field">
                 <?php echo $form->passwordField($model, 're_password', array('placeholder' => $model->getAttributeLabel('re_password'), 'class' => 'form-control')) ?>
+                <p class="help-block">
+                    <?php echo Yii::t('main', 'Длина должна быть от :min до :max символов', array(':min' => Users::PASSWORD_MIN_LENGTH, ':max' => Users::PASSWORD_MAX_LENGTH)) ?><br>
+                </p>
             </div>
         </div>
 

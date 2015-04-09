@@ -3,7 +3,7 @@
  * @var Controller $this
  */
 
-$assetsUrl = app()->getAssetManager()->publish(Yii::getPathOfAlias('application.views.assets'), FALSE, -1, YII_DEBUG);
+$assetsUrl = assetsUrl();
 
 // jQuery
 js('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');

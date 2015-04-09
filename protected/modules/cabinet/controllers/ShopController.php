@@ -317,7 +317,7 @@ class ShopController extends CabinetBaseController
                 user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('main', 'Сделка прошла успешно, Нижеперечисленные предметы в ближайшее время будут зачислены на Вашего персонажа.<br><b>:item_list</b>',
                     array(':item_list' => $itemList)));
 
-                app()->notify->shopBuyItems(user()->get('email'), array(
+                notify()->shopBuyItems(user()->get('email'), array(
                     'items' => $items,
                 ));
 

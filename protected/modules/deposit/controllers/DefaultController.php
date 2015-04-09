@@ -62,7 +62,7 @@ class DefaultController extends FrontendBaseController
                             db()->createCommand()->insert('{{referals_profit}}', $dataDb);
 
                             // Отправляю письмо что баланс реферера был пополнен
-                            app()->notify->rechargeBalanceByReferal($refererProfile->user->email, array(
+                            notify()->rechargeBalanceByReferal($refererProfile->user->email, array(
                                 'profit' => $profit,
                             ));
 

@@ -156,54 +156,6 @@
 
 				}
 
-					.article-wrap article .sidebar .server-status ul
-					{
-						background: url(../images/status-divider.png) no-repeat scroll 0 100%;
-						margin: 0 0 10px;
-						padding: 0 0 10px;
-						width: 280px;
-					}
-
-						.article-wrap article .sidebar .server-status ul li
-						{
-							height: 58px;
-							line-height: 24px;
-						}
-
-							.article-wrap article .sidebar .server-status ul li .count
-							{
-								background: url(../images/icons/status.png) no-repeat scroll 0 0;
-								float: right;
-								padding: 24px 0 10px 60px;
-							}
-
-							.article-wrap article .sidebar .server-status ul li.offline .count
-							{
-								background-position: 0 -63px;
-								color: #520d00;
-							}
-
-							.article-wrap article .sidebar .server-status ul li.online .count
-							{
-								color: #37d61f;
-							}
-
-							.article-wrap article .sidebar .server-status ul li .name
-							{
-								display: inline-block;
-								padding: 24px 0 10px;
-							}
-
-								.article-wrap article .sidebar .server-status ul li .name span
-								{
-									color: #ead255;
-								}
-
-					.article-wrap article .sidebar .server-status p span
-					{
-						color: #ead255;
-					}
-
 				/* Join */
 				.article-wrap article .sidebar .join
 				{

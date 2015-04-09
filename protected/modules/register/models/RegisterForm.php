@@ -17,41 +17,134 @@
  */
 class RegisterForm extends CFormModel
 {
+    /**
+     * @var Gs[]
+     */
     public $gs_list = array();
+
+    /**
+     * @var int
+     */
     public $gs_id;
 
+    /**
+     * @var Lineage
+     */
     public $l2;
 
+    /**
+     * @var string
+     */
     public $prefix;
+
+    /**
+     * @var string
+     */
     public $login;
+
+    /**
+     * @var string
+     */
     public $password;
+
+    /**
+     * @var string
+     */
     public $re_password;
+
+    /**
+     * @var string
+     */
     public $email;
+
+    /**
+     * @var string
+     */
     public $referer = '';
+
+    /**
+     * @var string
+     */
     public $verifyCode;
+
+    /**
+     * @var Users
+     */
     public $refererInfo;
 
 
 
     public function rules()
     {
-        return array(
-            array('gs_id,prefix,login,password,re_password,email,referer,verifyCode', 'filter', 'filter' => 'trim'),
+        $rules =  array(
+            array('gs_id,login,password,re_password,email', 'filter', 'filter' => 'trim'),
             array('gs_id,login,password,re_password,email', 'required'),
             array('login', 'length', 'min' => Users::LOGIN_MIN_LENGTH, 'max' => Users::LOGIN_MAX_LENGTH),
             array('password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH, 'max' => Users::PASSWORD_MAX_LENGTH),
             array('re_password', 'length', 'min' => Users::PASSWORD_MIN_LENGTH, 'max' => Users::PASSWORD_MAX_LENGTH),
             array('re_password', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('main', 'Поля «{compareAttribute}» и «{attribute}» не совпадают.')),
             array('email', 'email', 'message' => Yii::t('main', 'Введите корректный Email адрес.')),
-            array('referer', 'length', 'allowEmpty' => TRUE, 'min' => Users::REFERER_MIN_LENGTH, 'max' => Users::REFERER_MAX_LENGTH),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements() || config('register.captcha.allow') == 0, 'message' => Yii::t('main', 'Код с картинки введен не верно.')),
             array('email', 'checkBadEmail'),
             array('login', 'checkLoginChars'),
             array('gs_id', 'gsIsExists'),
-            array('email', 'emailUnique'),
             array('login', 'loginUnique'),
-            array('referer', 'refererIsExists'),
         );
+
+        // Captcha
+        $captcha = config('register.captcha.allow') && CCaptcha::checkRequirements();
+
+        if($captcha)
+        {
+            $rules[] = array('verifyCode', 'filter', 'filter' => 'trim');
+            $rules[] = array('verifyCode', 'required');
+            $rules[] = array('verifyCode', 'captcha', 'message' => Yii::t('main', 'Код с картинки введен не верно.'));
+        }
+
+        // Prefix
+        if(config('prefixes.allow') && config('prefixes.length') > 0 && config('prefixes.count_for_list') > 0)
+        {
+            $rules[] = array('prefix', 'filter', 'filter' => 'trim');
+            $rules[] = array('prefix', 'required');
+            $rules[] = array('prefix', 'length', 'is' => config('prefixes.length'));
+            $rules[] = array('prefix', 'checkPrefix');
+        }
+
+        // Referral program
+        if(config('referral_program.allow'))
+        {
+            $rules[] = array('referer', 'filter', 'filter' => 'trim');
+            $rules[] = array('referer', 'length', 'allowEmpty' => TRUE, 'min' => Users::REFERER_MIN_LENGTH, 'max' => Users::REFERER_MAX_LENGTH);
+            $rules[] = array('referer', 'refererIsExists');
+        }
+
+        // Unique email
+        if(!config('register.multiemail'))
+        {
+            $rules[] = array('email', 'emailUnique');
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Проверка префикса
+     *
+     * @param string $attr
+     */
+    public function checkPrefix($attr)
+    {
+        if(!$this->hasErrors($attr))
+        {
+            $prefix   = $this->prefix;
+            $prefixes = user()->getState('prefixes');
+
+            if(is_array($prefixes) && !in_array($prefix, $prefixes))
+            {
+                $this->addError($attr, Yii::t('main', 'Выберите префикс для логина.'));
+            }
+
+            user()->setState('prefixes', NULL);
+        }
     }
 
     /**
@@ -96,21 +189,6 @@ class RegisterForm extends CFormModel
         }
 
         parent::afterConstruct();
-    }
-
-    protected function beforeValidate()
-    {
-        // Проверка префикса
-        if(config('prefixes.allow'))
-        {
-            $validator = CValidator::createValidator('length', $this, 'prefix', array(
-                'is' => (int) config('prefixes.length')
-            ));
-
-            $this->validatorList->add($validator);
-        }
-
-        return parent::beforeValidate();
     }
 
     /**
@@ -169,7 +247,7 @@ class RegisterForm extends CFormModel
     {
         if(!$this->hasErrors())
         {
-            if(is_file($path = Yii::getPathOfAlias('app.data') . '/badEmails.txt'))
+            if(is_file($path = Yii::getPathOfAlias('app.data') . '/badEmails.txt') && is_readable($path))
             {
                 $emails = file_get_contents($path);
                 $emails = explode("\n", $emails);
@@ -198,19 +276,21 @@ class RegisterForm extends CFormModel
      */
     public function emailUnique($attribute, $params)
     {
-        if(!$this->hasErrors() && !config('register.multiemail'))
+        if(!$this->hasErrors())
         {
             $email = $this->email;
             $lsId  = $this->gs_list[$this->gs_id]['login_id'];
 
-            $res = db()->createCommand("SELECT COUNT(0) FROM `{{users}}` WHERE `email` = :email AND ls_id = :ls_id LIMIT 1")
+            $res = db()->createCommand("SELECT COUNT(0) FROM {{users}} WHERE email = :email AND ls_id = :ls_id LIMIT 1")
                 ->bindParam('email', $email, PDO::PARAM_STR)
                 ->bindParam('ls_id', $lsId, PDO::PARAM_INT)
                 ->queryScalar();
 
             if($res)
             {
-                $this->addError('email', Yii::t('main', 'Email :email уже существует.', array(':email' => '<b>' . $this->email . '</b>')));
+                $this->addError('email', Yii::t('main', 'Email :email уже существует.', array(
+                    ':email' => '<b>' . $this->email . '</b>'
+                )));
             }
         }
     }
@@ -228,14 +308,17 @@ class RegisterForm extends CFormModel
             $login = $this->getLogin();
             $lsId  = $this->gs_list[$this->gs_id]['login_id'];
 
-            $res = db()->createCommand("SELECT COUNT(0) FROM `{{users}}` WHERE `login` = :login AND ls_id = :ls_id LIMIT 1")
+            $res = db()->createCommand("SELECT COUNT(0) FROM {{users}} WHERE login = :login AND ls_id = :ls_id LIMIT 1")
                 ->bindParam('login', $login, PDO::PARAM_STR)
                 ->bindParam('ls_id', $lsId, PDO::PARAM_INT)
                 ->queryScalar();
 
             if($res)
             {
-                $this->addError('login', Yii::t('main', 'Логин :login уже существует.', array(':login' => '<b>' . $login . '</b>')));
+                $this->addError('login', Yii::t('main', 'Логин :login уже существует.', array(
+                    ':login' => '<b>' . $login . '</b>'
+                )));
+
                 return;
             }
 
@@ -284,6 +367,8 @@ class RegisterForm extends CFormModel
             $prefixes[] = strtolower(randomString($length));
         }
 
+        user()->setState('prefixes', $prefixes);
+
         return array_combine($prefixes, $prefixes);
     }
 
@@ -311,7 +396,7 @@ class RegisterForm extends CFormModel
 
             $user = $this->_createAccount();
 
-            app()->notify->registerStep1($this->email, array(
+            notify()->registerStep1($this->email, array(
                 'hash' => $activatedHash,
             ));
 
@@ -324,7 +409,9 @@ class RegisterForm extends CFormModel
                 'email'    => $this->email,
             ), (int) config('register.confirm_email.time') * 60);
 
-            user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('main', 'Вы успешно зарегистрировали аккаунт. На почту :email отправлены инструкции по активации аккаута.', array(':email' => '<b>' . $this->email . '</b>')));
+            user()->setFlash(FlashConst::MESSAGE_SUCCESS, Yii::t('main', 'Вы успешно зарегистрировали аккаунт. На почту :email отправлены инструкции по активации аккаута.', array(
+                ':email' => '<b>' . $this->email . '</b>'
+            )));
         }
         else
         {
@@ -337,7 +424,7 @@ class RegisterForm extends CFormModel
 
                 $user = $this->_createAccount();
 
-                app()->notify->registerNoEmailActivated($this->email, array(
+                notify()->registerNoEmailActivated($this->email, array(
                     'server_name' => $this->gs_list[$this->gs_id]['name'],
                     'login'       => $login,
                     'password'    => $this->password,

@@ -34,7 +34,7 @@ class DefaultController extends FrontendBaseController
 
                 $cache->set($this->_cacheName . $cacheData['hash'], $cacheData, (int) config('forgotten_password.cache_time') * 60);
 
-                app()->notify->forgottenPasswordStep1($model->email, array(
+                notify()->forgottenPasswordStep1($model->email, array(
                     'hash' => $cacheData['hash'],
                 ));
 
@@ -89,7 +89,7 @@ class DefaultController extends FrontendBaseController
                             ->bindParam('login', $login, PDO::PARAM_STR)
                             ->execute();
 
-                        app()->notify->forgottenPasswordStep2($email, array(
+                        notify()->forgottenPasswordStep2($email, array(
                             'password' => $newPassword,
                         ));
 

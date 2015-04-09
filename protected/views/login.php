@@ -1,4 +1,10 @@
 <?php
+/**
+ * @var int $failedAttempt
+ * @var ActiveForm $form
+ * @var LoginForm $model
+ */
+
 $title_ = Yii::t('main', 'Авторизация');
 $this->pageTitle = $title_;
 ?>
@@ -43,6 +49,9 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 'login') ?>
             <div class="field">
                 <?php echo $form->textField($model, 'login', array('placeholder' => $model->getAttributeLabel('login'), 'class' => 'form-control')) ?>
+                <p class="help-block">
+                    <?php echo Yii::t('main', 'Длина должна быть от :min до :max символов', array(':min' => Users::LOGIN_MIN_LENGTH, ':max' => Users::LOGIN_MAX_LENGTH)) ?><br>
+                </p>
             </div>
         </div>
 
@@ -50,6 +59,9 @@ $this->pageTitle = $title_;
             <?php echo $form->labelEx($model, 'password') ?>
             <div class="field">
                 <?php echo $form->passwordField($model, 'password', array('placeholder' => $model->getAttributeLabel('password'), 'class' => 'form-control')) ?>
+                <p class="help-block">
+                    <?php echo Yii::t('main', 'Длина должна быть от :min до :max символов', array(':min' => Users::PASSWORD_MIN_LENGTH, ':max' => Users::PASSWORD_MAX_LENGTH)) ?><br>
+                </p>
             </div>
         </div>
 
