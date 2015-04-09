@@ -133,7 +133,6 @@ return array(
         ),
 
         'securityManager' => array(
-            'cryptAlgorithm'    => array('rijndael-256', '', 'ofb', ''),
             'encryptionKey'     => 'kkc123103x-1813c1io31hxi1',
         ),
 
