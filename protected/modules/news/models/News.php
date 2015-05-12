@@ -15,12 +15,16 @@
  * @property integer $status
  * @property string $created_at
  * @property string $updated_at
+ * @property string $img
  *
  * The followings are the available model relations:
  * @property Users $author
  */
 class News extends ActiveRecord
 {
+    const PATH_TO_FOLDER_WITH_IMAGE = 'images/news';
+
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -35,18 +39,43 @@ class News extends ActiveRecord
 	public function rules()
 	{
 		return array(
-			array('title, description, text, seo_title, seo_description, seo_keywords, status', 'filter', 'filter' => 'trim'),
+			array('title, description, text, seo_title, seo_description, seo_keywords, status, img', 'filter', 'filter' => 'trim'),
 			array('title, description, text, status', 'required'),
 			array('status', 'numerical', 'integerOnly' => TRUE),
 			array('title, seo_title, seo_keywords, seo_description', 'length', 'max' => 255),
             array('description, text', 'length', 'min' => 15),
             array('title', 'length', 'min' => 4),
 
+            array('img', 'file', 'types' => 'jpg,jpeg,png', 'allowEmpty' => TRUE),
+
             array('status', 'in', 'range' => array_keys(parent::getStatusList())),
 
 			array('id, title, status', 'safe', 'on' => 'search'),
 		);
 	}
+
+    public function behaviors()
+    {
+        return array(
+            'fileUpload' => array(
+                'class'             => 'application.components.behaviors.ImageUploadBehavior',
+                'uploadPath'        => '/' . app()->params['uploadPath'] . '/' . self::PATH_TO_FOLDER_WITH_IMAGE . '/',
+                'imageNameCallback' => array($this, 'generateFileName'),
+                'imgParams'         => array(
+                    array(
+                        'quality' => 70,
+                        'width'   => config('news.img.width'),
+                        'height'  => config('news.img.height'),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    public function generateFileName()
+    {
+        return md5(uniqid() . rand());
+    }
 
     /**
      * Возвращает дату
@@ -100,6 +129,7 @@ class News extends ActiveRecord
 			'status'          => Yii::t('main', 'Статус'),
 			'created_at'      => Yii::t('main', 'Дата создания'),
 			'updated_at'      => Yii::t('main', 'Дата обновления'),
+			'img'             => Yii::t('main', 'Картинка'),
 		);
 	}
 

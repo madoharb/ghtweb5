@@ -2,6 +2,7 @@
 /**
  * @var NewsController $this
  * @var News $model
+ * @var ActiveForm $form
  */
 
 $title__ = Yii::t('backend', 'Новости');
@@ -16,6 +17,7 @@ $this->breadcrumbs = array(
     'id' => $this->getId() . '-form',
     'htmlOptions' => array(
         'class' => 'form-horizontal',
+        'enctype' => 'multipart/form-data',
     )
 )) ?>
 
@@ -39,6 +41,16 @@ $this->breadcrumbs = array(
         <?php echo $form->labelEx($model, 'text', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">
             <?php echo $form->textArea($model, 'text', array('placeholder' => $model->getAttributeLabel('text'), 'class' => 'form-control')) ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <?php echo $form->labelEx($model, 'img', array('class' => 'col-lg-3 control-label')) ?>
+        <div class="col-lg-9">
+            <?php if(!$model->isNewRecord && $model->imgIsExists()) { ?>
+                <?php echo CHtml::image($model->getImgUrl()) ?>
+                <br><br>
+            <?php } ?>
+            <?php echo $form->fileField($model, 'img') ?>
         </div>
     </div>
     <div class="form-group">

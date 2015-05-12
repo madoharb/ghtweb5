@@ -29,5 +29,13 @@ class m150409_193312_fix extends CDbMigration
             'field_type' => 'dropDownList',
             'created_at' => date('Y-m-d H:i:s'),
         ));
+
+        $this->addColumn('{{gs}}', 'telnet_host', 'varchar(54)');
+        $this->addColumn('{{gs}}', 'telnet_port', 'int unsigned');
+        $this->addColumn('{{gs}}', 'telnet_pass', 'varchar(54)');
+
+        $this->addColumn('{{ls}}', 'telnet_host', 'varchar(54)');
+        $this->addColumn('{{ls}}', 'telnet_port', 'int unsigned');
+        $this->addColumn('{{ls}}', 'telnet_pass', 'varchar(54)');
 	}
 }

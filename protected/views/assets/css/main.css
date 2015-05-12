@@ -328,7 +328,7 @@
 					background: rgba(0, 0, 0, .3);
 					height: 860px;
 					margin: 0 0 20px;
-					padding: 0 10px 0 20px;
+					padding: 0 20px;
 
 					-webkit-border-radius: 5px;
 					   -moz-border-radius: 5px;
@@ -1116,3 +1116,7 @@
         z-index: 10;
 	}
 
+.news img
+{
+    max-width: 100%;
+}

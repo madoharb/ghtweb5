@@ -2,12 +2,15 @@
 /**
  * @var DepositController $this
  * @var Transactions $model
+ * @var string $formAction
+ * @var string $fields
+ * @var Deposit $deposit
  */
 
 $title_ = Yii::t('main', 'Подтверждение платежа');
 $this->pageTitle = $title_;
 
-$this->breadcrumbs=array(
+$this->breadcrumbs = array(
     Yii::t('main', 'Пополнение баланса') => array('/cabinet/deposit/index'),
     $title_
 );

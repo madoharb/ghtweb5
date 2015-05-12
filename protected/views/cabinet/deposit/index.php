@@ -3,16 +3,15 @@
  * @var DepositController $this
  * @var DepositForm $model
  * @var Deposit $deposit
+ * @var ActiveForm $form
  */
 
-$assetsUrl = app()->getAssetManager()->publish(Yii::getPathOfAlias('application.views.assets'), FALSE, -1, YII_DEBUG);
+$assetsUrl = assetsUrl();
 
 $title_ = Yii::t('main', 'Пополнение баланса');
 $this->pageTitle = $title_;
 
 $this->breadcrumbs = array($title_);
-
-js($assetsUrl . '/js/cabinet/deposit/sms.js', CClientScript::POS_END);
 ?>
 
 <?php if($this->gs->deposit_allow) { ?>

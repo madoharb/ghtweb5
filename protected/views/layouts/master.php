@@ -1,39 +1,40 @@
 <?php
 /**
  * @var Controller $this
+ * @var string $content
  */
 
 $assetsUrl = assetsUrl();
 
-// jQuery
+// -------------------- [Подключение jQuery] --------------------
 js('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');
+// --------------------------------------------------------------
 
-// Font
+// -------------------- [Подключение шрифта] --------------------
 css('//fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic');
+// ---------------------------------------------------------------------------------
 
-// Bootstrap
+// -------------------- [Подключение bootstrap, see: http://getbootstrap.com/] --------------------
+css($assetsUrl . '/css/bootstrap.min.css');
 js('//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', CClientScript::POS_END);
+// ---------------------------------------------------------------------------------
 
-// Chosen
+// -------------------- [Подключение либы для оформления <select>] --------------------
 css($assetsUrl . '/js/libs/chosen/1.1.0/chosen.css');
 js($assetsUrl . '/js/libs/chosen/1.1.0/chosen.jquery.min.js', CClientScript::POS_END);
+// ------------------------------------------------------------------------------------
 
-// Scrollpane
+// -------------------- [Подключение вертикального скроллера] --------------------
 css($assetsUrl . '/js/libs/scrollpane/jquery.jscrollpane.css');
 js($assetsUrl . '/js/libs/scrollpane/jquery.mousewheel.js', CClientScript::POS_END);
 js($assetsUrl . '/js/libs/scrollpane/jquery.jscrollpane.min.js', CClientScript::POS_END);
+// -------------------------------------------------------------------------------
 
-clientScript()->registerScript('scrollPane', "
-    $('.scroll-pane').jScrollPane();
-    var h = $('.jspDrag').height();
-    $('.jspDrag').height(h - 4);
-");
-
-// Themes
+// -------------------- [Подключение стилей и скриптов от шаблона] --------------------
 js($assetsUrl . '/js/main.js', CClientScript::POS_END);
 css($assetsUrl . '/css/reset.css');
-css($assetsUrl . '/css/bootstrap.min.css');
 css($assetsUrl . '/css/main.css');
+// ------------------------------------------------------------------------------------
 ?>
 <!doctype html>
 <html lang="<?php echo app()->language ?>">
@@ -48,7 +49,9 @@ css($assetsUrl . '/css/main.css');
     </head>
     <body>
 
-        <?php $this->widget('app.widgets.UserNotifications.UserNotifications') ?>
+        <?php
+        // Виджет быстрых сообщений
+        $this->widget('app.widgets.UserNotifications.UserNotifications') ?>
 
         <div id="layout">
             <div class="header-wrap">
@@ -59,7 +62,9 @@ css($assetsUrl . '/css/main.css');
                 </header>
             </div>
             <nav>
-                <?php $this->widget('zii.widgets.CMenu',array(
+                <?php
+                // Виджет для формирования меню
+                $this->widget('zii.widgets.CMenu',array(
                     'htmlOptions' => array(
                         'class' => '',
                     ),
@@ -115,14 +120,18 @@ css($assetsUrl . '/css/main.css');
                     <div class="sidebar">
                         <aside class="server-status">
                             <h2><?php echo Yii::t('main', 'Статус сервера') ?></h2>
-                            <?php $this->widget('app.widgets.ServerStatus.ServerStatus') ?>
+                            <?php
+                            // Виджет статуса сервера
+                            $this->widget('app.widgets.ServerStatus.ServerStatus') ?>
                         </aside>
 
                         <?php if(!user()->isGuest) { ?>
                             <aside class="menu">
                                 <h2><?php echo Yii::t('main', 'Личный кабинет') ?></h2>
                                 <p class="gold"><span><?php echo Yii::t('main', 'Баланс') ?>:</span> <b><?php echo formatCurrency(user()->get('balance')) ?></b></p>
-                                <?php $this->widget('zii.widgets.CMenu',array(
+                                <?php
+                                // Виджет для формирования меню
+                                $this->widget('zii.widgets.CMenu',array(
                                     'htmlOptions' => array(
                                         'class' => 'cabinet-menu',
                                     ),
@@ -207,14 +216,18 @@ css($assetsUrl . '/css/main.css');
                         <?php } ?>
                         <aside class="forum-threats">
                             <h2><?php echo Yii::t('main', 'Темы с форума') ?></h2>
-                            <?php $this->widget('app.widgets.ForumThreads.ForumThreads') ?>
+                            <?php
+                            // Виджет тем с форума
+                            $this->widget('app.widgets.ForumThreads.ForumThreads') ?>
                         </aside>
                     </div>
                     <div class="content">
 
                         <?php if(strpos($_SERVER['REQUEST_URI'], 'cabinet') !== FALSE) { ?>
                             <div class="breadcrumbs">
-                                <?php $this->widget('zii.widgets.CBreadcrumbs', array(
+                                <?php
+                                // Виджет хлебных крошек
+                                $this->widget('zii.widgets.CBreadcrumbs', array(
                                     'homeLink'  => '<li>' . HTML::link(Yii::t('main', 'Главная'), array('/cabinet/default/index')) . '</li>',
                                     'links'     => $this->breadcrumbs,
                                     'separator' => '<li class="divider">\</li>',
@@ -222,12 +235,14 @@ css($assetsUrl . '/css/main.css');
                             </div>
                         <?php } ?>
 
-                        <!-- Виджет таймера обратного отсчета -->
-                        <?php $this->widget('app.widgets.Timer.Timer', array(
+                        <?php
+                        // Виджет таймера обратного отсчета
+                        $this->widget('app.widgets.Timer.Timer', array(
                             'timeEnd' => strtotime('2017-01-01 00:00:00'), // Дата старта
                         )) ?>
 
                         <?php echo $content ?>
+
                     </div>
                 </article>
             </div>
