@@ -205,6 +205,7 @@ class ForumThreads extends CWidget
 
         $command = $this->db->createCommand()
             ->select('tid AS id_topic,start_date,starter_name,starter_id,forum_id AS id_forum,title')
+            ->where('tdelete_time = 0 AND approved = 1')
             ->from('{{topics}}')
             ->order('start_date DESC')
             ->limit($limit);
