@@ -12,9 +12,10 @@ return array(
     'language'      => 'ru',
 
     'aliases' => array(
-        'app'       => 'application',
-        'modules'   => 'application.modules',
-        //'vendor' => '',
+        'app'        => 'application',
+        'widgets'    => 'application.widgets',
+        'modules'    => 'application.modules',
+        'validators' => 'application.validators',
     ),
 
     //'basePath' => 'app',

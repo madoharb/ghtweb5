@@ -56,7 +56,7 @@ class ForgottenPasswordForm extends CFormModel
         {
             $rules[] = array('verifyCode', 'filter', 'filter' => 'trim');
             $rules[] = array('verifyCode', 'required');
-            $rules[] = array('verifyCode', 'captcha', 'message' => Yii::t('main', 'Код с картинки введен не верно.'));
+            $rules[] = array('verifyCode', 'validators.CaptchaValidator');
         }
 
         return $rules;
