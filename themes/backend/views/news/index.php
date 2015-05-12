@@ -28,6 +28,7 @@ $this->breadcrumbs = array($title_);
                 <th><?php echo $model->getAttributeLabel('title') ?></th>
                 <th width="10%"><?php echo $model->getAttributeLabel('status') ?></th>
                 <th width="20%"><?php echo $model->getAttributeLabel('created_at') ?></th>
+                <th width="10%"><?php echo $model->getAttributeLabel('lang') ?></th>
                 <th width="12%"></th>
             </tr>
         </thead>
@@ -35,8 +36,9 @@ $this->breadcrumbs = array($title_);
             <tr>
                 <td><?php echo $form->textField($model, 'id', array('class' => 'form-control input-sm')) ?></td>
                 <td><?php echo $form->textField($model, 'title', array('class' => 'form-control input-sm')) ?></td>
-                <td><?php echo $form->dropDownList($model, 'status', array('' => Yii::t('backend', '-- select --')) + $model->getStatusList(), array('class' => 'form-control input-sm')) ?></td>
+                <td><?php echo $form->dropDownList($model, 'status', $model->getStatusList(), array('class' => 'form-control input-sm', 'empty' => '-- select --')) ?></td>
                 <td></td>
+                <td><?php echo $form->dropDownList($model, 'lang', app()->params['languages'], array('class' => 'form-control input-sm', 'empty' => '-- select --')) ?></td>
                 <td>
                     <button type="submit" class="btn btn-primary glyphicon glyphicon-search" title="<?php echo Yii::t('backend', 'Искать') ?>" rel="tooltip"></button>
                     <?php echo HTML::link('', array('/backend/news/index'), array('class' => 'btn btn-default glyphicon glyphicon-ban-circle', 'title' => Yii::t('backend', 'Сбросить'), 'rel' => 'tooltip')) ?>
@@ -49,6 +51,7 @@ $this->breadcrumbs = array($title_);
                         <td><?php echo e($row->title) ?></td>
                         <td><span class="label <?php echo ($row->isStatusOn() ? 'label-success' : 'label-default') ?>"><?php echo $row->getStatus() ?></span></td>
                         <td><?php echo $row->getCreatedAt() ?></td>
+                        <td><?php echo (isMultiLang() ? $row->getLangText() : '-') ?></td>
                         <td>
                             <ul class="actions list-unstyled">
                                 <li><?php echo HTML::link('', array('/backend/' . $this->getId() . '/form', 'id' => $row->id), array('class' => 'glyphicon glyphicon-pencil', 'title' => Yii::t('backend', 'Редактировать'), 'rel' => 'tooltip')) ?></li>

@@ -16,6 +16,7 @@
  * @property string $created_at
  * @property string $updated_at
  * @property string $img
+ * @property string $lang
  *
  * The followings are the available model relations:
  * @property Users $author
@@ -38,8 +39,8 @@ class News extends ActiveRecord
 	 */
 	public function rules()
 	{
-		return array(
-			array('title, description, text, seo_title, seo_description, seo_keywords, status, img', 'filter', 'filter' => 'trim'),
+		$rules = array(
+			array('title, description, text, seo_title, seo_description, seo_keywords, status', 'filter', 'filter' => 'trim'),
 			array('title, description, text, status', 'required'),
 			array('status', 'numerical', 'integerOnly' => TRUE),
 			array('title, seo_title, seo_keywords, seo_description', 'length', 'max' => 255),
@@ -52,6 +53,15 @@ class News extends ActiveRecord
 
 			array('id, title, status', 'safe', 'on' => 'search'),
 		);
+
+        if(isMultiLang())
+        {
+            $rules[] = array('lang', 'filter', 'filter' => 'trim');
+            $rules[] = array('lang', 'required');
+            $rules[] = array('lang', 'in', 'range' => array_keys(app()->params['languages']));
+        }
+
+        return $rules;
 	}
 
     public function behaviors()
@@ -130,6 +140,7 @@ class News extends ActiveRecord
 			'created_at'      => Yii::t('main', 'Дата создания'),
 			'updated_at'      => Yii::t('main', 'Дата обновления'),
 			'img'             => Yii::t('main', 'Картинка'),
+			'lang'            => Yii::t('main', 'Язык'),
 		);
 	}
 
@@ -140,6 +151,7 @@ class News extends ActiveRecord
 		$criteria->compare('id', $this->id, TRUE);
 		$criteria->compare('title', $this->title, TRUE);
 		$criteria->compare('status', $this->status, TRUE);
+		$criteria->compare('lang', $this->lang);
 
         $criteria->scopes = array('not_deleted');
 
@@ -163,5 +175,22 @@ class News extends ActiveRecord
         unset($data[ActiveRecord::STATUS_DELETED]);
 
         return $data;
+    }
+
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    public function getLangText()
+    {
+        $lang = $this->lang;
+
+        if(isset(app()->params['languages']) && is_array(app()->params['languages']) && isset(app()->params['languages'][$lang]))
+        {
+            $lang = app()->params['languages'][$lang];
+        }
+
+        return $lang;
     }
 }

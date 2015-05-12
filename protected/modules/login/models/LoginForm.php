@@ -5,8 +5,20 @@
  *
  * Class LoginForm
  */
-class LoginForm extends Users
+class LoginForm extends CFormModel
 {
+    /**
+     * Логин
+     * @var string
+     */
+    public $login;
+
+    /**
+     * Пароль
+     * @var string
+     */
+    public $password;
+
     /**
      * Список серверов
      * @var Gs[]

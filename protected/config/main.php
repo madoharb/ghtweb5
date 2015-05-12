@@ -66,7 +66,7 @@ return array(
                     'clickableImage'    => TRUE,
                     'showRefreshButton' => FALSE,
                     'imageOptions'      => array(
-                        'title' => Yii::t('main', 'Нажмите чтобы обновить'),
+                        'title' => 'Refresh',
                     ),
                 ),
 
@@ -405,6 +405,8 @@ return array(
             'EUR' => Yii::t('main', 'Евро'),
             'USD' => Yii::t('main', 'Доллары'),
         ),
+
+        'languages' => require 'languages.php',
 
     ),
 );

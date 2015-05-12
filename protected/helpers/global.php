@@ -379,3 +379,13 @@ function assetsUrl($path = NULL)
 
     return $path_;
 }
+
+/**
+ * Использует ли сайт несколько языков
+ *
+ * @return bool
+ */
+function isMultiLang()
+{
+    return isset(app()->params['languages']) && is_array(app()->params['languages']) && count(app()->params['languages']) > 1;
+}

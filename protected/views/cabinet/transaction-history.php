@@ -29,16 +29,18 @@ $this->breadcrumbs=array($title_);
                     <?php foreach($data as $i => $transaction) { ?>
                         <tr>
                             <td><?php echo $transaction->getPrimaryKey() ?></td>
-                            <td><?php echo $transaction->count ?></td>
-                            <td><?php echo app()->getNumberFormatter()->formatCurrency($transaction->sum, $this->gs->currency_symbol) ?></td>
-                            <td><?php echo $transaction->status ? '<span style="color: green;">' . Yii::t('main', 'Завершена') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не завершена') . '</span>' ?></td>
+                            <td><?php echo $transaction->getCount() ?></td>
+                            <td><?php echo $transaction->getSum() ?></td>
+                            <td><?php echo $transaction->status
+                                    ? '<span style="color: green;">' . Yii::t('main', 'Завершена') . '</span>'
+                                    : '<span style="color: red;">' . Yii::t('main', 'Не завершена') . '</span>' ?></td>
                             <td><?php echo $transaction->getType() ?></td>
                             <td><?php echo $transaction->getDate() ?></td>
                         </tr>
                     <?php } ?>
                 <?php } else { ?>
                     <tr>
-                        <td colspan="5"><?php echo Yii::t('main', 'Нет данных.') ?></td>
+                        <td colspan="6"><?php echo Yii::t('main', 'Нет данных.') ?></td>
                     </tr>
                 <?php } ?>
             </tbody>

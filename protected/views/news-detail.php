@@ -19,8 +19,12 @@ $this->pageTitle = $model->title
         <div class="clearfix"></div>
         <?php if(config('news.detail.socials') == 1) { ?>
             <?php $this->widget('app.widgets.NewsSocials.NewsSocials', array(
-                'url'   => $this->createAbsoluteUrl('/news/default/detail', array('news_id' => $model->id)),
-                'title' => $model->title,
+                'params' => array(
+                    'data-url'   => $this->createAbsoluteUrl('/news/default/detail', array('news_id' => $model->id)),
+                    'data-title' => e($model->title),
+                    'data-image' => $model->imgIsExists() ? $model->getImgUrl() : '',
+                    'data-description' => $model->description,
+                )
             )) ?>
         <?php } ?>
 

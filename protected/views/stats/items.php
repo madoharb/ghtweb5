@@ -40,7 +40,9 @@
                             echo ($character['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link);
                             ?></td>
                         <td><?php echo Lineage::getOnlineTime($character['onlinetime']) ?></td>
-                        <td><?php echo ($character['online'] ? '<span style="color: green;">' . Yii::t('main', 'В игре') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не в игре') . '</span>') ?></td>
+                        <td><?php echo ($row['online']
+                                ? '<span class="status-online" title="' . Yii::t('main', 'В игре') . '"></span>'
+                                : '<span class="status-offline" title="' . Yii::t('main', 'Не в игре') . '"></span>') ?></td>
                         <td><?php echo number_format($character['maxCountItems'], 0, '', '.') ?></td>
                     </tr>
                 <?php } ?>
