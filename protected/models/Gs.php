@@ -59,6 +59,7 @@
  * @property string $updated_at
  * @property integer $stats_items
  * @property string $stats_items_list
+ * @property int $online_txt_allow
  *
  * The followings are the available model relations:
  * @property Ls $ls
@@ -85,14 +86,14 @@ class Gs extends ActiveRecord
                 stats_count_results, exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb, services_premium_allow,
                 services_remove_hwid_allow, services_change_char_name_allow, services_change_char_name_cost, services_change_char_name_chars,
                 services_change_gender_allow, services_change_gender_cost, currency_name, deposit_allow, deposit_payment_system,
-                deposit_desc, deposit_course_payments, currency_symbol, stats_items, stats_items_list', 'filter', 'filter' => 'trim'),
+                deposit_desc, deposit_course_payments, currency_symbol, stats_items, stats_items_list, online_txt_allow', 'filter', 'filter' => 'trim'),
 
             array('name, ip, port, db_host, db_port, db_user, db_name, login_id, version, status, fake_online,
                 allow_teleport, teleport_time, stats_allow, stats_cache_time, stats_total, stats_pvp, stats_pk,
                 stats_clans, stats_castles, stats_online, stats_clan_info, stats_top, stats_rich, stats_count_results,
                 exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb, services_premium_allow,
                 services_remove_hwid_allow, currency_name, deposit_allow, deposit_payment_system, deposit_desc, deposit_course_payments,
-                stats_items', 'required'),
+                stats_items, online_txt_allow', 'required'),
 
             array('services_premium_allow', 'checkPremiumCost'),
             array('deposit_payment_system', 'checkDepositPaymentSystem'),
@@ -104,7 +105,7 @@ class Gs extends ActiveRecord
             array('status', 'in', 'range' => array_keys(parent::getStatusList())),
 
 			array('port, db_port, login_id, fake_online, teleport_time, stats_cache_time, stats_count_results,
-                exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb', 'numerical', 'integerOnly' => TRUE),
+                exp, sp, adena, drop, items, spoil, q_drop, q_reward, rb, erb, online_txt_allow', 'numerical', 'integerOnly' => TRUE),
 
 			array('currency_name', 'length', 'max' => 128),
 			array('name, ip, db_host, db_user, db_pass, db_name', 'length', 'max' => 54),
@@ -303,6 +304,7 @@ class Gs extends ActiveRecord
 			'updated_at'                        => Yii::t('backend', 'Дата обновления'),
 			'stats_items'                       => Yii::t('backend', 'Статистика предметов'),
 			'stats_items_list'                  => Yii::t('backend', 'Список ID предметов для вывода в статистике'),
+			'online_txt_allow'                  => Yii::t('backend', 'Записывать онлайн сервера в файл online.txt'),
 		);
 	}
 
@@ -794,6 +796,14 @@ class Gs extends ActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function getOnlineTxtAllow()
+    {
+        return $this->online_txt_allow;
+    }
+
+    /**
      * Возвращает список открытых серверов
      *
      * @return Gs[]
@@ -818,5 +828,13 @@ class Gs extends ActiveRecord
         }
 
         return $list;
+    }
+
+    /**
+     * @return Ls
+     */
+    public function getLs()
+    {
+        return $this->ls;
     }
 }

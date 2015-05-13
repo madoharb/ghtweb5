@@ -97,6 +97,12 @@ $this->breadcrumbs = array(
             <p class="help-block"><?php echo Yii::t('backend', 'Указывайте в процентах, к примеру игроков в игре 100 если вписать 10 то выведет на сайте 110. 0 - отключит накрутку') ?></p>
         </div>
     </div>
+    <div class="form-group">
+        <?php echo $form->labelEx($model, 'online_txt_allow', array('class' => 'col-lg-3 control-label')) ?>
+        <div class="col-lg-9">
+            <?php echo $form->dropDownList($model, 'online_txt_allow', array(Yii::t('backend', 'выкл'), Yii::t('backend', 'вкл')), array('class' => 'form-control')) ?>
+        </div>
+    </div>
 
     <legend><?php echo Yii::t('backend', 'Подключение к базе данных') ?></legend>
 

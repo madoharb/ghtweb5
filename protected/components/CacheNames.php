@@ -29,6 +29,8 @@ class CacheNames
     // Телепорт персонажа
     const CHARACTER_TELEPORT = 'teleport_:user_id_:char_id_:gs_id';
 
+    const ONLINE_TXT_FILE = 'online.txt';
+
     // Категории в магазине
     //const SHOP_CATEGORIES = 'shop_categories';
 
