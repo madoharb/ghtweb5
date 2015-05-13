@@ -214,4 +214,31 @@ class Ls extends ActiveRecord
     {
         return $this->version;
     }
+
+    /**
+     * Возвращает список открытых логинов
+     *
+     * @return Ls[]
+     */
+    public function getOpenLoginServers()
+    {
+        static $list = array();
+
+        if(!$list)
+        {
+            $dependency = new CDbCacheDependency("SELECT COUNT(0), MAX(UNIX_TIMESTAMP(updated_at)) FROM {{ls}} WHERE status = :status");
+            $dependency->params = array('status' => ActiveRecord::STATUS_ON);
+            $dependency->reuseDependentData = TRUE;
+
+            /** @var Ls[] $res */
+            $res = $this->cache(3600 * 24, $dependency)->opened()->findAll();
+
+            foreach($res as $row)
+            {
+                $list[$row->getPrimaryKey()] = $row;
+            }
+        }
+
+        return $list;
+    }
 }

@@ -56,6 +56,10 @@ css($assetsUrl . '/css/main.css');
         <div id="layout">
             <div class="header-wrap">
                 <header role="banner">
+                    <?php
+                    // Виджет переключения языков
+                    $this->widget('widgets.Languages.Languages');
+                    ?>
                     <h1 class="logo">
                         <a href="/"></a>
                     </h1>

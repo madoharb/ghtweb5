@@ -41,4 +41,27 @@ define('YII_TRACE_LEVEL', 1);
 require_once dirname(__FILE__) . '/protected/helpers/global.php';
 
 require_once $yii;
-Yii::createWebApplication($config)->run();
+
+$app = Yii::createWebApplication($config);
+
+$app->onBeginRequest = function(){
+
+    $languages = isset(app()->params['languages']) && is_array(app()->params['languages']) && count(app()->params['languages'])
+        ? app()->params['languages']
+        : NULL;
+
+    if($languages)
+    {
+        $cookieLanguage = !empty($_COOKIE['lang'])
+            ? strtolower(trim($_COOKIE['lang']))
+            : NULL;
+
+        if(isset($languages[$cookieLanguage]))
+        {
+            app()->setLanguage($cookieLanguage);
+        }
+    }
+
+};
+
+$app->run();

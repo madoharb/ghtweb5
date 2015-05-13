@@ -24,11 +24,13 @@
                     {
                         $clan_link = HTML::link($row['clan_name'], array('/stats/default/index', 'gs_id' => $this->_gs_id, 'type' => 'clan-info', 'clan_id' => $row['clan_id']));
                     }
-                    echo ($row['clan_name'] == '' ? Yii::t('main', 'Не в клане') : $clan_link);
+                    echo ($row['clan_name'] == '' ? '-' : $clan_link);
                     ?></td>
                     <td><?php echo Lineage::getOnlineTime($row['onlinetime']) ?></td>
                     <td><?php echo number_format($row['adena_count'], 0, '', '.') ?></td>
-                    <td><?php echo ($row['online'] ? '<span style="color: green;">' . Yii::t('main', 'В игре') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не в игре') . '</span>') ?></td>
+                    <td><?php echo ($row['online']
+                            ? '<span class="status-online" title="' . Yii::t('main', 'В игре') . '"></span>'
+                            : '<span class="status-offline" title="' . Yii::t('main', 'Не в игре') . '"></span>') ?></td>
                 </tr>
             <?php } ?>
         <?php } else { ?>

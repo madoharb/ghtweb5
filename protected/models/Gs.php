@@ -792,4 +792,31 @@ class Gs extends ActiveRecord
     {
         return $this->stats_items_list;
     }
+
+    /**
+     * Возвращает список открытых серверов
+     *
+     * @return Gs[]
+     */
+    public function getOpenServers()
+    {
+        static $list = array();
+
+        if(!$list)
+        {
+            $dependency = new CDbCacheDependency("SELECT COUNT(0), MAX(UNIX_TIMESTAMP(updated_at)) FROM {{gs}} WHERE status = :status");
+            $dependency->params = array('status' => ActiveRecord::STATUS_ON);
+            $dependency->reuseDependentData = TRUE;
+
+            /** @var Gs[] $res */
+            $res = $this->cache(3600 * 24, $dependency)->opened()->findAll();
+
+            foreach($res as $row)
+            {
+                $list[$row->getPrimaryKey()] = $row;
+            }
+        }
+
+        return $list;
+    }
 }

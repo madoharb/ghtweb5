@@ -24,7 +24,9 @@
                         <p class="help-block" style="font-size: 13px;"><?php echo Lineage::getClassName($row['base_class']) ?> [<?php echo $row['level'] ?>]</p></td>
                     <td><?php echo $row['pvpkills'] ?>/<?php echo $row['pkkills'] ?></td>
                     <td><?php echo Lineage::getOnlineTime($row['onlinetime']) ?></td>
-                    <td><?php echo ($row['online'] ? '<span style="color: green;">' . Yii::t('main', 'В игре') . '</span>' : '<span style="color: red;">' . Yii::t('main', 'Не в игре') . '</span>') ?></td>
+                    <td><?php echo ($row['online']
+                            ? '<span class="status-online" title="' . Yii::t('main', 'В игре') . '"></span>'
+                            : '<span class="status-offline" title="' . Yii::t('main', 'Не в игре') . '"></span>') ?></td>
                 </tr>
             <?php } ?>
         <?php } else { ?>

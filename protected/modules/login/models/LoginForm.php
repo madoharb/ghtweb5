@@ -1,7 +1,24 @@
-<?php 
- 
+<?php
+
+/**
+ * Модель формы авторизации
+ *
+ * Class LoginForm
+ */
 class LoginForm extends CFormModel
 {
+    /**
+     * Логин
+     * @var string
+     */
+    public $login;
+
+    /**
+     * Пароль
+     * @var string
+     */
+    public $password;
+
     /**
      * Список серверов
      * @var Gs[]
@@ -19,18 +36,6 @@ class LoginForm extends CFormModel
      * @var
      */
     public $ls_id;
-
-    /**
-     * Логин
-     * @var string
-     */
-    public $login;
-
-    /**
-     * Пароль
-     * @var string
-     */
-    public $password;
 
     /**
      * Код с картинки
@@ -57,7 +62,7 @@ class LoginForm extends CFormModel
         {
             $rules[] = array('verifyCode', 'filter', 'filter' => 'trim');
             $rules[] = array('verifyCode', 'required');
-            $rules[] = array('verifyCode', 'captcha', 'message' => Yii::t('main', 'Код с картинки введен не верно.'));
+            $rules[] = array('verifyCode', 'validators.CaptchaValidator');
         }
 
         return $rules;
@@ -65,18 +70,7 @@ class LoginForm extends CFormModel
 
     protected function afterConstruct()
     {
-        $dependency = new CDbCacheDependency("SELECT COUNT(0), MAX(UNIX_TIMESTAMP(updated_at)) FROM {{gs}} WHERE status = :status");
-        $dependency->params = array('status' => ActiveRecord::STATUS_ON);
-        $dependency->reuseDependentData = TRUE;
-
-        $res = Gs::model()->cache(3600 * 24, $dependency)->opened()->findAll();
-
-        foreach($res as $gs)
-        {
-            $this->gs_list[$gs->getPrimaryKey()] = $gs;
-        }
-
-        unset($res, $gs);
+        $this->gs_list = Gs::model()->getOpenServers();
 
         if(count($this->gs_list) == 1)
         {
@@ -111,8 +105,8 @@ class LoginForm extends CFormModel
     {
         return array(
             'gs_id'      => Yii::t('main', 'Сервер'),
-            'login'      => Yii::t('main', 'Логин'),
-            'password'   => Yii::t('main', 'Пароль'),
+            'login'      => Users::model()->getAttributeLabel('login'),
+            'password'   => Users::model()->getAttributeLabel('password'),
             'verifyCode' => Yii::t('main', 'Код с картинки'),
         );
     }
@@ -169,12 +163,36 @@ class LoginForm extends CFormModel
     }
 
     /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
      * ID логин сервера
      *
      * @return int
      */
     public function getLsId()
     {
-        return (int) $this->ls_id;
+        return $this->gs_list[$this->gs_id]['login_id'];
+    }
+
+    /**
+     * @return Gs[]
+     */
+    public function getGsList()
+    {
+        return $this->gs_list;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGsId()
+    {
+        return $this->gs_id;
     }
 }

@@ -356,6 +356,70 @@ class Users extends ActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActivatedHash()
+    {
+        return $this->activated_hash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthHash()
+    {
+        return $this->auth_hash;
+    }
+
+    /**
+     * @return UserProfiles
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @return Transactions
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * @return Referals
+     */
+    public function getReferals()
+    {
+        return $this->referals;
+    }
+
+    /**
+     * @return UserBonuses
+     */
+    public function getBonuses()
+    {
+        return $this->bonuses;
+    }
+
+    /**
+     * @return Ls
+     */
+    public function getLs()
+    {
+        return $this->ls;
+    }
+
+    /**
      * @return bool
      */
     public function isAdmin()

@@ -12,9 +12,10 @@ return array(
     'language'      => 'ru',
 
     'aliases' => array(
-        'app'       => 'application',
-        'modules'   => 'application.modules',
-        //'vendor' => '',
+        'app'        => 'application',
+        'widgets'    => 'application.widgets',
+        'modules'    => 'application.modules',
+        'validators' => 'application.validators',
     ),
 
     //'basePath' => 'app',
@@ -65,7 +66,7 @@ return array(
                     'clickableImage'    => TRUE,
                     'showRefreshButton' => FALSE,
                     'imageOptions'      => array(
-                        'title' => Yii::t('main', 'Нажмите чтобы обновить'),
+                        'title' => 'Refresh',
                     ),
                 ),
 
@@ -404,6 +405,8 @@ return array(
             'EUR' => Yii::t('main', 'Евро'),
             'USD' => Yii::t('main', 'Доллары'),
         ),
+
+        'languages' => require 'languages.php',
 
     ),
 );

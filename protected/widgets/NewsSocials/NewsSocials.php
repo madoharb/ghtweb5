@@ -2,8 +2,15 @@
  
 class NewsSocials extends CWidget
 {
-    public $url;
-    public $title;
+    /**
+     * @var array
+     */
+    public $params;
+
+    /**
+     * @var int
+     */
+    public $charLimit = 300;
 
 
 
@@ -17,7 +24,18 @@ class NewsSocials extends CWidget
 
         js($assetsUrl . '/share42.js', CClientScript::POS_END);
 
-        echo '<div class="share42init" data-url="' . $this->url . '" data-title="' . e($this->title) . '" data-path="' . app()->createAbsoluteUrl($assetsUrl) . '"></div>';
+        // Обрезаю description
+        if(!empty($this->params['data-description']))
+        {
+            $this->params['data-description'] = strip_tags($this->params['data-description']);
+
+            if(mb_strlen($this->params['data-description']) > $this->charLimit)
+            {
+                $this->params['data-description'] = characterLimiter($this->params['data-description'], $this->charLimit, ' ...');
+            }
+        }
+
+        echo CHtml::openTag('div', $this->params + array('class' => 'share42init')) . CHtml::closeTag('div');
 
         Yii::endProfile(__CLASS__);
     }

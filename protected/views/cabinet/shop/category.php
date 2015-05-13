@@ -71,10 +71,10 @@ $this->breadcrumbs = array(
                                                         <td>
                                                             <?php if($item->discount > 0) { ?>
                                                                 <?php echo Yii::t('main', 'Скидка') ?>: <?php echo $item->discount ?>%<br>
-                                                                <b><?php echo formatCurrency(ShopItems::costAtDiscount($item->getCost(), $item->discount), FALSE) ?></b><br>
+                                                                <b><?php echo ShopItems::costAtDiscount($item->getCost(), $item->discount) ?></b><br>
                                                                 <strike> <?php echo formatCurrency($item->getCost(), FALSE) ?></strike><br>
                                                             <?php } else { ?>
-                                                                <?php echo formatCurrency($item->cost, FALSE) ?>
+                                                                <?php echo $item->cost ?>
                                                             <?php } ?>
 
                                                             <?php if($item->currency_type == 'donat') { ?>

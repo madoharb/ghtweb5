@@ -53,6 +53,14 @@ $this->breadcrumbs = array(
             <?php echo $form->fileField($model, 'img') ?>
         </div>
     </div>
+    <?php if(isMultiLang()) { ?>
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'lang', array('class' => 'col-lg-3 control-label')) ?>
+            <div class="col-lg-9">
+                <?php echo $form->dropDownList($model, 'lang', app()->params['languages'], array('class' => 'form-control')) ?>
+            </div>
+        </div>
+    <?php } ?>
     <div class="form-group">
         <?php echo $form->labelEx($model, 'seo_title', array('class' => 'col-lg-3 control-label')) ?>
         <div class="col-lg-9">

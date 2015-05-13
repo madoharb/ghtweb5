@@ -31,11 +31,11 @@
                         <p class="help-block"><?php echo Yii::t('main', 'Лидер') ?>: <?php echo $row['char_name'] ?> [<?php echo Lineage::getClassName($row['base_class']) ?>][<?php echo $row['level'] ?>]</p>
                     </td>
                     <td><?php echo $row['clan_level'] ?></td>
-                    <td><?php echo Lineage::getCastleName($row['hasCastle']) ?></td>
+                    <td><?php echo ($row['hasCastle'] != 0 ? Lineage::getCastleName($row['hasCastle']) : '-') ?></td>
                     <td><?php echo $row['ccount'] ?></td>
                     <td><?php echo number_format($row['reputation_score'], 0, '', '.') ?></td>
                     <td>
-                        <?php echo ($row['ally_name'] != '' ? $row['ally_name'] : Yii::t('main', 'Не в Альянсе')) ?>
+                        <?php echo ($row['ally_name'] != '' ? e($row['ally_name']) : '-') ?>
                     </td>
                 </tr>
             <?php } ?>
