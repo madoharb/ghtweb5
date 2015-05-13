@@ -408,5 +408,7 @@ return array(
 
         'languages' => require 'languages.php',
 
+        'l2' => require 'lineage.php',
+
     ),
 );

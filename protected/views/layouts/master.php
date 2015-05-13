@@ -1,6 +1,6 @@
 <?php
 /**
- * @var Controller $this
+ * @var FrontendBaseController $this
  * @var string $content
  */
 

@@ -5,9 +5,15 @@
  */
 $assetsUrl = app()->getAssetManager()->publish(Yii::getPathOfAlias('application.widgets.Timer.assets'), FALSE, -1, YII_DEBUG);
 
+$langFile = $assetsUrl . '/js/jquery.countdown-' . app()->getLanguage() . '.js';
+
 js($assetsUrl . '/js/jquery.plugin.min.js', CClientScript::POS_END);
 js($assetsUrl . '/js/jquery.countdown.min.js', CClientScript::POS_END);
-js($assetsUrl . '/js/jquery.countdown-' . app()->getLanguage() . '.js', CClientScript::POS_END);
+
+if(is_file($langFile))
+{
+    js($langFile, CClientScript::POS_END);
+}
 
 css($assetsUrl . '/css/jquery.countdown.css');
 
